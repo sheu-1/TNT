@@ -7,14 +7,15 @@
 .nav {
 	display: flex;
 	justify-content: space-between;
-	border: 2px solid peachpuff;
+	/* border: 2px solid peachpuff; */
 	align-items: center;
+	font-weight: bold;
 }
 
 .links {
 	display: flex;
 	gap: 8px;
-	border: 2px solid maroon;
+	/* border: 2px solid maroon; */
 }
 
 .links li {
@@ -35,13 +36,84 @@ li>a:hover {
 	text-decoration: underline;
 }
 
+label {
+	font-size: 20px;
+	margin-right: 7px;
+}
+
+input {
+	min-height: 25px;
+	font-size: 15px;
+}
+
+label {
+	float: left;
+	width: 250px;
+	text-align: right;
+}
+
+input {
+	display: inline-block;
+}
+
+
+input {
+	height: 28px;
+	margin-left: 5px;
+}
+
+.btn {
+	padding: 12px;
+	margin-right: 12px;
+}
+
+.buttons {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+}
+
+.buttons>button {
+	border-radius: 4px;
+	outline: none;
+	border: none;
+	font-weight: bold;
+	background-color: #696241;
+}
+
+.buttons>button:hover {
+	background-color: #A18882;
+}
+
+.btn:hover {
+	cursor: pointer;
+}
+
+.layer {
+
+	background: rgba(121, 112, 66, 0.46);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(4.8px);
+	-webkit-backdrop-filter: blur(4.8px);
+	border: 1px solid rgba(121, 112, 66, 0.84);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 12px;
+}
+
+.logout {
+	color: red;
+}
+
 /* Debugging purposes */
 .main {
-	border: 2px solid greenyellow;
+	/* border: 2px solid greenyellow; */
 }
 
 .form-wrapper {
-	border: 2px solid peachpuff;
+	/* border: 2px solid peachpuff; */
 }
 
 .form-wrapper {
@@ -51,26 +123,7 @@ li>a:hover {
 }
 
 .assets {
-	border: 2px solid seashell;
+	/* border: 2px solid seashell; */
 	margin-bottom: 4px;
 	padding: 9px;
-}
-
-input {
-	height: 28px;
-	margin-left: 5px;
-}
-
-.btn {
-	padding: 12px;
-}
-
-.buttons {
-	display: flex;
-	gap: 12px;
-	justify-content: center;
-}
-
-.btn:hover {
-	cursor: pointer;
 }
