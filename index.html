@@ -4,52 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
-	<title>Inventory Manager</title>
+	<title>Asset management system</title>
 	<link rel="stylesheet" href="style.css">
 	<script src="index.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<div class="nav">
-			<ul class="logo">
-				<a href="index.html"><img src="assets/images/logo.jpg" height="70"
-						alt="treasury-logo"></a>
-			</ul>
-			<ul class="links">
-				<li><a href="#">All items</a></li>
-				<li class="logout"><a class="logout" href="#">Logout</a></li>
-				<li><a href="register.html">Register</a></li>
-				<li><a href="login.html">Login</a></li>
-			</ul>
+	<div class="nav">
+		<div class="logo">
+			<img src="assets/images/TNT logo.png" alt="treasury logo"><a href="index.html"></a></img>
 		</div>
-		<div class="main">
-			<div class="form-wrapper">
-				<div class="layer">
-					<h3>Inventory Sheet</h3>
-					<form action="" class="form">
-						<div class="assets"><label for="description">Asset Description:
-							</label><input type="text" id="description" name="description">
-						</div>
-
-						<div class="assets"><label for="serial">Serial Number:</label><input
-								type="text" id="serial" name="serial"></div>
-						<div class="assets"><label for="product">Product Number:</label><input
-								type="text" id="product" name="product"></div>
-						<div class="assets"><label for="make">Make Model:</label><input
-								type="text" id="make" name="make"></div>
-						<div class="assets"><label for="location">Location: </label><input
-								type="text" id="location" name="location"></div>
-						<div class="assets"><label for="condition">Condition: </label><input
-								type="text" id="condition" name="condition"></div>
-						<div class="buttons">
-							<button class="btn">Add item</button>
-							<button class="btn">Reset defaults</button>
-						</div>
-					</form>
-				</div>
-			</div>
+		<div class="links">
+			<a href="register.html" class="links signup">Sign up</a>
+			<a href="login.html" class="links login">Login</a>
 		</div>
 	</div>
 </body>

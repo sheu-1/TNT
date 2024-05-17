@@ -2,128 +2,42 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	color-scheme: light;
 }
 
 .nav {
 	display: flex;
 	justify-content: space-between;
-	/* border: 2px solid peachpuff; */
 	align-items: center;
-	font-weight: bold;
+	border-bottom: 2px solid peachpuff;
+	padding-left: 4px;
+	padding-top: 5px;
+	padding-right: 15px;
 }
 
 .links {
+	/* border: 2px solid slateblue; */
+	padding: 12px;
 	display: flex;
-	gap: 8px;
-	/* border: 2px solid maroon; */
+	align-items: center;
+	gap: 32px;
+	border-radius: 34px;
+	margin-bottom: 8px;
+
 }
 
-.links li {
-	list-style-type: none;
-}
-
-.links li>a {
-	list-style-type: none;
+.links>a {
 	text-decoration: none;
-	color: gray;
-	font-size: 16px;
-	text-transform: uppercase;
-	gap: 8px;
+	color: wheat;
+	width: 7em;
 }
 
-li>a:hover {
-	color: #31852269;
-	text-decoration: underline;
+.signup {
+	background-color: #CE9540;
 }
 
-label {
-	font-size: 20px;
-	margin-right: 7px;
-}
-
-input {
-	min-height: 25px;
-	font-size: 15px;
-}
-
-label {
-	float: left;
-	width: 250px;
-	text-align: right;
-}
-
-input {
-	display: inline-block;
-}
-
-
-input {
-	height: 28px;
-	margin-left: 5px;
-}
-
-.btn {
-	padding: 12px;
-	margin-right: 12px;
-}
-
-.buttons {
-	display: flex;
-	gap: 12px;
-	justify-content: center;
-}
-
-.buttons>button {
-	border-radius: 4px;
-	outline: none;
-	border: none;
-	font-weight: bold;
-	background-color: #696241;
-}
-
-.buttons>button:hover {
-	background-color: #A18882;
-}
-
-.btn:hover {
-	cursor: pointer;
-}
-
-.layer {
-
-	background: rgba(121, 112, 66, 0.46);
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(4.8px);
-	-webkit-backdrop-filter: blur(4.8px);
-	border: 1px solid rgba(121, 112, 66, 0.84);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 12px;
-}
-
-.logout {
-	color: red;
-}
-
-/* Debugging purposes */
-.main {
-	/* border: 2px solid greenyellow; */
-}
-
-.form-wrapper {
-	/* border: 2px solid peachpuff; */
-}
-
-.form-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.assets {
-	/* border: 2px solid seashell; */
-	margin-bottom: 4px;
-	padding: 9px;
+.login {
+	background-color: #734C11;
+	margin-left: -67px;
+	padding-left: 32px;
 }
