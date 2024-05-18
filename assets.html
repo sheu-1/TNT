@@ -7,48 +7,62 @@
 	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
 	<title>Inventory Manager</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="assets.css">
+	<!-- <link rel="stylesheet" href="auth.css"> -->
 	<script src="index.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<div class="nav">
-			<div class="logo">
-				<img src="assets/images/TNT logo.png" alt="treasury logo"><a
-					href="index.html"></a></img>
-			</div>
-			<div class="links">
-				<a href="#" class="links login">Log out</a>
-			</div>
+	<div class="nav">
+		<div class="logo">
+			<img src="assets/images/TNT logo.png" alt="treasury logo"><a href="index.html"></a></img>
+		</div>
+		<div class="links">
+			<a href="#" class="links login">Log out</a>
 		</div>
 	</div>
-	<div class="main">
-		<div class="form-wrapper">
-			<div class="layer">
-				<h3>Inventory Sheet</h3>
-				<form action="" class="form">
-					<div class="assets"><label for="description">Asset Description:
-						</label><input type="text" id="description" name="description">
+	<h2 class="asset-heading">Add an asset</h2>
+	<div class="form-wrapper">
+		<div class="layer">
+			<form action="" class="form">
+				<div class="row-1">
+					<div class="assets"><label for="description"> </label><input
+							placeholder="Asset Description" type="text" id="description"
+							name="description">
 					</div>
 
-					<div class="assets"><label for="serial">Serial Number:</label><input type="text"
-							id="serial" name="serial"></div>
-					<div class="assets"><label for="product">Product Number:</label><input
-							type="text" id="product" name="product"></div>
-					<div class="assets"><label for="make">Make Model:</label><input type="text"
-							id="make" name="make"></div>
-					<div class="assets"><label for="location">Location: </label><input type="text"
-							id="location" name="location"></div>
-					<div class="assets"><label for="condition">Condition: </label><input type="text"
-							id="condition" name="condition"></div>
-					<div class="buttons">
-						<button class="btn">Add item</button>
-						<button class="btn">Reset defaults</button>
+					<div class="assets"><label for="room"> </label><input placeholder="Room"
+							type="text" id="room" name="room">
 					</div>
-				</form>
-			</div>
+				</div>
+				<div class="row-2">
+					<div class="assets"><label for="serial"></label><input
+							placeholder="Serial Number" type="text" id="serial"
+							name="serial"></div>
+					<div class="assets"><label for="building"></label><input placeholder="Building"
+							type="text" id="building" name="building"></div>
+				</div>
+				<div class="row-3">
+					<div class="assets"><label for="productnumber"> </label><input
+							placeholder="Product Number" type="text" id="productnumber"
+							name="productnumber"></div>
+					<div class="assets"><label for="makemodel"></label><input
+							placeholder="Make Model" type="text" id="makemodel"
+							name="makemodel"></div>
+				</div>
+				<div class="row-4">
+					<div class="assets"><label for="condition"> </label><input
+							placeholder="Condition" type="text" id="condition"
+							name="condition"></div>
+				</div>
+				<div class="row-5">
+					<!-- <button class="btn">Add item</button> -->
+					<!-- <button class="btn">Reset defaults</button> -->
+					<input type="submit" value="Add item">
+					<button id="reset" class="reset">Reset</button>
+				</div>
+			</form>
 		</div>
-	</div>
 	</div>
 </body>
 
