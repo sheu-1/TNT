@@ -6,22 +6,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
-	<title>Document</title>
+	<title>Log in</title>
+	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="auth.css">
 </head>
 
 <body>
-	<div class="auth-container">
-		<div class="header">
-			<img src="assets/images/TNT logo.png " alt="treasury-logo"><a href="index.html"></a></img>
-			<h3>Log in to your account</h3>
+	<div class="nav">
+		<div class="logo">
+			<img src="assets/images/TNT logo.png" alt="treasury logo"><a href="index.html"></a></img>
 		</div>
+		<div class="links">
+			<a href="login.html" class="links login">Login</a>
+		</div>
+	</div>
+	<div class="auth-container">
 		<div class="auth-form">
-			<div class="email"><label for="email">Enter your Email:</label><input type="text" name="email"
-					id="email"></div>
-			<div class="password"><label for="password">Enter your Password:</label><input type="text"
-					name="password" id="password"></div>
-			<button class="btn-signup">LogIn</button>
+			<h3>Log in</h3>
+			<div class="email"><label for="email"><input placeholder="Email Address" type="text"
+						name="email" id="email"></div>
+			<div class="password"><label for="password"></label><input placeholder="Password"
+					type="password" name="password" id="password"></div>
+			<!-- <button class="btn-signup">LogIn</button> -->
+			<input type="submit" value="Submit" class="btn-signup"><br>
+			<small class="have-account-link">Don't have an account?<a href="register.html">Sign
+					up</a></small>
 		</div>
 	</div>
 </body>
