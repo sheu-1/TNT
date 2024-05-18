@@ -7,24 +7,36 @@
 
 	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
 	<title>Document</title>
-
+	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="auth.css">
 </head>
 
 <body>
-	<div class="auth-container">
-		<div class="header">
-			<img src="assets/images/TNT logo.png" alt="treasury-logo"><a href="index.html"></a></img>
-			<h3>Signup for an account</h3>
+	<div class="nav">
+		<div class="logo">
+			<img src="assets/images/TNT logo.png" alt="treasury logo"><a href="index.html"></a></img>
 		</div>
+		<div class="links">
+			<a href="login.html" class="links login">Login</a>
+		</div>
+	</div>
+	<div class="auth-container">
 		<div class="auth-form">
-			<div class="email"><label for="email">Enter your Email:</label><input type="text" name="email"
-					id="email"></div>
-			<div class="password"><label for="password">Enter your Password:</label><input type="text"
-					name="password" id="password"></div>
-			<div class="confirmpassword"><label for="confirmpassword">Confirm your Password:</label><input
-					type="text" name="confirmpassword" id="confirmpassword"></div>
-			<button class="btn-signup">SignUp</button>
+			<h3>Sign up</h3>
+			<div class="firstname"><label for="firstname"></label><input type="text" name="firstname"
+					placeholder="First name" id="firstname"></div>
+			<div class="secondname"><label for="secondname"></label><input type="text" name="secondname"
+					placeholder="Second name" id="secondname"></div>
+			<div class="email"><label for="email"></label><input type="email" name="email"
+					placeholder="Email Address" id="email"></div>
+			<div class="password"><label for="password"></label><input type="password" name="password"
+					placeholder="Password" id="password"></div>
+			<div class="confirmpassword"><label for="confirmpassword"></label><input type="password"
+					name="confirmpassword" placeholder="Confirm Password" id="confirmpassword">
+			</div>
+			<!-- <button class="btn-signup">Submit</button> -->
+			<input type="submit" value="Submit" class="btn-signup"><br>
+			<small class="have-account-link">Have an account?<a href="login.html">Login</a></small>
 		</div>
 	</div>
 </body>
