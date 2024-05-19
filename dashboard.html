@@ -11,6 +11,7 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="exportToExcel.js" defer></script>
 	<link rel="stylesheet" href="dashboard.css">
 </head>
 
@@ -27,7 +28,8 @@
 		<div class="table-links">
 			<input class="filter-input" type="search" data-table="tbl" id="tbl" placeholder="Filter">
 			<a href="assets.html" class="add-asset-link">Add a new Asset</a>
-			<button class="export-excel">Download as Excel sheet</button>
+			<button id="export-excel-btn" class="export-excel">Download as
+				Excel sheet</button>
 		</div>
 
 		<section>
@@ -48,7 +50,18 @@
 				</table>
 			</div>
 			<div class="tbl-content">
-				<table cellpadding="0" cellspacing="0" border="0">
+				<table id="table" cellpadding="0" cellspacing="0" border="0">
+					<thead style="display: none;">
+						<tr>
+							<th>Asset Description</th>
+							<th>Room</th>
+							<th>Serial Number</th>
+							<th>Building</th>
+							<th>Product Number</th>
+							<th>Make Model</th>
+							<th>Condition</th>
+						</tr>
+					</thead>
 					<tbody id="row">
 						<tr>
 							<td>Monitor</td>
