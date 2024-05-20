@@ -1,61 +1,13 @@
-.asset-heading {
+.profile-heading {
 	padding: 14px;
 	text-align: center;
 	color: whitesmoke;
 	background-color: #734C11;
 }
 
-.nav {
+.assets {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 2px solid peachpuff;
-	padding-left: 4px;
-	padding-top: 5px;
-	padding-right: 15px;
-}
-
-.links {
-	/* border: 2px solid slateblue; */
-	padding: 12px;
-	display: flex;
-	align-items: center;
-	gap: 32px;
-	border-radius: 34px;
-	margin-bottom: 8px;
-
-}
-
-.links>a {
-	text-decoration: none;
-	color: whitesmoke;
-	width: 7em;
-}
-
-.links>a:hover,
-.create-inventory-btn>a:hover {
-	color: wheat;
-}
-
-.signup {
-	background-color: #CE9540;
-}
-
-.login {
-	background-color: #CE9540;
-	margin-left: -67px;
-	padding-left: 32px;
-}
-
-.form-wrapper {
-	background-color: #CE9540;
-	position: relative;
-	bottom: 0;
-	/* height: calc(100vh - 19.076923076923077vh); */
-	/* max-height: 100%; */
-
-	display: flex;
-	justify-content: center;
+	flex-direction: column;
 }
 
 *:focus {
@@ -99,26 +51,10 @@ input[type="submit"]:hover,
 	background-color: rgb(0, 0, 0, 0.8);
 }
 
-input[id="condition"] {
-	width: 879px;
-}
-
 .form {
 	/* border: 2px solid peachpuff; */
 	width: 900px;
 	padding: 12px;
-}
-
-
-.row-1,
-.row-2,
-.row-3,
-.row-3,
-.row-4,
-.row-5 {
-	display: flex;
-	gap: 38px;
-	margin-bottom: 30px;
 }
 
 /* removes white background on atofill passwords */

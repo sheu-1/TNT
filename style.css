@@ -37,6 +37,7 @@
 	color: wheat;
 }
 
+
 .signup {
 	background-color: #CE9540;
 }
@@ -83,17 +84,22 @@
 
 .create-inventory-btn {
 	padding: 16px;
-	background-color: #734C11;
-	border-radius: 20px;
 	margin-bottom: 38px;
+	margin-right: 8px;
 }
 
 .create-inventory-btn>a {
+	background-color: #734C11;
+	border-radius: 20px;
 	text-decoration: none;
 	color: whitesmoke;
 	font-weight: bold;
 	font-size: 23px;
 	padding: 20px;
+}
+
+.info {
+	margin-left: 7em;
 }
 
 .footer {
