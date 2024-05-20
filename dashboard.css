@@ -29,6 +29,10 @@ section {
 	border: none
 }
 
+tbody tr:hover {
+	background-color: #9D825872;
+}
+
 *:focus {
 	outline: none;
 }
@@ -38,7 +42,8 @@ section {
 }
 
 .add-asset-link:hover,
-.export-excel:hover {
+.export-excel:hover,
+.import-excel:hover {
 	cursor: pointer;
 	color: wheat;
 	background-color: #78541d;
