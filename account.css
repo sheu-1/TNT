@@ -1,8 +1,39 @@
+body {
+	/* maximize rest of the div to fill the set size */
+	display: flex;
+	flex-direction: column;
+	background-color: #CE9540;
+	height: 100%;
+}
+
+.nav {
+	background-color: whitesmoke;
+}
+
+.login {
+	background-color: #a8372f;
+}
+
 .profile-heading {
 	padding: 14px;
 	text-align: center;
 	color: whitesmoke;
 	background-color: #734C11;
+}
+
+.delete-btn {
+	padding: 14px;
+	border-radius: 14px;
+	margin-bottom: 10px;
+	width: 420px;
+	font-size: 20px;
+	background-color: #a8372f;
+	border: none;
+}
+
+.delete-btn:hover {
+	background-color: #73342f;
+	cursor: pointer;
 }
 
 .assets {
@@ -12,10 +43,11 @@
 
 .account-wrapper {
 	background-color: #CE9540;
-	height: calc(100vh - 23.5vh);
+	/* height: calc(100vh - 23.5vh); */
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 100%;
 }
 
 *:focus {

@@ -5,9 +5,26 @@ section {
 	border-radius: 10px;
 }
 
-.main {
-	height: 100vh;
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: #ce9540;
 }
+
+.nav {
+	background-color: whitesmoke;
+}
+
+.logo {
+	background: url('assets/images/TNT\ logo.png');
+	background-color: whitesmoke;
+	background-blend-mode: multiply;
+}
+
+/* .tnt-logo { */
+/* 	background-color: whitesmoke; */
+/* } */
 
 .table-links {
 	width: 100%;

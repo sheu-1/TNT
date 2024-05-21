@@ -1,3 +1,14 @@
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: #CE9540;
+}
+
+.nav {
+	background-color: whitesmoke;
+}
+
 .asset-heading {
 	padding: 14px;
 	text-align: center;
@@ -48,9 +59,9 @@
 }
 
 .form-wrapper {
-	background-color: #CE9540;
-	position: relative;
-	bottom: 0;
+	/* background-color: #CE9540; */
+	/* position: relative; */
+	/* bottom: 0; */
 	/* height: calc(100vh - 19.076923076923077vh); */
 	/* max-height: 100%; */
 

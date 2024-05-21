@@ -5,6 +5,13 @@
 	color-scheme: light;
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: #ce9540;
+}
+
 .nav {
 	display: flex;
 	justify-content: space-between;
@@ -13,7 +20,9 @@
 	padding-left: 4px;
 	padding-top: 5px;
 	padding-right: 15px;
+	background-color: whitesmoke;
 }
+
 
 .links {
 	/* border: 2px solid slateblue; */
@@ -55,9 +64,6 @@
 	margin-left: 8px;
 }
 
-.main {
-	background-color: #CE9540;
-}
 
 .heading>h2 {
 	padding: 12px;
