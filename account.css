@@ -6,12 +6,9 @@ body {
 	height: 100%;
 }
 
-.nav {
-	background-color: whitesmoke;
-}
 
 .login {
-	background-color: #a8372f;
+	background-color: #701e1e;
 }
 
 .profile-heading {
@@ -27,7 +24,7 @@ body {
 	margin-bottom: 10px;
 	width: 420px;
 	font-size: 20px;
-	background-color: #a8372f;
+	background-color: #701e1e;
 	border: none;
 }
 
