@@ -25,7 +25,6 @@ if (empty($email) || empty($password)) {
     exit('email or password cannot be empty.');
 }
 
-
 // Check if the username already exists
 $stmt = $conn->prepare("SELECT email FROM login WHERE email = ?");
 $stmt->bind_param('s', $email);
@@ -48,7 +47,16 @@ if ($stmt->num_rows > 0) {
 }
 
 //Verify password
-if(password_verify)
+if(password_verify($password, ['password'])) {
+    //password is correct, start session and redirect
+    $_SESSION['email'] = $email;
+    header('Location: dashboard.html');
+    exit();
+}
+else{
+    // Email not found
+    echo 'Invalid email or password';
+}
 
 $stmt->close();
 $conn->close();
