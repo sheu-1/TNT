@@ -10,23 +10,25 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 if (mysqli_connect_error()) {
     exit('Error connecting to the database: ' . mysqli_connect_error());
+}else{
+    echo "Connected";
 }
 
 // Check if the form data is set
-if (!isset($_POST['firstname'], $_POST['secondname'], $_POST['email'], $_POST['password'], $_POST['confirmpassword'])) {
-    exit('Please fill out all fields.');
-}
+//if (!isset($_POST['firstname'], $_POST['secondname'], $_POST['email'], $_POST['password'], $_POST['confirmpassword'])) {
+//   exit('Please fill out all fields.');
+//}
 
 // Validate input
-$firstname = $_POST['firstname'];
-$secondname = $_POST['secondname'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$confirmpassword = $_POST['confirmpassword'];
+$firstname =($_POST['firstname']);
+$secondname = ($_POST['secondname']);
+$email = ($_POST['email']);
+$password =($_POST['password']);
+$confirmpassword = ($_POST['confirmpassword']);
 
-if (empty($firstname) || empty($secondname) || empty($email) || empty($password) || empty($confirmpassword)) {
-    exit('Fields cannot be empty.');
-}
+//if (empty($firstname) || empty($secondname) || empty($email) || empty($password) || empty($confirmpassword)) {
+//exit('Fields cannot be empty.');
+//}
 
 // Check if passwords match
 if ($password !== $confirmpassword) {
@@ -53,6 +55,7 @@ if ($stmt->num_rows > 0) {
         echo 'Error occurred while registering.';
     }
 }
+
 
 $stmt->close();
 $conn->close();

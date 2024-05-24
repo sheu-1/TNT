@@ -1,63 +1,51 @@
 <?php
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'new';
+session_start();
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-// Check connection
-if (mysqli_connect_error()) {
-    exit('Error connecting to the database: ' . mysqli_connect_error());
-}
+    // Database connection
+    $servername = 'localhost';
+    $username = 'root';
+    $passwordDB = ''; // Assuming no password for root user
+    $dbname = 'new';
 
-// Check if the form data is set
-if (!isset($_POST['email'], $_POST['password'])) {
-    exit('Please fill out all fields.');
-}
+    $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
 
-// Validate input
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-if (empty($email) || empty($password)) {
-    exit('email or password cannot be empty.');
-}
-
-// Check if the username already exists
-$stmt = $conn->prepare("SELECT email FROM login WHERE email = ?");
-$stmt->bind_param('s', $email);
-$stmt->execute();
-$stmt->store_result();
-
-if ($stmt->num_rows > 0) {
-    echo 'Username already exists. Please choose another one.';
-} else {
-    // Prepare statement to insert new user
-    $stmt = $conn->prepare("INSERT INTO login (email, password) VALUES (?, ?)");
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt->bind_param('ss', $email, $passwordHash);
-    
-    if ($stmt->execute()) {
-        echo "Successfully registered.";
-    } else {
-        echo 'Error occurred while registering.';
+    // Check connection
+    if (mysqli_connect_error()) {
+        exit('Error connecting to the database: ' . mysqli_connect_error());
     }
+
+    // Prepare and execute query to fetch user data
+    $stmt = $conn->prepare("SELECT id, password FROM login WHERE email = ?");
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // Check if the user exists
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($userId, $hashedPassword);
+        $stmt->fetch();
+
+        // Verify the password
+        if (password_verify($password, $hashedPassword)) {
+            $_SESSION["user_id"] = $userId; // Store user ID in the session
+            header("Location: dashboard.html"); // Redirect to the dashboard
+            exit();
+        } else {
+            $error = "Invalid credentials. Please try again.";
+        }
+    } else {
+        $error = "Invalid credentials. Please try again.";
+    }
+
+    $stmt->close();
+    $conn->close();
 }
 
-//Verify password
-if(password_verify($password, ['password'])) {
-    //password is correct, start session and redirect
-    $_SESSION['email'] = $email;
-    header('Location: dashboard.html');
-    exit();
+if (isset($error)) {
+    echo $error;
 }
-else{
-    // Email not found
-    echo 'Invalid email or password';
-}
-
-$stmt->close();
-$conn->close();
 ?>

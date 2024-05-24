@@ -1,56 +1,51 @@
 <?php
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'new';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "new";
 
-// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
 if (mysqli_connect_error()) {
-    exit('Error connecting to the database: ' . mysqli_connect_error());
+    exit("Error connecting: " . mysqli_connect_error());
 }
 
-// Check if the form data is set
-if (!isset($_POST['firstname'], $_POST['secondname'], $_POST['email'], $_POST['password'], $_POST['confirmpassword'])) {
-    exit('Please fill out all fields.');
+// Check if form data is set
+if (!isset($_POST['description'], $_POST['room'], $_POST['serial'], $_POST['building'], $_POST['productnumber'], $_POST['makemodel'], $_POST['asset'])) {
+    exit("Please fill all fields");
 }
 
 // Validate input
-$firstname = $_POST['firstname'];
-$secondname = $_POST['secondname'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$confirmpassword = $_POST['confirmpassword'];
+$description = $_POST['description'];
+$room = $_POST['room'];
+$serial = $_POST['serial'];
+$building = $_POST['building'];
+$productnumber = $_POST['productnumber'];
+$makemodel = $_POST['makemodel'];
+$asset = $_POST['asset'];
 
-if (empty($firstname) || empty($secondname) || empty($email) || empty($password) || empty($confirmpassword)) {
-    exit('Fields cannot be empty.');
+if (empty($description) || empty($room) || empty($serial) || empty($building) || empty($productnumber) || empty($makemodel) || empty($asset)) {
+    exit('Fields cannot be empty');
 }
 
-// Check if passwords match
-if ($password !== $confirmpassword) {
-    exit('Passwords do not match.');
-}
-
-// Check if the email already exists
-$stmt = $conn->prepare("SELECT email FROM sign_up WHERE email = ?");
-$stmt->bind_param('s', $email);
+// Check if the asset already exists
+$stmt = $conn->prepare("SELECT serial FROM assets WHERE serial = ?");
+$stmt->bind_param('s', $serial);
 $stmt->execute();
 $stmt->store_result();
 
 if ($stmt->num_rows > 0) {
-    echo 'User already exists. Please choose another one.';
+    echo "Asset already exists";
 } else {
-    // Prepare statement to insert new user
-    $stmt = $conn->prepare("INSERT INTO sign_up (firstname, secondname, email, password) VALUES (?, ?, ?, ?)");
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt->bind_param('ssss', $firstname, $secondname, $email, $passwordHash);
-    
+    // Prepare statement to insert new asset
+    $stmt = $conn->prepare("INSERT INTO assets (description, room, serial, building, productnumber, makemodel, asset) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $description, $room, $serial, $building, $productnumber, $makemodel, $asset);
+
     if ($stmt->execute()) {
         echo "Successfully registered.";
     } else {
-        echo 'Error occurred while registering.';
+        echo "Error occurred while registering.";
     }
 }
 
