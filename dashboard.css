@@ -20,6 +20,24 @@ body {
 	background-blend-mode: multiply;
 }
 
+.sort-btn {
+	background-color: #734c11;
+	border: none;
+	position: relative;
+}
+
+.sort-btn #sort-default {
+	display: none;
+}
+
+.sort-btn>option {
+	position: absolute;
+	top: 0;
+	font-size: 23px;
+	border: none;
+	appearance: none;
+}
+
 /* .tnt-logo { */
 /* 	background-color: whitesmoke; */
 /* } */
