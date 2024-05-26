@@ -24,6 +24,7 @@ body {
 	background-color: #734c11;
 	border: none;
 	position: relative;
+	color: wheat;
 }
 
 .sort-btn #sort-default {
