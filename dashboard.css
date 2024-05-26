@@ -73,6 +73,11 @@ h1 {
 	margin-bottom: 15px;
 }
 
+.footer {
+	position: fixed;
+	bottom: 5px;
+}
+
 table {
 	width: 100%;
 	table-layout: fixed;
