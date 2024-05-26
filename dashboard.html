@@ -30,6 +30,23 @@
 	<div class="main">
 		<div class="table-links">
 			<input class="filter-input" type="search" data-table="tbl" id="tbl" placeholder="Filter">
+			<div class="sort">
+				<select name="pets" id="sort-btn" class="sort-btn">
+					<option value="sort" default selected disabled id="sort-default">Sort</option>
+					<option value="default">Default</option>
+					<option value="asset">Asset Description</option>
+					<option value="room">Room</option>
+					<option value="serial">Serial Number</option>
+					<option value="building">Building</option>
+					<option value="product">Product Number</option>
+					<option value="make">Make Model</option>
+					<option value="department">Department</option>
+					<option value="directorate">Directorate</option>
+					<option value="units">Units</option>
+					<option value="officer">Officer in Charge</option>
+					<option value="condition">Condition</option>
+				</select>
+			</div>
 			<a href="assets.html" class="add-asset-link">Add a new Asset</a>
 			<button id="import-excel-btn" class="import-excel">Import an Excel file</button>
 			<button id="export-excel-btn" class="export-excel">Download as
