@@ -25,6 +25,13 @@
 	width: 7em;
 }
 
+.footer {
+	position: fixed;
+	bottom: 5px;
+	width: 100%;
+	margin: 0 auto;
+}
+
 .links>a:hover,
 .create-inventory-btn>a:hover {
 	color: wheat;
