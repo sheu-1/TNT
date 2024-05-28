@@ -45,7 +45,7 @@ if ($stmt->num_rows > 0) {
     echo 'User already exists. Please choose another one.';
 } else {
     // Prepare statement to insert new user
-    $stmt = $conn->prepare("INSERT INTO sign_up (firstname, secondname, email, password) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO new.sign_up (firstname, secondname, email, password) VALUES (?, ?, ?, ?)");
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     $stmt->bind_param('ssss', $firstname, $secondname, $email, $passwordHash);
     
