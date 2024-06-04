@@ -1,46 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
-	<title>Log in</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="auth.css">
-	<script src="index.js" defer></script>
-</head>
-
-<body>
-	<div class="nav">
-		<div class="logo">
-			<a href="index.html"><img src="assets/images/TNT logo.png" alt="treasury logo"></img></a>
-		</div>
-		<div class="links">
-			<a href="register.html" class="links login">Sign up</a>
-		</div>
+{% extends "base.html" %}
+{% block title %}
+Asset management system - Log in
+{% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock head %}
+{% block navlinks %}
+<a href="{{ url_for('register') }}" class="links login">Sign up</a>
+{% endblock navlinks %}
+{% block body %}
+<div class="auth-container">
+	<div class="auth-form">
+		<form action="login.php" method="post">
+			<h3>Log in</h3>
+			<div class="email"><label for="email"><input placeholder="Email Address" type="text"
+						name="email" id="email"></div>
+			<div class="password"><label for="password"></label><input placeholder="Password"
+					type="password" name="password" id="password"></div>
+			<!-- <button class="btn-signup">LogIn</button> -->
+			<input type="submit" value="Submit" class="btn-signup"><br>
+			<small class="have-account-link">Don't have an account?<a href="{{ url_for('register') }}">Sign
+					up</a></small>
+		</form>
 	</div>
-	<div class="auth-container">
-		<div class="auth-form">
-			<form action="login.php" method="post">
-				<h3>Log in</h3>
-				<div class="email"><label for="email"><input placeholder="Email Address" type="text"
-							name="email" id="email"></div>
-				<div class="password"><label for="password"></label><input placeholder="Password"
-						type="password" name="password" id="password"></div>
-				<!-- <button class="btn-signup">LogIn</button> -->
-				<input type="submit" value="Submit" class="btn-signup"><br>
-				<small class="have-account-link">Don't have an account?<a href="register.html">Sign
-						up</a></small>
-			</form>
-		</div>
-	</div>
-	<div class="footer">
-		<img src="assets/images/tntfooterlogo.png" alt="footer logo" width="30" height="30">
-		<p>© Copyright <span class="copyright-year"></span>. The National Treasury. All Rights Reserved.
-		</p>
-	</div>
-</body>
-
-</html>
+</div>
+{% endblock body %}

@@ -1,49 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Your Profile</title>
-	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="account.css">
-	<script src="index.js" defer></script>
-</head>
-
-<body>
-	<div class="nav">
-		<div class="logo">
-			<a href="index.html"><img src="assets/images/TNT logo.png" alt="treasury logo"></img></a>
+{% extends "base.html" %}
+{% block title %}
+Asset management system - Your Profile
+{% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="account.css">
+{% endblock head %}
+{% block navlinks %}
+<a href="{{ url_for('index') }}" class="links signup">Home</a>
+<button class="links login">Log out</button>
+{% endblock navlinks %}
+{% block body %}
+<h2 class="profile-heading">Your Profile</h2>
+<div class="account-wrapper">
+	<form action="" class="form">
+		<div class="assets"><label for="firstname">First Name:</label><input type="text" id="firstname"
+				name="firstname">
 		</div>
-		<div class="links">
-			<a href="index.html" class="links signup">Home</a>
-			<a href="index.html" class="links login">Log out</a>
+
+		<div class="assets"><label for="secondname">Second Name:</label><input type="text" id="secondname"
+				name="secondname">
 		</div>
-	</div>
-	<h2 class="profile-heading">Your Profile</h2>
-	<div class="account-wrapper">
-		<form action="" class="form">
-			<div class="assets"><label for="firstname">First Name:</label><input type="text" id="firstname"
-					name="firstname">
-			</div>
-
-			<div class="assets"><label for="secondname">Second Name:</label><input type="text"
-					id="secondname" name="secondname">
-			</div>
-			<div class="assets"><label for="email">Email:</label><input type="text" id="email" name="email">
-			</div>
-			<div class="assets"><label for="password">New Password:</label><input type="password"
-					id="password" name="password"></div>
-			<input type="submit" value="Update"><br>
-			<button class="delete-btn">Delete your account</button>
-		</form>
-	</div>
-	<div class="footer">
-		<img src="assets/images/tntfooterlogo.png" alt="footer logo" width="30" height="30">
-		<p>© Copyright <span class="copyright-year"></span>. The National Treasury. All Rights Reserved.
-		</p>
-	</div>
-</body>
-
-</html>
+		<div class="assets"><label for="email">Email:</label><input type="text" id="email" name="email">
+		</div>
+		<div class="assets"><label for="password">New Password:</label><input type="password" id="password"
+				name="password"></div>
+		<input type="submit" value="Update"><br>
+		<button class="delete-btn">Delete your account</button>
+	</form>
+</div>
+{% endblock body %}

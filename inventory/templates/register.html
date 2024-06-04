@@ -1,56 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<title>Sign up</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="auth.css">
-	<script src="index.js" defer></script>
-</head>
-
-<body>
-	<div class="nav">
-		<div class="logo">
-			<a href="index.html"><img src="assets/images/TNT logo.png" alt="treasury logo"></img></a>
-		</div>
-		<div class="links">
-			<a href="login.html" class="links login">Login</a>
-		</div>
+{% extends "base.html" %}
+{% block title %}
+Asset management system - Sign up
+{% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock head %}
+{% block navlinks %}
+<a href="{{ url_for('login') }}" class="links login">Login</a>
+{% endblock navlinks %}
+{% block body %}
+{% endblock body %}
+<div class="auth-container">
+	<div class="auth-form">
+		<form action="" method="post">
+			<h3>Sign up</h3>
+			<div class="firstname"><label for="firstname"></label><input type="text" name="firstname"
+					placeholder="First name" id="firstname"></div>
+			<div class="secondname"><label for="secondname"></label><input type="text" name="secondname"
+					placeholder="Second name" id="secondname"></div>
+			<div class="email"><label for="email"></label><input type="email" name="email"
+					placeholder="Email Address" id="email"></div>
+			<div class="password"><label for="password"></label>
+				<input type="password" name="password" placeholder="Password" id="password">
+			</div>
+			<div class="confirmpassword"><label for="confirmpassword"></label><input type="password"
+					name="confirmpassword" placeholder="Confirm Password" id="confirmpassword">
+			</div>
+			<!-- <button class="btn-signup">Submit</button> -->
+			<input type="submit" value="Submit" class="btn-signup"><br>
+			<small class="have-account-link">Have an account?<a
+					href="{{ url_for('login') }}">Login</a></small>
+		</form>
 	</div>
-	<div class="auth-container">
-		<div class="auth-form">
-			<form action="sign_up.php" method="post">
-				<h3>Sign up</h3>
-				<div class="firstname"><label for="firstname"></label><input type="text"
-						name="firstname" placeholder="First name" id="firstname"></div>
-				<div class="secondname"><label for="secondname"></label><input type="text"
-						name="secondname" placeholder="Second name" id="secondname"></div>
-				<div class="email"><label for="email"></label><input type="email" name="email"
-						placeholder="Email Address" id="email"></div>
-				<div class="password"><label for="password"></label>
-					<input type="password" name="password" placeholder="Password" id="password">
-				</div>
-				<div class="confirmpassword"><label for="confirmpassword"></label><input type="password"
-						name="confirmpassword" placeholder="Confirm Password"
-						id="confirmpassword">
-				</div>
-				<!-- <button class="btn-signup">Submit</button> -->
-				<input type="submit" value="Submit" class="btn-signup"><br>
-				<small class="have-account-link">Have an account?<a href="login.html">Login</a></small>
-			</form>
-		</div>
-	</div>
-	<div class="footer">
-		<img src="assets/images/tntfooterlogo.png" alt="footer logo" width="30" height="30">
-		<p>© Copyright <span class="copyright-year"></span>. The National Treasury. All Rights Reserved.
-		</p>
-	</div>
-</body>
-
-</html>
+</div>
+{% endblock body %}
