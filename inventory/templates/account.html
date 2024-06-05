@@ -4,7 +4,7 @@ Asset management system - Your Profile
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="account.css">
+<link rel="stylesheet" href="{{ url_for('static',filename='account.css') }}">
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" class="links signup">Home</a>

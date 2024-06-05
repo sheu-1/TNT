@@ -1,67 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}
+Asset management - Add an asset
+{% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
+{% endblock head %}
+{% block navlinks %}
+<a href="{{ url_for('index') }}" class="links login">Log out</a>
+{% endblock navlinks %}
+{% block body %}
+<h2 class="asset-heading">Add an asset</h2>
+<div class="form-wrapper">
+	<div class="layer">
+		<form action="assets.php" class="form" method="post">
+			<div class="row-1">
+				<div class="assets"><label for="description"> </label><input
+						placeholder="Asset Description" type="text" id="description"
+						name="description">
+				</div>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
-	<title>Inventory Manager</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="assets.css">
-	<!-- <link rel="stylesheet" href="auth.css"> -->
-	<script src="index.js" defer></script>
-</head>
-
-<body>
-	<div class="nav">
-		<div class="logo">
-			<a href="index.html"><img src="assets/images/TNT logo.png" alt="treasury logo"></img></a>
-		</div>
-		<div class="links">
-			<a href="index.html" class="links login">Log out</a>
-		</div>
+				<div class="assets"><label for="room"> </label><input placeholder="Room" type="text"
+						id="room" name="room">
+				</div>
+			</div>
+			<div class="row-2">
+				<div class="assets"><label for="serial"></label><input placeholder="Serial Number"
+						type="text" id="serial" name="serial"></div>
+				<div class="assets"><label for="building"></label><input placeholder="Building"
+						type="text" id="building" name="building"></div>
+			</div>
+			<div class="row-3">
+				<div class="assets"><label for="productnumber"> </label><input
+						placeholder="Product Number" type="text" id="productnumber"
+						name="productnumber"></div>
+				<div class="assets"><label for="makemodel"></label><input placeholder="Make Model"
+						type="text" id="makemodel" name="makemodel"></div>
+			</div>
+			<div class="row-4">
+				<div class="assets"><label for="condition"> </label><input placeholder="Condition"
+						type="text" id="condition" name="asset">
+				</div>
+			</div>
+			<div class="row-5">
+				<input type="submit" value="Add item">
+				<button type="reset" id="reset" class="reset">Reset</button>
+			</div>
+		</form>
 	</div>
-	<h2 class="asset-heading">Add an asset</h2>
-	<div class="form-wrapper">
-		<div class="layer">
-			<form action="assets.php" class="form" method="post">
-				<div class="row-1">
-					<div class="assets"><label for="description"> </label><input
-							placeholder="Asset Description" type="text" id="description"
-							name="description">
-					</div>
-
-					<div class="assets"><label for="room"> </label><input placeholder="Room"
-							type="text" id="room" name="room">
-					</div>
-				</div>
-				<div class="row-2">
-					<div class="assets"><label for="serial"></label><input
-							placeholder="Serial Number" type="text" id="serial"
-							name="serial"></div>
-					<div class="assets"><label for="building"></label><input placeholder="Building"
-							type="text" id="building" name="building"></div>
-				</div>
-				<div class="row-3">
-					<div class="assets"><label for="productnumber"> </label><input
-							placeholder="Product Number" type="text" id="productnumber"
-							name="productnumber"></div>
-					<div class="assets"><label for="makemodel"></label><input
-							placeholder="Make Model" type="text" id="makemodel"
-							name="makemodel"></div>
-				</div>
-				<div class="row-4">
-					<div class="assets"><label for="condition"> </label><input
-							placeholder="Condition" type="text" id="condition"
-							name="asset"></div>
-				</div>
-				<div class="row-5">
-					<input type="submit" value="Add item">
-					<!--<button type="reset" id="reset" class="reset">Reset</button>-->
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
-
-</html>
+</div>
+{% endblock body %}

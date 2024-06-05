@@ -3,8 +3,8 @@
 Asset management system - Home
 {% endblock %}
 {% block navlinks %}
-<a href="{{ url_for('register') }}" class="links signup">Sign up</a>
-<a href="{{ url_for('login') }}" class="links login">Login</a>
+<a href="{{url_for('register')}}" class="links signup">Sign up</a>
+<a href="{{url_for('login')}}" class="links login">Login</a>
 {% endblock navlinks %}
 {% block body %}
 <div class="main">
@@ -19,8 +19,8 @@ Asset management system - Home
 		are able to deliver excellent services and make informed decisions.
 	</div>
 	<div class="create-inventory-btn">
-		<a href="{{ url_for('assets') }}">Click here to create an inventory</a>
-		<a href="{{ url_for('dashboard') }}">View and manage all inventories</a>
+		<a href="{{url_for('create_assets')}}">Click here to create an inventory</a>
+		<a href="{{url_for('show_assets')}}">View and manage all inventories</a>
 	</div>
 </div>
 {% endblock body %}
