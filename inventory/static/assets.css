@@ -65,8 +65,9 @@ body {
 	/* height: calc(100vh - 19.076923076923077vh); */
 	/* max-height: 100%; */
 
-	display: flex;
-	justify-content: center;
+	/* display: flex; */
+	/* justify-content: center; */
+	margin: 0 auto;
 }
 
 *:focus {
@@ -121,12 +122,7 @@ input[id="condition"] {
 }
 
 
-.row-1,
-.row-2,
-.row-3,
-.row-3,
-.row-4,
-.row-5 {
+.row {
 	display: flex;
 	gap: 38px;
 	margin-bottom: 30px;

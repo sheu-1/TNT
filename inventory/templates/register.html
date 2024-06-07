@@ -14,20 +14,26 @@ Asset management system - Sign up
 	<div class="auth-form">
 		<form action="" method="post">
 			<h3>Sign up</h3>
-			<div class="firstname"><label for="firstname"></label><input type="text" name="firstname"
-					placeholder="First name" id="firstname"></div>
-			<div class="secondname"><label for="secondname"></label><input type="text" name="secondname"
-					placeholder="Second name" id="secondname"></div>
-			<div class="email"><label for="email"></label><input type="email" name="email"
-					placeholder="Email Address" id="email"></div>
-			<div class="password"><label for="password"></label>
-				<input type="password" name="password" placeholder="Password" id="password">
-			</div>
-			<div class="confirmpassword"><label for="confirmpassword"></label><input type="password"
-					name="confirmpassword" placeholder="Confirm Password" id="confirmpassword">
-			</div>
+			{{ form.first_name(placeholder="First name",id="firstname") }}
+			<!-- <div class="firstname"><label for="firstname"></label><input type="text" name="firstname" -->
+			<!-- 		placeholder="First name" id="firstname"></div> -->
+			{{ form.second_name(placeholder="Second name",id="secondname") }}
+			<!-- <div class="secondname"><label for="secondname"></label><input type="text" name="secondname" -->
+			<!-- 		placeholder="Second name" id="secondname"></div> -->
+			{{ form.email(placeholder="Email Address",id="email") }}
+			<!-- <div class="email"><label for="email"></label><input type="email" name="email" -->
+			<!-- 		placeholder="Email Address" id="email"></div> -->
+			{{ form.password(placeholder="Password",id="password") }}
+			<!-- <div class="password"><label for="password"></label> -->
+			<!-- 	<input type="password" name="password" placeholder="Password" id="password"> -->
+			<!-- </div> -->
+			{{ form.confirm_password(placeholder="Confirm Password",id="confirmpassword") }}
+			<!-- <div class="confirmpassword"><label for="confirmpassword"></label><input type="password" -->
+			<!-- 		name="confirmpassword" placeholder="Confirm Password" id="confirmpassword"> -->
+			<!-- </div> -->
 			<!-- <button class="btn-signup">Submit</button> -->
-			<input type="submit" value="Submit" class="btn-signup"><br>
+			{{ form.submit(class="btn-signup") }}
+			<!-- <input type="submit" value="Submit" class="btn-signup"><br> -->
 			<small class="have-account-link">Have an account?<a
 					href="{{ url_for('login') }}">Login</a></small>
 		</form>

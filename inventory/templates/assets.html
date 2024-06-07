@@ -13,36 +13,32 @@ Asset management - Add an asset
 <h2 class="asset-heading">Add an asset</h2>
 <div class="form-wrapper">
 	<div class="layer">
-		<form action="assets.php" class="form" method="post">
-			<div class="row-1">
-				<div class="assets"><label for="description"> </label><input
-						placeholder="Asset Description" type="text" id="description"
-						name="description">
-				</div>
-
-				<div class="assets"><label for="room"> </label><input placeholder="Room" type="text"
-						id="room" name="room">
-				</div>
+		<form action="" class="form" method="post">
+			<div class="row">
+				{{ form.asset_description(placeholder="Asset Description",id="description") }}
+				{{ form.room(placeholder="Room",id="room") }}
 			</div>
-			<div class="row-2">
-				<div class="assets"><label for="serial"></label><input placeholder="Serial Number"
-						type="text" id="serial" name="serial"></div>
-				<div class="assets"><label for="building"></label><input placeholder="Building"
-						type="text" id="building" name="building"></div>
+			<div class="row">
+				{{ form.serial_number(placeholder="Serial Number",id="serial") }}
+				{{ form.building(placeholder="Building",id="building") }}
 			</div>
-			<div class="row-3">
-				<div class="assets"><label for="productnumber"> </label><input
-						placeholder="Product Number" type="text" id="productnumber"
-						name="productnumber"></div>
-				<div class="assets"><label for="makemodel"></label><input placeholder="Make Model"
-						type="text" id="makemodel" name="makemodel"></div>
+			<div class="row">
+				{{ form.product_number(placeholder="Product Number",id="productnumber") }}
+				{{ form.make_model(placeholder="Make Model",id="makemodel") }}
 			</div>
-			<div class="row-4">
-				<div class="assets"><label for="condition"> </label><input placeholder="Condition"
-						type="text" id="condition" name="asset">
+			<div class="row">
+				{{ form.financed_by(placeholder="Financed by/ Source of funds",id="financedby") }}
+				{{ form.department(placeholder="Department",id="department") }}
+			</div>
+			<div class="row">
+				{{ form.directorate(placeholder="Directorate",id="directorate") }}
+				{{ form.units(placeholder="Units",id="units") }}
+			</div>
+			<div class="row">
+				{{ form.condition(placeholder="Condition",id="condition") }}
 				</div>
 			</div>
-			<div class="row-5">
+			<div class="row">
 				<input type="submit" value="Add item">
 				<button type="reset" id="reset" class="reset">Reset</button>
 			</div>

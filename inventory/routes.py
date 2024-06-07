@@ -1,6 +1,7 @@
 from flask import render_template, url_for
 
 from inventory import app
+from inventory.form import AssetForm, RegisterForm
 
 
 @app.route("/")
@@ -15,10 +16,12 @@ def show_assets():
 
 @app.route("/assets/create")
 def create_assets():
-    return render_template("assets.html")
+    form = AssetForm()
+    return render_template("assets.html", form=form)
 
 
-@app.route("/profile")
+@app.route("/account/")
+@app.route("/profile/")
 def profile():
     return render_template("account.html")
 
@@ -36,4 +39,5 @@ def login():
 @app.route("/SIGNUP/")
 @app.route("/signup/")
 def register():
-    return render_template("register.html")
+    form = RegisterForm()
+    return render_template("register.html", form=form)
