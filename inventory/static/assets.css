@@ -111,9 +111,9 @@ input[type="submit"]:hover,
 	background-color: rgb(0, 0, 0, 0.8);
 }
 
-input[id="condition"] {
-	width: 879px;
-}
+/* input[id="condition"] { */
+/* 	width: 879px; */
+/* } */
 
 .form {
 	/* border: 2px solid peachpuff; */
@@ -132,6 +132,7 @@ input[id="condition"] {
 /* input:autofill { */
 /* 	background-color: #ce9540; */
 /* } */
+
 /**/
 /* input { */
 /* 	filter: none; */

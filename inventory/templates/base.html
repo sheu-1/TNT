@@ -27,6 +27,18 @@
 			{% endblock navlinks %}
 		</div>
 	</div>
+			{% with messages = get_flashed_messages(with_categories=true) %} 
+			{% if messages %} 
+			{% for category,message in messages %}
+		<div class="error-messages-container error-messages-container-{{ category }}">
+			<div class="error-close-icon">
+				<i class="fa-solid fa-circle-xmark"></i>
+			</div>
+			<div class="error-messages error-messages-{{ category }}">
+				{{ message }}
+			</div>
+		</div>
+			{% endfor %} {% endif %} {% endwith %}
 	{% block body %}
 
 	{% endblock body %}

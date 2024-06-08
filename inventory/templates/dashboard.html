@@ -22,14 +22,15 @@ Asset management system - All assets
 				<option value="sort" default selected disabled id="sort-default">Sort</option>
 				<option value="default">Default</option>
 				<option value="asset">Asset Description</option>
-				<option value="room">Room</option>
+				<option value="financedby">Financed By</option>
 				<option value="serial">Serial Number</option>
-				<option value="building">Building</option>
 				<option value="product">Product Number</option>
 				<option value="make">Make Model</option>
-				<option value="department">Department</option>
 				<option value="directorate">Directorate</option>
 				<option value="units">Units</option>
+				<option value="department">Department</option>
+				<option value="building">Building</option>
+				<option value="room">Room</option>
 				<option value="officer">Officer in Charge</option>
 				<option value="condition">Condition</option>
 			</select>
@@ -47,14 +48,15 @@ Asset management system - All assets
 				<thead>
 					<tr>
 						<th>Asset Description</th>
-						<th>Room</th>
+						<th>Financed By</th>
 						<th>Serial Number</th>
-						<th>Building</th>
 						<th>Product Number</th>
 						<th>Make Model</th>
-						<th>Department</th>
 						<th>Directorate</th>
 						<th>Units</th>
+						<th>Department</th>
+						<th>Building</th>
+						<th>Room</th>
 						<th>Officer in Charge</th>
 						<th>Condition</th>
 					</tr>
@@ -66,44 +68,37 @@ Asset management system - All assets
 				<thead style="display: none;">
 					<tr>
 						<th>Asset Description</th>
-						<th>Room</th>
+						<th>Financed By</th>
 						<th>Serial Number</th>
-						<th>Building</th>
 						<th>Product Number</th>
-						<th>Department</th>
+						<th>Make Model</th>
 						<th>Directorate</th>
 						<th>Units</th>
+						<th>Department</th>
+						<th>Building</th>
+						<th>Room</th>
 						<th>Officer in Charge</th>
 						<th>Condition</th>
 					</tr>
 				</thead>
 				<tbody id="row">
+					{% for asset in assets %}
 					<tr>
-						<td>Monitor</td>
-						<td>TNT 101</td>
-						<td>######</td>
-						<td>Treasury</td>
-						<td>6789</td>
-						<td>HP</td>
-						<td>ICT</td>
-						<td>TREASURY</td>
-						<td>Auditor General Office</td>
-						<td>Virginia</td>
-						<td>Working</td>
-					</tr>
-					<tr>
-						<td>Monitor</td>
-						<td>TNT 101</td>
-						<td>######</td>
-						<td>Treasury</td>
-						<td>6789</td>
-						<td>HP</td>
-						<td>ICT</td>
-						<td>Crops</td>
-						<td>Accounts</td>
-						<td>James</td>
-						<td>Working</td>
-					</tr>
+						<td>{{ asset.asset_description }}</td>
+						<td>{{ asset.financed_by }}</td>
+						<td>{{ asset.serial_number }}</td>
+						<td>{{ asset.product_number }}</td>
+						<td>{{ asset.make_model }}</td>
+						<td>{{ asset.directorate }}</td>
+						<td>{{ asset.units }}</td>
+						<td>{{ asset.department }}</td>
+						<td>{{ asset.building }}</td>
+						<td>{{ asset.room }}</td>
+						<td>{{ asset.officer_in_charge }}</td>
+						<td>{{ asset.state }}</td>
+					</tr>	
+						{% endfor %}
+
 				</tbody>
 			</table>
 		</div>

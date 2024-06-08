@@ -1,6 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import EmailField, PasswordField, StringField, SubmitField, validators
+from wtforms import (
+    EmailField,
+    PasswordField,
+    StringField,
+    SubmitField,
+    ValidationError,
+    validators,
+)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
+
+from inventory.models import Asset
 
 
 class RegisterForm(FlaskForm):
@@ -17,13 +26,18 @@ class RegisterForm(FlaskForm):
 class AssetForm(FlaskForm):
     asset_description = StringField(validators=[DataRequired(), Length(min=2, max=19)])
     financed_by = StringField()
-    serial_number = StringField(validators=[DataRequired()])
-    product_number = StringField(validators=[DataRequired()])
+    serial_number = StringField(validators=[DataRequired(), Length(min=5, max=20)])
+    product_number = StringField(validators=[DataRequired(), Length(min=3, max=20)])
     make_model = StringField(validators=[DataRequired()])
-    directorate = StringField()
-    units = StringField()
+    directorate = StringField(validators=[DataRequired()])
+    units = StringField(validators=[DataRequired()])
     department = StringField(validators=[DataRequired()])
     building = StringField(validators=[DataRequired()])
     room = StringField(validators=[DataRequired()])
-    officer_in_charge = StringField()
-    condition = StringField(validators=[DataRequired()])
+    officer_in_charge = StringField(validators=[Length(min=2, max=20)])
+    state = StringField(validators=[DataRequired()])
+
+    def validate_serial_number(self, serial_number):
+        serial_number = Asset.query.filter_by(serial_number=serial_number.data).first()
+        if serial_number:
+            raise ValidationError("Serial Number already exists")

@@ -13,29 +13,140 @@ Asset management - Add an asset
 <h2 class="asset-heading">Add an asset</h2>
 <div class="form-wrapper">
 	<div class="layer">
-		<form action="" class="form" method="post">
+		<form autocomplete="off" action="" class="form" method="post">
+			{{ form.csrf_token }}
+			{{ form.hidden_tag() }}
 			<div class="row">
+				<div class="asset_description">
 				{{ form.asset_description(placeholder="Asset Description",id="description") }}
-				{{ form.room(placeholder="Room",id="room") }}
-			</div>
-			<div class="row">
-				{{ form.serial_number(placeholder="Serial Number",id="serial") }}
-				{{ form.building(placeholder="Building",id="building") }}
-			</div>
-			<div class="row">
-				{{ form.product_number(placeholder="Product Number",id="productnumber") }}
-				{{ form.make_model(placeholder="Make Model",id="makemodel") }}
-			</div>
-			<div class="row">
+				{% if form.asset_description.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.asset_description.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+				<div class="financed_by">
 				{{ form.financed_by(placeholder="Financed by/ Source of funds",id="financedby") }}
-				{{ form.department(placeholder="Department",id="department") }}
+				{% if form.financed_by.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.financed_by.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
 			</div>
 			<div class="row">
+				<div class="serial_number">
+				{{ form.serial_number(placeholder="Serial Number",id="serial") }}
+				{% if form.serial_number.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.serial_number.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+				<div class="product_number">
+				{{ form.product_number(placeholder="Product Number",id="productnumber") }}
+				{% if form.product_number.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.product_number.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="make_model">
+				{{ form.make_model(placeholder="Make Model",id="makemodel") }}
+				{% if form.make_model.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.make_model.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+				<div class="directorate">
 				{{ form.directorate(placeholder="Directorate",id="directorate") }}
-				{{ form.units(placeholder="Units",id="units") }}
+				{% if form.directorate.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.directorate.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
 			</div>
 			<div class="row">
-				{{ form.condition(placeholder="Condition",id="condition") }}
+				<div class="units">
+				{{ form.units(placeholder="Units",id="units") }}
+				{% if form.units.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.units.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div> 
+				<div class="department">
+				{{ form.department(placeholder="Department",id="department") }}
+				{% if form.department.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.department.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="building">
+				{{ form.building(placeholder="Building",id="building") }}
+				{% if form.building.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.building.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+				<div class="room">
+				{{ form.room(placeholder="Room",id="room") }}
+				{% if form.room.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.room.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="officer_in_charge">
+				{{ form.officer_in_charge(placeholder="Officer in Charge",id="officerincharge") }}
+				{% if form.officer_in_charge.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.officer_in_charge.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+				<div class="condition">
+				{{ form.state(placeholder="Condition",id="condition") }}
+				{% if form.state.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.state.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
 				</div>
 			</div>
 			<div class="row">
