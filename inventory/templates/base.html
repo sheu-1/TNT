@@ -30,9 +30,9 @@
 			{% with messages = get_flashed_messages(with_categories=true) %} 
 			{% if messages %} 
 			{% for category,message in messages %}
-		<div class="error-messages-container error-messages-container-{{ category }}">
+		<div class="error-messages-container error-messages-container-{{ category }}" id="error-message-container" >
 			<div class="error-close-icon">
-				<i class="fa-solid fa-circle-xmark"></i>
+				<i class="fa-solid fa-circle-xmark" id="close-error-btn"></i>
 			</div>
 			<div class="error-messages error-messages-{{ category }}">
 				{{ message }}

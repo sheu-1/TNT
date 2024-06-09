@@ -15,73 +15,76 @@ Asset management system - All assets
 {% endblock navlinks %}
 {% block body %}
 <div class="main">
-	<div class="table-links">
-		<input class="filter-input" type="search" data-table="tbl" id="tbl" placeholder="Filter">
-		<div class="sort">
-			<select name="pets" id="sort-btn" class="sort-btn">
-				<option value="sort" default selected disabled id="sort-default">Sort</option>
-				<option value="default">Default</option>
-				<option value="asset">Asset Description</option>
-				<option value="financedby">Financed By</option>
-				<option value="serial">Serial Number</option>
-				<option value="product">Product Number</option>
-				<option value="make">Make Model</option>
-				<option value="directorate">Directorate</option>
-				<option value="units">Units</option>
-				<option value="department">Department</option>
-				<option value="building">Building</option>
-				<option value="room">Room</option>
-				<option value="officer">Officer in Charge</option>
-				<option value="condition">Condition</option>
-			</select>
-		</div>
+	<!-- <div class="table-links"> -->
+	<!-- 	<input class="filter-input" type="search" data-table="tbl" id="tbl" placeholder="Filter"> -->
+	<!-- 	<div class="sort"> -->
+	<!-- 		<select name="pets" id="sort-btn" class="sort-btn"> -->
+	<!-- 			<option value="sort" default selected disabled id="sort-default">Sort</option> -->
+	<!-- 			<option value="default">Default</option> -->
+	<!-- 			<option value="asset">Asset Description</option> -->
+	<!-- 			<option value="financedby">Financed By</option> -->
+	<!-- 			<option value="serial">Serial Number</option> -->
+	<!-- 			<option value="product">Product Number</option> -->
+	<!-- 			<option value="make">Make Model</option> -->
+	<!-- 			<option value="directorate">Directorate</option> -->
+	<!-- 			<option value="units">Units</option> -->
+	<!-- 			<option value="department">Department</option> -->
+	<!-- 			<option value="building">Building</option> -->
+	<!-- 			<option value="room">Room</option> -->
+	<!-- 			<option value="officer">Officer in Charge</option> -->
+	<!-- 			<option value="condition">Condition</option> -->
+	<!-- 		</select> -->
+	<!-- 	</div> -->
+	<!-- 	<a href="{{ url_for('create_assets') }}" class="add-asset-link">Add a new Asset</a> -->
+	<!-- 	<button id="import-excel-btn" class="import-excel">Import an Excel file</button> -->
+	<!-- 	<button id="export-excel-btn" class="export-excel">Download as -->
+	<!-- 		Excel sheet</button> -->
+	<!-- </div> -->
+
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>All Assets</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+		<img src="{{ url_for('static', filename='assets/images/search.png') }}" alt="">
+            </div>
+	    <div class="table-links">
 		<a href="{{ url_for('create_assets') }}" class="add-asset-link">Add a new Asset</a>
 		<button id="import-excel-btn" class="import-excel">Import an Excel file</button>
-		<button id="export-excel-btn" class="export-excel">Download as
+		<button id="toEXCEL" class="export-excel">Download as
 			Excel sheet</button>
-	</div>
-
-	<section>
-		<h1>All Assets</h1>
-		<div class="tbl-header">
-			<table cellpadding="0" cellspacing="0" border="0">
-				<thead>
-					<tr>
-						<th>Asset Description</th>
-						<th>Financed By</th>
-						<th>Serial Number</th>
-						<th>Product Number</th>
-						<th>Make Model</th>
-						<th>Directorate</th>
-						<th>Units</th>
-						<th>Department</th>
-						<th>Building</th>
-						<th>Room</th>
-						<th>Officer in Charge</th>
-						<th>Condition</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-		<div class="tbl-content">
-			<table id="table" cellpadding="0" cellspacing="0" border="0">
-				<thead style="display: none;">
-					<tr>
-						<th>Asset Description</th>
-						<th>Financed By</th>
-						<th>Serial Number</th>
-						<th>Product Number</th>
-						<th>Make Model</th>
-						<th>Directorate</th>
-						<th>Units</th>
-						<th>Department</th>
-						<th>Building</th>
-						<th>Room</th>
-						<th>Officer in Charge</th>
-						<th>Condition</th>
-					</tr>
-				</thead>
-				<tbody id="row">
+	    </div>
+    <!--         <div class="export__file"> -->
+    <!--             <label for="export-file" class="export__file-btn" title="Export File"></label> -->
+    <!--             <input type="checkbox" id="export-file"> -->
+    <!--             <div class="export__file-options"> -->
+    <!--                 <label>Export As &nbsp; &#10140;</label> -->
+				<!-- <label for="export-file" id="toPDF">PDF <img src="{{ url_for('static', filename='assets/images/pdf.png')}}" alt=""></label> -->
+				<!-- 	<label for="export-file" id="toJSON">JSON <img src="{{ url_for('static', filename='assets/images/json.png')}}" alt=""></label> -->
+		  <!--   <label for="export-file" id="toCSV">CSV <img src="{{ url_for('static',filename='assets/images/csv.png')}}" alt=""></label> -->
+		  <!--   <label for="export-file" id="toEXCEL">EXCEL <img src="{{ url_for('static', filename='assets/images/excel.png')}}" alt=""></label> -->
+    <!--             </div> -->
+    <!--         </div> -->
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Asset Description <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Financed by <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Serial Number <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Product Number<span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Make Model <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Directorate <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Units <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Department <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Building <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Room <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Officer in Charge <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Condition <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
 					{% for asset in assets %}
 					<tr>
 						<td>{{ asset.asset_description }}</td>
@@ -98,9 +101,9 @@ Asset management system - All assets
 						<td>{{ asset.state }}</td>
 					</tr>	
 						{% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
 
-				</tbody>
-			</table>
-		</div>
-	</section>
 	{% endblock body %}

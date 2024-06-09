@@ -23,16 +23,16 @@ def create_assets():
     if request.method == "POST":
         if form.validate_on_submit():
             asset = Asset(
-                asset_description=form.asset_description.data.capitalize(),
-                financed_by=form.financed_by.data.capitalize(),
+                asset_description=form.asset_description.data.title(),
+                financed_by=form.financed_by.data.title(),
                 serial_number=form.serial_number.data.upper(),
                 product_number=form.product_number.data.upper(),
                 make_model=form.make_model.data.upper(),
-                directorate=form.directorate.data.capitalize(),
-                units=form.units.data.capitalize(),
-                department=form.department.data.capitalize(),
-                building=form.building.data.capitalize(),
-                room=form.room.data.capitalize(),
+                directorate=form.directorate.data.title(),
+                units=form.units.data.title(),
+                department=form.department.data.title(),
+                building=form.building.data.title(),
+                room=form.room.data.title(),
                 officer_in_charge=form.officer_in_charge.data.title(),
                 state=form.state.data.capitalize(),
             )
