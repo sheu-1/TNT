@@ -41,6 +41,7 @@ body {
 	text-decoration: none;
 	color: whitesmoke;
 	width: 7em;
+	margin-right: 4px;
 }
 
 .links>a:hover,
@@ -53,7 +54,7 @@ body {
 }
 
 .login {
-	background-color: #CE9540;
+	background-color: #734C11;
 	margin-left: -67px;
 	padding-left: 32px;
 }

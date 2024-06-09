@@ -7,6 +7,7 @@ Asset management - Add an asset
 <link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
 {% endblock head %}
 {% block navlinks %}
+<a href="{{ url_for('show_assets') }}" class="links signup">All Assets</a>
 <a href="{{ url_for('index') }}" class="links login">Log out</a>
 {% endblock navlinks %}
 {% block body %}
