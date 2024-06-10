@@ -16,7 +16,6 @@ Asset management - Add an asset
 	<div class="layer">
 		<form autocomplete="off" action="" class="form" method="post">
 			{{ form.csrf_token }}
-			{{ form.hidden_tag() }}
 			<div class="row">
 				<div class="asset_description">
 				{{ form.asset_description(placeholder="Asset Description",id="description") }}
@@ -85,7 +84,7 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="units">
-				{{ form.units(placeholder="Units",id="units") }}
+				{{ form.units(placeholder="Units/ Department",id="units") }}
 				{% if form.units.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.units.errors %}
@@ -94,18 +93,6 @@ Asset management - Add an asset
 				    </div>
 				    {% endif %}
 				</div> 
-				<div class="department">
-				{{ form.department(placeholder="Department",id="department") }}
-				{% if form.department.errors %}
-				    <div class="invalid-form">
-				      {% for error in form.department.errors %}
-					<span>{{error}}</span>
-				      {% endfor %}
-				    </div>
-				    {% endif %}
-				</div>
-			</div>
-			<div class="row">
 				<div class="building">
 				{{ form.building(placeholder="Building",id="building") }}
 				{% if form.building.errors %}
@@ -116,6 +103,8 @@ Asset management - Add an asset
 				    </div>
 				    {% endif %}
 				</div>
+			</div>
+			<div class="row">
 				<div class="room">
 				{{ form.room(placeholder="Room",id="room") }}
 				{% if form.room.errors %}
@@ -126,13 +115,23 @@ Asset management - Add an asset
 				    </div>
 				    {% endif %}
 				</div>
-			</div>
-			<div class="row">
 				<div class="officer_in_charge">
 				{{ form.officer_in_charge(placeholder="Officer in Charge",id="officerincharge") }}
 				{% if form.officer_in_charge.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.officer_in_charge.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="officer_contact_info">
+				{{ form.officer_contact_info(placeholder="Officer Contact Info",id="officercontactinfo") }}
+				{% if form.officer_contact_info.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.officer_contact_info.errors %}
 					<span>{{error}}</span>
 				      {% endfor %}
 				    </div>

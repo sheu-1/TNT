@@ -31,10 +31,10 @@ class AssetForm(FlaskForm):
     make_model = StringField(validators=[DataRequired()])
     directorate = StringField(validators=[DataRequired()])
     units = StringField(validators=[DataRequired()])
-    department = StringField(validators=[DataRequired()])
     building = StringField(validators=[DataRequired()])
     room = StringField(validators=[DataRequired()])
     officer_in_charge = StringField(validators=[Length(min=2, max=20)])
+    officer_contact_info = StringField()
     state = StringField(validators=[DataRequired()])
 
     def validate_serial_number(self, serial_number):

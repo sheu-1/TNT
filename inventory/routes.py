@@ -30,10 +30,10 @@ def create_assets():
                 make_model=form.make_model.data.upper(),
                 directorate=form.directorate.data.title(),
                 units=form.units.data.title(),
-                department=form.department.data.title(),
                 building=form.building.data.title(),
                 room=form.room.data.title(),
                 officer_in_charge=form.officer_in_charge.data.title(),
+                officer_contact_info=form.officer_contact_info.data.title(),
                 state=form.state.data.capitalize(),
             )
             db.session.add(asset)
