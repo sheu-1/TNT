@@ -1,8 +1,9 @@
 from flask import flash, redirect, render_template, request, url_for
 
-from inventory import app, db
-from inventory.form import AssetForm, RegisterForm
-from inventory.models import Asset
+from inventory import app, db, bcrypt
+from inventory.form import AssetForm, RegisterForm, LoginForm
+from inventory.models import Asset, User
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route("/")
@@ -58,18 +59,67 @@ def profile():
     return render_template("account.html")
 
 
-@app.route("/signin/")
-@app.route("/SIGNIN/")
-@app.route("/LOGIN/")
-@app.route("/login/")
+@app.route("/signin/", methods=("GET", "POST"))
+@app.route("/SIGNIN/", methods=("GET", "POST"))
+@app.route("/LOGIN/", methods=("GET", "POST"))
+@app.route("/login/", methods=("GET", "POST"))
 def login():
-    return render_template("login.html")
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+            user = User.query.filter_by(email=form.email.data).first()
+            print(user)
+            print(bcrypt.check_password_hash(user.password, form.password.data))
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user, remember=form.remember.data)
+                return redirect(url_for('index'))
+            else:
+                flash('Login unsuccessful. Please check email and password', 'danger')
+    return render_template("login.html", title=login, form=form)
 
 
-@app.route("/register/")
-@app.route("/REGISTER/")
-@app.route("/SIGNUP/")
-@app.route("/signup/")
+@app.route("/register/", methods=['POST', 'GET'])
+@app.route("/REGISTER/", methods=['GET', 'POST'])
+@app.route("/SIGNUP/", methods=['GET', 'POST'])
+@app.route("/signup/", methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = RegisterForm()
+    print(form)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            first_name=form.first_name.data
+            second_name=form.second_name.data
+            email=form.email.data
+            password=form.password.data
+             
+            hashed_password = bcrypt.generate_password_hash(password)
+            user = User(
+               first_name=first_name,
+               second_name= second_name,
+               email=email,
+               password=hashed_password
+               )
+            
+            db.session.add(user)
+            db.session.commit()
+            flash(f" {form.first_name.data}has  been successfully registered", "success")
+            return redirect(url_for("login"))
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    print(
+                        f"Error in {getattr(form, field).label.text}: {error}", "error"
+                    )
+    else:
+        print(form.email.data)
+        print("Did not validate?")
+            
     return render_template("register.html", form=form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

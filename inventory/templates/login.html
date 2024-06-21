@@ -12,7 +12,8 @@ Asset management system - Log in
 {% block body %}
 <div class="auth-container">
 	<div class="auth-form">
-		<form action="login.php" method="post">
+		<form action="" method="post">
+			{{form.csrf_token}}
 			<h3>Log in</h3>
 			<div class="email"><label for="email"><input placeholder="Email Address" type="text"
 						name="email" id="email"></div>

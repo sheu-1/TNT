@@ -203,7 +203,7 @@ body {
 	/* background-color: #cecece; */
 }
 
-.image {
+.image img{
 	width: 100%;
-	max-width: 800px;
+	max-width: 12000px;
 }

@@ -3,8 +3,13 @@
 Asset management system - Home
 {% endblock %}
 {% block navlinks %}
-<a href="{{url_for('register')}}" class="links signup">Sign up</a>
-<a href="{{url_for('login')}}" class="links login">Login</a>
+	{%if current_user.is_authenticated%}
+		<a href="{{url_for('account')}}" class="links logout">Account</a>
+		<a href="{{url_for('logout')}}" class="links logout">Logout</a>
+	{%else%}
+		<a href="{{url_for('register')}}" class="links signup">Sign up</a>
+		<a href="{{url_for('login')}}" class="links login">Login</a>
+	{%endif%}
 {% endblock navlinks %}
 {% block body %}
 <div class="main">
@@ -12,7 +17,7 @@ Asset management system - Home
 		<h2>INVENTORY MANAGEMENT SYSTEM</h2>
 	</div>
 	<div class="image">
-		<img src="{{ url_for('static',filename='assets/images/hero.jpeg') }}" alt="hero-image" height="470">
+		<img src="{{ url_for('static',filename='assets/images/hero.jpeg') }}" alt="hero-image" width="1000 " height="470">
 	</div>
 	<div class="info">
 		Inventory management is a crucial way for us as an organization to track our assets. This way we

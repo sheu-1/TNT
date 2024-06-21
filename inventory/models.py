@@ -1,7 +1,12 @@
-from inventory import app, db
+from inventory import app, db, login_manager
+from flask_login import UserMixin
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text, nullable=False)
     second_name = db.Column(db.Text, nullable=False)
@@ -57,3 +62,4 @@ class Asset(db.Model):
 
     def __repr__(self):
         return "<Serial Number %r>" % self.serial_number
+

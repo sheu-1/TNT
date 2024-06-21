@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (
+    BooleanField,
     EmailField,
     PasswordField,
     StringField,
@@ -9,7 +10,7 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
-from inventory.models import Asset
+from inventory.models import Asset, User
 
 
 class RegisterForm(FlaskForm):
@@ -41,3 +42,9 @@ class AssetForm(FlaskForm):
         serial_number = Asset.query.filter_by(serial_number=serial_number.data).first()
         if serial_number:
             raise ValidationError("Serial Number already exists")
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
