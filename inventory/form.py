@@ -41,7 +41,9 @@ class AssetForm(FlaskForm):
     def validate_serial_number(self, serial_number):
         serial_number = Asset.query.filter_by(serial_number=serial_number.data).first()
         if serial_number:
-            raise ValidationError("Serial Number already exists")
+            raise ValidationError(
+                "The serial number you entered is already in use. Please verify your entry or check the existing records to avoid duplicates."
+            )
 
 
 class LoginForm(FlaskForm):
