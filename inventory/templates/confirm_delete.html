@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}
+Asset management system - Delete account
+{% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='confirm_delete.css') }}">
+{% endblock head %}
+{% block body %}
+<div class="content">
+	<h2>Enter your password to proceed</h2>
+	<form action="">
+		{{ form.csrf_token }}
+		<div class="password">
+			{{ form.password.label(class='confirm-delete-label') }}
+			{{ form.password() }}
+		</div>
+		{{ form.submit() }}
+	</form>
+</div>
+{% endblock body %}

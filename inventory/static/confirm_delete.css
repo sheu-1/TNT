@@ -1,0 +1,21 @@
+.password {
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+}
+
+h2 {
+	margin-bottom: 12px;
+	color: red
+}
+
+.confirm-delete-label {
+	font-size: 20px;
+}

@@ -2,7 +2,13 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import AssetForm, LoginForm, RegisterForm, UpdateAccountForm
+from inventory.form import (
+    AssetForm,
+    DeleteAccountForm,
+    LoginForm,
+    RegisterForm,
+    UpdateAccountForm,
+)
 from inventory.models import Asset, User
 
 
@@ -153,9 +159,18 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/profile/delete")
+@app.route("/account/delete", methods=("GET", "POST"))
+@app.route("/profile/delete", methods=("GET", "POST"))
 def delete_account():
-    return "SURE?"
+    form = DeleteAccountForm()
+    if form.validate_on_submit():
+        if bcrypt.check_password_hash(current_user.password, form.password.data):
+            user = User.query.first_or_404(current_user.username)
+            db.session.delete(user)
+            db.session.commit()
+            flash("Your Account has been deleted successfully!", "success")
+            redirect(url_for("home"))
+    return render_template("confirm_delete.html", form=form)
 
 
 @app.errorhandler(404)
