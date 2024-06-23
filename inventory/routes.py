@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import AssetForm, LoginForm, RegisterForm
+from inventory.form import AssetForm, LoginForm, RegisterForm, UpdateAccountForm
 from inventory.models import Asset, User
 
 
@@ -55,11 +55,34 @@ def create_assets():
     return render_template("assets.html", form=form)
 
 
-@app.route("/account/")
-@app.route("/profile/")
+@app.route("/account/", methods=("GET", "POST"))
+@app.route("/profile/", methods=("GET", "POST"))
 @login_required
 def profile():
-    return render_template("account.html")
+    form = UpdateAccountForm()
+    if request.method == "GET":
+        form.first_name.data = current_user.first_name
+        form.second_name.data = current_user.second_name
+        form.email.data = current_user.email
+    if request.method == "POST" and form.validate_on_submit():
+        if (
+            current_user.first_name == form.first_name.data
+            and current_user.second_name == form.second_name.data
+            and current_user.email == form.email.data
+        ):
+            redirect(url_for("profile"))
+        else:
+            current_user.first_name = form.first_name.data
+            current_user.second_name = form.second_name.data
+            current_user.email = form.email.data
+            if form.new_password.data:
+                hashed_password = bcrypt.generate_password_hash(form.password.data)
+                current_user.password = hashed_password
+            else:
+                current_user.password = current_user.password
+            db.commit()
+
+    return render_template("account.html", form=form)
 
 
 @app.route("/signin/", methods=("GET", "POST"))
@@ -128,6 +151,11 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
+
+@app.route("/profile/delete")
+def delete_account():
+    return "SURE?"
 
 
 @app.errorhandler(404)

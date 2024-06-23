@@ -8,25 +8,38 @@ Asset management system - Your Profile
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" class="links signup">Home</a>
-<button class="links login">Log out</button>
+<a href="{{ url_for('logout') }}" class="links login">Logout</a>
 {% endblock navlinks %}
 {% block body %}
 <h2 class="profile-heading">Your Profile</h2>
 <div class="account-wrapper">
-	<form action="" class="form">
-		<div class="assets"><label for="firstname">First Name:</label><input type="text" id="firstname"
-				name="firstname">
+	<form action="" class="form" method="post" >
+		{{ form.csrf_token }}
+		<div class="assets">
+		{{ form.first_name.label }}
+		{{ form.first_name() }}
 		</div>
-
-		<div class="assets"><label for="secondname">Second Name:</label><input type="text" id="secondname"
-				name="secondname">
+		<div class="assets">
+		{{ form.second_name.label }}
+		{{ form.second_name() }}
 		</div>
-		<div class="assets"><label for="email">Email:</label><input type="text" id="email" name="email">
+		<div class="assets">
+		{{ form.email.label }}
+		{{ form.email() }}
 		</div>
-		<div class="assets"><label for="password">New Password:</label><input type="password" id="password"
-				name="password"></div>
-		<input type="submit" value="Update"><br>
-		<button class="delete-btn">Delete your account</button>
+		<div class="assets">
+		{{ form.new_password.label }}
+		{{ form.new_password() }}
+		<div class="assets">
+		{{ form.confirm_new_password.label }}
+		{{ form.confirm_new_password() }}
+		</div>
+		</div>
+		<div class="assets">
+		{{ form.submit() }}
+		<!-- <button class="delete-btn">Delete your account</button> -->
+			<a href="{{ url_for('delete_account') }}" class="delete-btn">Delete your account</a>
+		</div>
 	</form>
 </div>
 {% endblock body %}

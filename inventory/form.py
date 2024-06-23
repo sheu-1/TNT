@@ -43,8 +43,25 @@ class AssetForm(FlaskForm):
         if serial_number:
             raise ValidationError("Serial Number already exists")
 
+
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    remember = BooleanField("Remember Me")
+    submit = SubmitField("Login")
+
+
+class UpdateAccountForm(RegisterForm):
+    first_name = StringField(
+        "First Name", validators=[DataRequired(), Length(min=2, max=12)]
+    )
+    second_name = StringField(
+        "Second Name", validators=[DataRequired(), Length(min=2, max=12)]
+    )
+    email = EmailField("Email", validators=[Email(), DataRequired()])
+    new_password = PasswordField("New Password", validators=[Length(min=6)])
+    confirm_new_password = PasswordField(
+        "Confirm New Password", validators=[Length(min=6), EqualTo("new_password")]
+    )
+    submit = SubmitField("Update your Account")
+
