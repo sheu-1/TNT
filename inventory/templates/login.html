@@ -15,12 +15,9 @@ Asset management system - Log in
 		<form action="" method="post">
 			{{form.csrf_token}}
 			<h3>Log in</h3>
-			<div class="email"><label for="email"><input placeholder="Email Address" type="text"
-						name="email" id="email"></div>
-			<div class="password"><label for="password"></label><input placeholder="Password"
-					type="password" name="password" id="password"></div>
-			<!-- <button class="btn-signup">LogIn</button> -->
-			<input type="submit" value="Submit" class="btn-signup"><br>
+			{{ form.email(placeholder='Email Address') }}
+			{{ form.password(placeholder='Password') }}
+			{{ form.submit(class='btn-signup') }}
 			<small class="have-account-link">Don't have an account?<a href="{{ url_for('register') }}">Sign
 					up</a></small>
 		</form>

@@ -23,34 +23,6 @@ class User(db.Model, UserMixin):
 
 
 class Asset(db.Model):
-    # def __init__(
-    #     self,
-    #     asset_description,
-    #     financed_by,
-    #     serial_number,
-    #     product_number,
-    #     make_model,
-    #     directorate,
-    #     units,
-    #     building,
-    #     room,
-    #     officer_in_charge,
-    #     officer_contact_info,
-    #     state,
-    # ):
-    #     self.asset_description = asset_description
-    #     self.financed_by = financed_by
-    #     self.serial_number = serial_number
-    #     self.product_number = product_number
-    #     self.make_model = make_model
-    #     self.directorate = directorate
-    #     self.units = units
-    #     self.building = building
-    #     self.room = room
-    #     self.officer_in_charge = officer_in_charge
-    #     self.officer_contact_info = officer_contact_info
-    #     self.state = state
-
     idassets = db.Column(db.Integer, primary_key=True)
     asset_description = db.Column(db.Text, nullable=False)
     financed_by = db.Column(db.Text, default="N/A")
