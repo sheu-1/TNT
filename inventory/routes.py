@@ -1,9 +1,9 @@
 from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 
-from inventory import app, db, bcrypt
-from inventory.form import AssetForm, RegisterForm, LoginForm
+from inventory import app, bcrypt, db
+from inventory.form import AssetForm, LoginForm, RegisterForm
 from inventory.models import Asset, User
-from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route("/")
@@ -12,12 +12,14 @@ def index():
 
 
 @app.route("/assets/")
+@login_required
 def show_assets():
     assets = Asset.query.all()
     return render_template("dashboard.html", assets=assets)
 
 
 @app.route("/assets/create", methods=("GET", "POST"))
+@login_required
 def create_assets():
     form = AssetForm()
     print(form)
@@ -55,6 +57,7 @@ def create_assets():
 
 @app.route("/account/")
 @app.route("/profile/")
+@login_required
 def profile():
     return render_template("account.html")
 
@@ -65,47 +68,47 @@ def profile():
 @app.route("/login/", methods=("GET", "POST"))
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for("show_assets"))
     form = LoginForm()
     if form.validate_on_submit():
-            user = User.query.filter_by(email=form.email.data).first()
-            print(user)
-            print(bcrypt.check_password_hash(user.password, form.password.data))
-            if user and bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user, remember=form.remember.data)
-                return redirect(url_for('index'))
-            else:
-                flash('Login unsuccessful. Please check email and password', 'danger')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for("show_assets"))
+        else:
+            flash("Login unsuccessful. Please check email and password", "danger")
     return render_template("login.html", title=login, form=form)
 
 
-@app.route("/register/", methods=['POST', 'GET'])
-@app.route("/REGISTER/", methods=['GET', 'POST'])
-@app.route("/SIGNUP/", methods=['GET', 'POST'])
-@app.route("/signup/", methods=['GET', 'POST'])
+@app.route("/register/", methods=["POST", "GET"])
+@app.route("/REGISTER/", methods=["GET", "POST"])
+@app.route("/SIGNUP/", methods=["GET", "POST"])
+@app.route("/signup/", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for("index"))
     form = RegisterForm()
     print(form)
     if request.method == "POST":
         if form.validate_on_submit():
-            first_name=form.first_name.data
-            second_name=form.second_name.data
-            email=form.email.data
-            password=form.password.data
-             
+            first_name = form.first_name.data
+            second_name = form.second_name.data
+            email = form.email.data
+            password = form.password.data
+
             hashed_password = bcrypt.generate_password_hash(password)
             user = User(
-               first_name=first_name,
-               second_name= second_name,
-               email=email,
-               password=hashed_password
-               )
-            
+                first_name=first_name,
+                second_name=second_name,
+                email=email,
+                password=hashed_password,
+            )
+
             db.session.add(user)
             db.session.commit()
-            flash(f" {form.first_name.data}has  been successfully registered", "success")
+            flash(
+                f" {form.first_name.data}has  been successfully registered", "success"
+            )
             return redirect(url_for("login"))
         else:
             for field, errors in form.errors.items():
@@ -116,10 +119,32 @@ def register():
     else:
         print(form.email.data)
         print("Did not validate?")
-            
+
     return render_template("register.html", form=form)
 
+
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for("index"))
+
+
+@app.errorhandler(404)
+def error_404(error):
+    return "404"
+
+
+@app.errorhandler(401)
+def error_403(error):
+    return "403"
+
+
+@app.errorhandler(403)
+def error_403(error):
+    return "403"
+
+
+@app.errorhandler(500)
+def error_500(error):
+    return "500"

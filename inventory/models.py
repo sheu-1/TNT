@@ -1,5 +1,7 @@
-from inventory import app, db, login_manager
 from flask_login import UserMixin
+
+from inventory import app, db, login_manager
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -13,6 +15,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
 
+    def get_id(self):
+        return self.id
     def __repr__(self):
         return "<User %r>" % self.first_name
 

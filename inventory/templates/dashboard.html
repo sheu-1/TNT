@@ -11,7 +11,7 @@ Asset management system - All assets
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('profile') }}" style="width: 9em;" class="links signup">Your Profile</a>
-<a href="" class="links login">Log out</a>
+<a href="{{ url_for('logout') }}" class="links login">Log out</a>
 {% endblock navlinks %}
 {% block body %}
 <div class="main">
