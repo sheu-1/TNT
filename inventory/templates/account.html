@@ -13,7 +13,8 @@ Asset management system - Your Profile
 {% block body %}
 <h2 class="profile-heading">Your Profile</h2>
 <div class="account-wrapper">
-	<form action="" class="form" method="post" >
+	<form action="{{ url_for('profile') }}" class="form" method="post" >
+		{{ form.hidden_tag() }}
 		{{ form.csrf_token }}
 		<div class="assets">
 		{{ form.first_name.label }}
@@ -37,7 +38,6 @@ Asset management system - Your Profile
 		</div>
 		<div class="assets">
 		{{ form.submit() }}
-		<!-- <button class="delete-btn">Delete your account</button> -->
 			<a href="{{ url_for('delete_account') }}" class="delete-btn">Delete your account</a>
 		</div>
 	</form>

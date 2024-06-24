@@ -66,11 +66,14 @@ def create_assets():
 @login_required
 def profile():
     form = UpdateAccountForm()
+    print(current_user.first_name)
     if request.method == "GET":
         form.first_name.data = current_user.first_name
         form.second_name.data = current_user.second_name
         form.email.data = current_user.email
+        print(request.method)
     if request.method == "POST" and form.validate_on_submit():
+        print(request.method)
         if (
             current_user.first_name == form.first_name.data
             and current_user.second_name == form.second_name.data
@@ -78,6 +81,7 @@ def profile():
         ):
             redirect(url_for("profile"))
         else:
+            print(current_user.first_name)
             current_user.first_name = form.first_name.data
             current_user.second_name = form.second_name.data
             current_user.email = form.email.data
@@ -86,7 +90,9 @@ def profile():
                 current_user.password = hashed_password
             else:
                 current_user.password = current_user.password
-            db.commit()
+            db.session.commit()
+            flash("Your account has been updated successfully!", "success")
+            return redirect(url_for("profile"))
 
     return render_template("account.html", form=form)
 

@@ -26,6 +26,10 @@ body {
 	font-size: 20px;
 	background-color: #701e1e;
 	border: none;
+	color: wheat;
+	display: flex;
+	justify-content: center;
+	text-decoration: none;
 }
 
 .delete-btn:hover {
