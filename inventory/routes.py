@@ -2,13 +2,8 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import (
-    AssetForm,
-    DeleteAccountForm,
-    LoginForm,
-    RegisterForm,
-    UpdateAccountForm,
-)
+from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
+                            RegisterForm, UpdateAccountForm)
 from inventory.models import Asset, User
 
 
@@ -86,13 +81,13 @@ def profile():
             current_user.second_name = form.second_name.data
             current_user.email = form.email.data
             if form.new_password.data:
-                hashed_password = bcrypt.generate_password_hash(form.password.data)
+                hashed_password = bcrypt.generate_password_hash(form.new_password.data)
                 current_user.password = hashed_password
             else:
                 current_user.password = current_user.password
             db.session.commit()
             flash("Your account has been updated successfully!", "success")
-            return redirect(url_for("profile"))
+            return redirect(url_for("show_assets"))
 
     return render_template("account.html", form=form)
 
@@ -167,15 +162,19 @@ def logout():
 
 @app.route("/account/delete", methods=("GET", "POST"))
 @app.route("/profile/delete", methods=("GET", "POST"))
+@login_required
 def delete_account():
     form = DeleteAccountForm()
     if form.validate_on_submit():
-        if bcrypt.check_password_hash(current_user.password, form.password.data):
-            user = User.query.first_or_404(current_user.username)
-            db.session.delete(user)
+        if request.method == "POST" and bcrypt.check_password_hash(
+            current_user.password, form.password.data
+        ):
+            current_user.remove()
             db.session.commit()
-            flash("Your Account has been deleted successfully!", "success")
-            redirect(url_for("home"))
+            flash("You no longer exist :)")
+            return redirect(url_for("index"))
+        else:
+            flash("Incorrect password!", "danger")
     return render_template("confirm_delete.html", form=form)
 
 

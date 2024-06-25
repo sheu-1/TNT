@@ -86,53 +86,97 @@ function sortTable(column, sort_asc) {
 const excel_btn = document.querySelector("#toEXCEL");
 
 const toExcel = function (table) {
-  // Code For SIMPLE TABLE
-  // const t_rows = table.querySelectorAll('tr');
-  // return [...t_rows].map(row => {
-  //     const cells = row.querySelectorAll('th, td');
-  //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
-  // }).join('\n');
-
   const t_heads = table.querySelectorAll("th"),
     tbody_rows = table.querySelectorAll("tbody tr");
 
-  const headings = [...t_heads]
-    .map((head) => {
-      let actual_head = head.textContent.trim().split(" ");
-      return actual_head.splice(0, actual_head.length - 1).join(" ");
-    })
-    .join("\t");
-  const table_data = [...tbody_rows]
-    .map((row) => {
-      const cells = row.querySelectorAll("td"),
-        data_without_img = [...cells]
-          .map((cell) => cell.textContent.trim())
-          .join("\t");
+  const headings = [...t_heads].map((head) => {
+    let actual_head = head.textContent.trim().split(" ");
+    return actual_head.splice(0, actual_head.length - 1).join(" ");
+  });
 
-      return data_without_img;
-    })
-    .join("\n");
+  const table_data = [...tbody_rows].map((row) => {
+    const cells = row.querySelectorAll("td");
+    const data_without_img = [...cells].map((cell) => cell.textContent.trim());
+    return data_without_img;
+  });
 
-  return headings + "\n" + table_data;
+  // Combine headings and table data into an array of arrays
+  const data = [headings, ...table_data];
+
+  // Create a workbook and add a worksheet with the data
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+  // Generate binary string and return
+  return XLSX.write(wb, { bookType: "xlsx", type: "binary" });
 };
+
+function s2ab(s) {
+  const buf = new ArrayBuffer(s.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) & 0xff;
+  return buf;
+}
 
 excel_btn.onclick = () => {
   const excel = toExcel(customers_table);
-  downloadFile(excel, "excel");
+  const blob = new Blob([s2ab(excel)], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  });
+  saveAs(blob, "inventory.xlsx");
 };
 
-const downloadFile = function (data, fileType, fileName = "") {
-  const a = document.createElement("a");
-  a.download = fileName;
-  const mime_types = {
-    json: "application/json",
-    csv: "text/csv",
-    excel: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  };
-  a.href = `
-        data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
-    `;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-};
+// const excel_btn = document.querySelector("#toEXCEL");
+//
+// const toExcel = function (table) {
+//   // Code For SIMPLE TABLE
+//   // const t_rows = table.querySelectorAll('tr');
+//   // return [...t_rows].map(row => {
+//   //     const cells = row.querySelectorAll('th, td');
+//   //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
+//   // }).join('\n');
+//
+//   const t_heads = table.querySelectorAll("th"),
+//     tbody_rows = table.querySelectorAll("tbody tr");
+//
+//   const headings = [...t_heads]
+//     .map((head) => {
+//       let actual_head = head.textContent.trim().split(" ");
+//       return actual_head.splice(0, actual_head.length - 1).join(" ");
+//     })
+//     .join("\t");
+//   const table_data = [...tbody_rows]
+//     .map((row) => {
+//       const cells = row.querySelectorAll("td"),
+//         data_without_img = [...cells]
+//           .map((cell) => cell.textContent.trim())
+//           .join("\t");
+//
+//       return data_without_img;
+//     })
+//     .join("\n");
+//
+//   return headings + "\n" + table_data;
+// };
+//
+// excel_btn.onclick = () => {
+//   const excel = toExcel(customers_table);
+//   downloadFile(excel, "excel");
+// };
+//
+// const downloadFile = function (data, fileType, fileName = "") {
+//   const a = document.createElement("a");
+//   a.download = fileName;
+//   const mime_types = {
+//     json: "application/json",
+//     csv: "text/csv",
+//     excel: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+//   };
+//   a.href = `
+//         data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
+//     `;
+//   document.body.appendChild(a);
+//   a.click();
+//   a.remove();
+// };

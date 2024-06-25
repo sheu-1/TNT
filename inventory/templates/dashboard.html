@@ -7,6 +7,8 @@ Asset management system - All assets
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='exportToExcel.js') }}" defer></script>
 <script src="{{ url_for('static', filename='filter.js') }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 {% endblock head %}
 {% block navlinks %}

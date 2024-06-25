@@ -15,6 +15,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
 
+    def remove(self):
+        db.session.delete(self)
+
     def get_id(self):
         return self.id
 

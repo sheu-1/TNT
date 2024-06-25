@@ -1,13 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    BooleanField,
-    EmailField,
-    PasswordField,
-    StringField,
-    SubmitField,
-    ValidationError,
-    validators,
-)
+from wtforms import (BooleanField, EmailField, PasswordField, StringField,
+                     SubmitField, ValidationError, validators)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -71,4 +64,6 @@ class UpdateAccountForm(RegisterForm):
 class DeleteAccountForm(FlaskForm):
     password = PasswordField("Password:", validators=[DataRequired(), Length(min=6)])
     submit = SubmitField("Proceed to delete")
+
+    
 

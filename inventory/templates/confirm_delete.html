@@ -10,7 +10,7 @@ Asset management system - Delete account
 {% block body %}
 <div class="content">
 	<h2>Enter your password to proceed</h2>
-	<form action="">
+	<form action="" method="POST" >
 		{{ form.csrf_token }}
 		<div class="password">
 			{{ form.password.label(class='confirm-delete-label') }}
