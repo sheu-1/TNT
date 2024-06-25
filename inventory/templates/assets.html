@@ -19,7 +19,8 @@ Asset management - Add an asset
 			{{ form.csrf_token }}
 			<div class="row">
 				<div class="asset_description">
-				{{ form.asset_description(placeholder="Asset Description",id="description") }}
+				{{ form.asset_description.label }}
+				{{ form.asset_description(placeholder="",id="description") }}
 				{% if form.asset_description.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.asset_description.errors %}
@@ -29,7 +30,8 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="financed_by">
-				{{ form.financed_by(placeholder="Financed by/ Source of funds",id="financedby") }}
+				{{ form.financed_by.label }}
+				{{ form.financed_by(placeholder="",id="financedby") }}
 				{% if form.financed_by.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.financed_by.errors %}
@@ -41,7 +43,8 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="serial_number">
-				{{ form.serial_number(placeholder="Serial Number",id="serial") }}
+				{{ form.serial_number.label }}
+				{{ form.serial_number(placeholder="",id="serial") }}
 				{% if form.serial_number.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.serial_number.errors %}
@@ -51,7 +54,8 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="product_number">
-				{{ form.product_number(placeholder="Product Number",id="productnumber") }}
+				{{ form.product_number.label }}
+				{{ form.product_number(placeholder="",id="productnumber") }}
 				{% if form.product_number.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.product_number.errors %}
@@ -63,7 +67,8 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="make_model">
-				{{ form.make_model(placeholder="Make Model",id="makemodel") }}
+				{{ form.make_model.label }}
+				{{ form.make_model(placeholder="",id="makemodel") }}
 				{% if form.make_model.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.make_model.errors %}
@@ -73,7 +78,8 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="directorate">
-				{{ form.directorate(placeholder="Directorate",id="directorate") }}
+				{{ form.directorate.label }}
+				{{ form.directorate(placeholder="",id="directorate") }}
 				{% if form.directorate.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.directorate.errors %}
@@ -85,7 +91,8 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="units">
-				{{ form.units(placeholder="Units/ Department",id="units") }}
+				{{ form.units.label }}	
+				{{ form.units(placeholder="",id="units") }}
 				{% if form.units.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.units.errors %}
@@ -95,7 +102,8 @@ Asset management - Add an asset
 				    {% endif %}
 				</div> 
 				<div class="building">
-				{{ form.building(placeholder="Building",id="building") }}
+				{{ form.building.label }}
+				{{ form.building(placeholder="",id="building") }}
 				{% if form.building.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.building.errors %}
@@ -107,7 +115,8 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="room">
-				{{ form.room(placeholder="Room",id="room") }}
+				{{ form.room.label }}
+				{{ form.room(placeholder="",id="room") }}
 				{% if form.room.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.room.errors %}
@@ -117,7 +126,8 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="officer_in_charge">
-				{{ form.officer_allocated(placeholder="Officer in Charge",id="officerincharge") }}
+				{{ form.officer_allocated.label }}
+				{{ form.officer_allocated(placeholder="",id="officerincharge") }}
 				{% if form.officer_allocated.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.officer_allocated.errors %}
@@ -129,7 +139,8 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="officer_contact_info">
-				{{ form.officer_contact_info(placeholder="Officer Contact Info",id="officercontactinfo") }}
+				{{ form.officer_contact_info.label }}
+				{{ form.officer_contact_info(placeholder="",id="officercontactinfo") }}
 				{% if form.officer_contact_info.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.officer_contact_info.errors %}
@@ -139,7 +150,8 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="condition">
-				{{ form.state(placeholder="Condition",id="condition") }}
+				{{ form.state.label }}
+				{{ form.state(placeholder="",id="condition") }}
 				{% if form.state.errors %}
 				    <div class="invalid-form">
 				      {% for error in form.state.errors %}

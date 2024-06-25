@@ -25,18 +25,26 @@ class RegisterForm(FlaskForm):
 
 
 class AssetForm(FlaskForm):
-    asset_description = StringField(validators=[DataRequired(), Length(min=2, max=19)])
-    financed_by = StringField()
-    serial_number = StringField(validators=[DataRequired(), Length(min=5, max=20)])
-    product_number = StringField(validators=[DataRequired(), Length(min=3, max=20)])
-    make_model = StringField(validators=[DataRequired()])
-    directorate = StringField(validators=[DataRequired()])
-    units = StringField(validators=[DataRequired()])
-    building = StringField(validators=[DataRequired()])
-    room = StringField(validators=[DataRequired()])
-    officer_allocated = StringField(validators=[Length(min=2, max=20)])
-    officer_contact_info = StringField()
-    state = StringField(validators=[DataRequired()])
+    asset_description = StringField(
+        "Asset Description", validators=[DataRequired(), Length(min=2, max=19)]
+    )
+    financed_by = StringField("Financed by/ Source")
+    serial_number = StringField(
+        "Serial Number", validators=[DataRequired(), Length(min=5, max=20)]
+    )
+    product_number = StringField(
+        "Product Number", validators=[DataRequired(), Length(min=3, max=20)]
+    )
+    make_model = StringField("Make Model", validators=[DataRequired()])
+    directorate = StringField("Directorate", validators=[DataRequired()])
+    units = StringField("Units", validators=[DataRequired()])
+    building = StringField("Building", validators=[DataRequired()])
+    room = StringField("Room", validators=[DataRequired()])
+    officer_allocated = StringField(
+        "Officer Allocated Names", validators=[Length(min=2, max=20)]
+    )
+    officer_contact_info = StringField("Officer Allocated Contact Info")
+    state = StringField("Condition", validators=[DataRequired()])
 
     def validate_serial_number(self, serial_number):
         serial_number = Asset.query.filter_by(serial_number=serial_number.data).first()
