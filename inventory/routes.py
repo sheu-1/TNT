@@ -12,6 +12,11 @@ def index():
     return render_template("index.html")
 
 
+# def get_total_asset_count():
+#     assets = Asset.query.all()
+#     return str(len(assets))
+
+
 @app.route("/assets/")
 @login_required
 def show_assets():
@@ -36,7 +41,7 @@ def create_assets():
                 units=form.units.data.title(),
                 building=form.building.data.title(),
                 room=form.room.data.title(),
-                officer_in_charge=form.officer_in_charge.data.title(),
+                officer_allocated=form.officer_allocated.data.title(),
                 officer_contact_info=form.officer_contact_info.data.title(),
                 state=form.state.data.capitalize(),
             )

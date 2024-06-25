@@ -36,7 +36,7 @@ class Asset(db.Model):
     units = db.Column(db.Text, nullable=False)
     building = db.Column(db.Text, nullable=False)
     room = db.Column(db.Integer, nullable=False)
-    officer_in_charge = db.Column(db.Text, default="N/A")
+    officer_allocated = db.Column(db.Text, default="N/A")
     officer_contact_info = db.Column(db.Text, default="N/A")
     state = db.Column(db.Text, nullable=False)
 

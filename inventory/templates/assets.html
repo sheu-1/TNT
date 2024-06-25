@@ -117,10 +117,10 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="officer_in_charge">
-				{{ form.officer_in_charge(placeholder="Officer in Charge",id="officerincharge") }}
-				{% if form.officer_in_charge.errors %}
+				{{ form.officer_allocated(placeholder="Officer in Charge",id="officerincharge") }}
+				{% if form.officer_allocated.errors %}
 				    <div class="invalid-form">
-				      {% for error in form.officer_in_charge.errors %}
+				      {% for error in form.officer_allocated.errors %}
 					<span>{{error}}</span>
 				      {% endfor %}
 				    </div>
