@@ -6,6 +6,7 @@ Asset management - Add an asset
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
 <script src="{{ url_for('static', filename='reset_fields.js') }}" defer></script>
+<script src="{{ url_for('static', filename='dependent_select.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('show_assets') }}" class="links signup">All Assets</a>
@@ -15,7 +16,8 @@ Asset management - Add an asset
 <h2 class="asset-heading">Add an asset</h2>
 <div class="form-wrapper">
 	<div class="layer">
-		<form autocomplete="off" action="" class="form" method="post">
+		<form autocomplete="off" action="{{ url_for('create_assets') }}" class="form" method="post">
+		        {{ form.hidden_tag() }}
 			{{ form.csrf_token }}
 			<div class="row">
 				<div class="asset_description">

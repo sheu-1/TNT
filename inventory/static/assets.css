@@ -105,6 +105,10 @@ select {
 	border: none;
 }
 
+select:hover {
+	cursor: pointer;
+}
+
 input[type="submit"],
 .reset {
 	color: whitesmoke;

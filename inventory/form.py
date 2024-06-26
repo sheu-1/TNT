@@ -1,6 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import (BooleanField, EmailField, PasswordField, SelectField,
-                     StringField, SubmitField, ValidationError, validators)
+from wtforms import (
+    BooleanField,
+    EmailField,
+    PasswordField,
+    SelectField,
+    StringField,
+    SubmitField,
+    ValidationError,
+    validators,
+)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -18,9 +26,6 @@ class RegisterForm(FlaskForm):
 
 
 class AssetForm(FlaskForm):
-    # asset_description = StringField(
-    #     "Asset Description", validators=[DataRequired(), Length(min=2, max=19)]
-    # )
     asset_description = SelectField(
         "Asset Description",
         choices=[
@@ -37,12 +42,12 @@ class AssetForm(FlaskForm):
             ("Scanner", "Scanner"),
             ("External Harddrive", "External Hardrive"),
             ("Router", "Router"),
-            ("Switch","Switch"),
-            ("Mobile Phone","Mobile Phone"),
-            ("Desk Phone(VoIp)","Desk Phone(VoIp)"),
-            ("Projectors","Projectors"),
-            ("Smart Boards","Smart Boards"),
-            ("Shredder","Shredder")
+            ("Switch", "Switch"),
+            ("Mobile Phone", "Mobile Phone"),
+            ("Desk Phone(VoIp)", "Desk Phone(VoIp)"),
+            ("Projectors", "Projectors"),
+            ("Smart Boards", "Smart Boards"),
+            ("Shredder", "Shredder"),
         ],
     )
     financed_by = StringField("Financed by/ Source")
@@ -67,19 +72,17 @@ class AssetForm(FlaskForm):
             ("Administrative Services", "Directorate of Administrative Services"),
             ("Public Private Partnership", "Directorate of Public Private Patnership"),
         ],
+        validators=[DataRequired()],
     )
-    units = StringField("Units", validators=[DataRequired()])
+    units = SelectField("Units / Departments", choices=[], validators=[DataRequired()])
     building = StringField("Building", validators=[DataRequired()])
+
     room = StringField("Room", validators=[DataRequired()])
     officer_allocated = StringField(
         "Officer Allocated Names", validators=[Length(min=2, max=20)]
     )
     officer_contact_info = StringField("Officer Allocated Work ID / National ID")
     state = StringField("Condition", validators=[DataRequired()])
-    # language = SelectField(
-    #     "Programming Language",
-    #     choices=[("cpp", "C++"), ("py", "Python"), ("text", "Plain Text")],
-    # )
 
     def validate_serial_number(self, serial_number):
         serial_number = Asset.query.filter_by(serial_number=serial_number.data).first()

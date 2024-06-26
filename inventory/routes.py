@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template, request, url_for
+from flask import flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
@@ -24,12 +24,49 @@ def show_assets():
     return render_template("dashboard.html", assets=assets)
 
 
+unit_options = {
+    "Accounting Services": [
+        "Government Accounting",
+        "National Sub-County Treasuries",
+        "IFMIS",
+        "Audit Department",
+    ],
+    "Budget, Fiscal and Economic Affairs": [
+        "Budget Department",
+        "Macro and Fiscal Affairs",
+        "Financial and Sectoral Affairs",
+        "Inter Government Fiscal Relations",
+        "Public Procurement",
+    ],
+    "Public Investment": [
+        "Government Public Investment and Public Enterprises",
+        "National Assets and Liability Management",
+        "Pensions Department",
+    ],
+    "Public Debt Management": [
+        "Resource Mobilization (Front Office)",
+        "Debt Policy Strategy and Risk Management (Middle Office)",
+        "Debt Recording and Settlement (Back Office)",
+    ],
+    "Administrative Services": ["Admin", "HRM", "ICT", "Finance", "Accounts", "SCM"],
+    "Public Private Partnership": [
+        "CPPMU",
+        "Legal",
+        "Public Communications",
+        "Internal Audit and Risk Assesment",
+    ],
+}
+
+
 @app.route("/assets/create", methods=("GET", "POST"))
 @login_required
 def create_assets():
     form = AssetForm()
     print(form)
     if request.method == "POST":
+        # set unit choices before submit
+        directorate = form.directorate.data
+        form.units.choices = [(unit,unit) for unit in unit_options.get(directorate, [])]
         if form.validate_on_submit():
             asset = Asset(
                 asset_description=form.asset_description.data.title(),
@@ -56,9 +93,21 @@ def create_assets():
                         f"Error in {getattr(form, field).label.text}: {error}", "error"
                     )
     else:
+        # Pre-fill items based on default category
+        default_directorate = form.directorate.data or "Accounting Services"
+        form.units.choices = [
+            (unit, unit) for unit in unit_options[default_directorate]
+        ]
         print(form.asset_description.data)
         print("Did not validate?")
     return render_template("assets.html", form=form)
+
+
+@app.route("/get_units", methods=["POST"])
+def get_units():
+    directorate = request.json["directorate"]
+    units = unit_options.get(directorate, [])
+    return jsonify(units)
 
 
 @app.route("/account/", methods=("GET", "POST"))
