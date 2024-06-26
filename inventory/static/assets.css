@@ -83,6 +83,7 @@ input,
 	border: none;
 }
 
+select,
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -90,6 +91,7 @@ input[type="password"] {
 	color: rgb(0, 0, 0);
 }
 
+select,
 input,
 .reset {
 	padding: 14px;
@@ -97,6 +99,10 @@ input,
 	margin-bottom: 10px;
 	width: 420px;
 	font-size: 20px;
+}
+
+select {
+	border: none;
 }
 
 input[type="submit"],

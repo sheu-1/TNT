@@ -1,13 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    BooleanField,
-    EmailField,
-    PasswordField,
-    StringField,
-    SubmitField,
-    ValidationError,
-    validators,
-)
+from wtforms import (BooleanField, EmailField, PasswordField, SelectField,
+                     StringField, SubmitField, ValidationError, validators)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -25,8 +18,32 @@ class RegisterForm(FlaskForm):
 
 
 class AssetForm(FlaskForm):
-    asset_description = StringField(
-        "Asset Description", validators=[DataRequired(), Length(min=2, max=19)]
+    # asset_description = StringField(
+    #     "Asset Description", validators=[DataRequired(), Length(min=2, max=19)]
+    # )
+    asset_description = SelectField(
+        "Asset Description",
+        choices=[
+            ("Monitor", "Monitor"),
+            (
+                "System Unit(CPU)",
+                "System Unit(CPU)",
+            ),
+            ("Uninterrupted Power Supply(UPS)", "Uninterrupted Power Supply(UPS)"),
+            ("Laptop", "Laptop"),
+            ("Keyboard", "Keyboard"),
+            ("Mouse", "Mouse"),
+            ("Printer", "Printer"),
+            ("Scanner", "Scanner"),
+            ("External Harddrive", "External Hardrive"),
+            ("Router", "Router"),
+            ("Switch","Switch"),
+            ("Mobile Phone","Mobile Phone"),
+            ("Desk Phone(VoIp)","Desk Phone(VoIp)"),
+            ("Projectors","Projectors"),
+            ("Smart Boards","Smart Boards"),
+            ("Shredder","Shredder")
+        ],
     )
     financed_by = StringField("Financed by/ Source")
     serial_number = StringField(
@@ -36,7 +53,21 @@ class AssetForm(FlaskForm):
         "Product Number", validators=[DataRequired(), Length(min=3, max=20)]
     )
     make_model = StringField("Make Model", validators=[DataRequired()])
-    directorate = StringField("Directorate", validators=[DataRequired()])
+    # directorate = StringField("Directorate", validators=[DataRequired()])
+    directorate = SelectField(
+        "Directorate",
+        choices=[
+            ("Accounting Services", "Directorate of Accounting Services"),
+            (
+                "Budget, Fiscal and Economic Affairs",
+                "Directorate of Budget, Fiscal and Economic Affairs",
+            ),
+            ("Public Investment", "Directorate of Public Investment"),
+            ("Public Debt Management", "Directorate of Public Debt Management"),
+            ("Administrative Services", "Directorate of Administrative Services"),
+            ("Public Private Partnership", "Directorate of Public Private Patnership"),
+        ],
+    )
     units = StringField("Units", validators=[DataRequired()])
     building = StringField("Building", validators=[DataRequired()])
     room = StringField("Room", validators=[DataRequired()])
@@ -45,6 +76,10 @@ class AssetForm(FlaskForm):
     )
     officer_contact_info = StringField("Officer Allocated Work ID / National ID")
     state = StringField("Condition", validators=[DataRequired()])
+    # language = SelectField(
+    #     "Programming Language",
+    #     choices=[("cpp", "C++"), ("py", "Python"), ("text", "Plain Text")],
+    # )
 
     def validate_serial_number(self, serial_number):
         serial_number = Asset.query.filter_by(serial_number=serial_number.data).first()
