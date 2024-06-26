@@ -43,7 +43,7 @@ class AssetForm(FlaskForm):
     officer_allocated = StringField(
         "Officer Allocated Names", validators=[Length(min=2, max=20)]
     )
-    officer_contact_info = StringField("Officer Allocated Contact Info")
+    officer_contact_info = StringField("Officer Allocated Work ID / National ID")
     state = StringField("Condition", validators=[DataRequired()])
 
     def validate_serial_number(self, serial_number):
