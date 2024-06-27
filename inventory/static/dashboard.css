@@ -13,6 +13,9 @@ body {
 }
 
 
+.all-assets-btn {
+	text-decoration: none;
+}
 
 .logo {
 	background: url('assets/images/TNT\ logo.png');

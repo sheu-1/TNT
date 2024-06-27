@@ -19,7 +19,7 @@ Asset management system - All assets
 <div class="main">
     <main class="table" id="customers_table">
         <section class="table__header">
-            <h1>All Assets</h1>
+            <a href="{{ url_for('show_assets') }}" class="all-assets-btn" ><h1>All Assets</h1></a>
             <div class="input-group">
                 <input type="search" placeholder="Search Data...">
 		<img src="{{ url_for('static', filename='assets/images/search.png') }}" alt="">
