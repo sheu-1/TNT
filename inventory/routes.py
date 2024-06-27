@@ -66,7 +66,9 @@ def create_assets():
     if request.method == "POST":
         # set unit choices before submit
         directorate = form.directorate.data
-        form.units.choices = [(unit,unit) for unit in unit_options.get(directorate, [])]
+        form.units.choices = [
+            (unit, unit) for unit in unit_options.get(directorate, [])
+        ]
         if form.validate_on_submit():
             asset = Asset(
                 asset_description=form.asset_description.data.title(),
@@ -79,7 +81,7 @@ def create_assets():
                 building=form.building.data.title(),
                 room=form.room.data.title(),
                 officer_allocated=form.officer_allocated.data.title(),
-                officer_contact_info=form.officer_contact_info.data.title(),
+                officer_contact_info=form.officer_contact_info.data,
                 state=form.state.data.capitalize(),
             )
             db.session.add(asset)
@@ -234,19 +236,13 @@ def delete_account():
 
 @app.errorhandler(404)
 def error_404(error):
-    return "404"
-
-
-@app.errorhandler(401)
-def error_403(error):
-    return "403"
-
+    return render_template('404.html')
 
 @app.errorhandler(403)
 def error_403(error):
-    return "403"
+    return render_template('403.html')
 
 
 @app.errorhandler(500)
 def error_500(error):
-    return "500"
+    return render_template('500.html')

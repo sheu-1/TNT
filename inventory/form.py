@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     EmailField,
+    IntegerField,
     PasswordField,
     SelectField,
     StringField,
@@ -81,7 +82,7 @@ class AssetForm(FlaskForm):
     officer_allocated = StringField(
         "Officer Allocated Names", validators=[Length(min=2, max=20)]
     )
-    officer_contact_info = StringField("Officer Allocated Work ID / National ID")
+    officer_contact_info = IntegerField("Officer Allocated Work ID / National ID")
     state = StringField("Condition", validators=[DataRequired()])
 
     def validate_serial_number(self, serial_number):

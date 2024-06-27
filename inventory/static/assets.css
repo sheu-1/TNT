@@ -86,7 +86,8 @@ input,
 select,
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
 	background-color: #734C11;
 	color: rgb(0, 0, 0);
 }
