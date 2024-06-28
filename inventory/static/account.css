@@ -1,76 +1,68 @@
 body {
+	/* maximize rest of the div to fill the set size */
 	display: flex;
 	flex-direction: column;
-	height: 100%;
 	background-color: #CE9540;
+	height: 100%;
 }
 
-.nav {
-	background-color: whitesmoke;
+
+.login {
+	background-color: #701e1e;
 }
 
-.asset-heading {
+.profile-heading {
 	padding: 14px;
 	text-align: center;
 	color: whitesmoke;
 	background-color: #734C11;
 }
 
-.nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 2px solid peachpuff;
-	padding-left: 4px;
-	padding-top: 5px;
-	padding-right: 15px;
-}
-
-.links {
-	/* border: 2px solid slateblue; */
-	padding: 12px;
-	display: flex;
-	align-items: center;
-	gap: 32px;
-	border-radius: 34px;
-	margin-bottom: 8px;
-
-}
-
-.links>a {
-	text-decoration: none;
-	color: whitesmoke;
-	width: 7em;
-}
-
-.links>a:hover,
-.create-inventory-btn>a:hover {
+.delete-btn {
+	padding: 14px;
+	border-radius: 14px;
+	margin-bottom: 10px;
+	width: 420px;
+	font-size: 20px;
+	background-color: #701e1e;
+	border: none;
 	color: wheat;
-}
-
-.signup {
-	background-color: #CE9540;
-}
-
-.login {
-	background-color: #CE9540;
-	margin-left: -67px;
-	padding-left: 32px;
-}
-
-.form-wrapper {
-	/* background-color: #CE9540; */
-	/* position: relative; */
-	/* bottom: 0; */
-	/* height: calc(100vh - 19.076923076923077vh); */
-	/* max-height: 100%; */
-
 	display: flex;
 	justify-content: center;
+	text-decoration: none;
+}
+
+.delete-btn:hover {
+	background-color: #73342f;
+	cursor: pointer;
+}
+
+.assets {
+	display: flex;
+	flex-direction: column;
+}
+
+.account-wrapper {
+	background-color: #CE9540;
+	/* height: calc(100vh - 23.5vh); */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.footer {
+	position: fixed;
+	bottom: 5px;
+	margin: 0 auto;
 }
 
 *:focus {
 	outline: none;
+}
+
+label {
+	font-size: 20px;
 }
 
 input,
@@ -110,26 +102,10 @@ input[type="submit"]:hover,
 	background-color: rgb(0, 0, 0, 0.8);
 }
 
-input[id="condition"] {
-	width: 879px;
-}
-
 .form {
 	/* border: 2px solid peachpuff; */
-	width: 900px;
+	/* width: 900px; */
 	padding: 12px;
-}
-
-
-.row-1,
-.row-2,
-.row-3,
-.row-3,
-.row-4,
-.row-5 {
-	display: flex;
-	gap: 38px;
-	margin-bottom: 30px;
 }
 
 /* removes white background on atofill passwords */
@@ -145,7 +121,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-	-webkit-box-shadow: 0 0 0 30px #ce9540 inset !important;
+	-webkit-box-shadow: 0 0 0 30px #734C11 inset !important;
 }
 
 /*Change text in autofill textbox*/

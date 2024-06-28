@@ -1,65 +1,78 @@
 body {
-	/* maximize rest of the div to fill the set size */
 	display: flex;
 	flex-direction: column;
-	background-color: #CE9540;
 	height: 100%;
+	background-color: #CE9540;
 }
 
-
-.login {
-	background-color: #701e1e;
+.nav {
+	background-color: whitesmoke;
 }
 
-.profile-heading {
+.asset-heading {
 	padding: 14px;
 	text-align: center;
 	color: whitesmoke;
 	background-color: #734C11;
 }
 
-.delete-btn {
-	padding: 14px;
-	border-radius: 14px;
-	margin-bottom: 10px;
-	width: 420px;
-	font-size: 20px;
-	background-color: #701e1e;
-	border: none;
-}
-
-.delete-btn:hover {
-	background-color: #73342f;
-	cursor: pointer;
-}
-
-.assets {
+.nav {
 	display: flex;
-	flex-direction: column;
-}
-
-.account-wrapper {
-	background-color: #CE9540;
-	/* height: calc(100vh - 23.5vh); */
-	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	height: 100%;
+	border-bottom: 2px solid peachpuff;
+	padding-left: 4px;
+	padding-top: 5px;
+	padding-right: 15px;
 }
 
-.footer {
-	position: fixed;
-	bottom: 5px;
-	width: 100%;
+.links {
+	/* border: 2px solid slateblue; */
+	padding: 12px;
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	border-radius: 34px;
+	margin-bottom: 8px;
+
+}
+
+.links>a {
+	text-decoration: none;
+	color: whitesmoke;
+	width: 8em;
+	margin-right: 4px;
+}
+
+.links>a:hover,
+.create-inventory-btn>a:hover {
+	color: wheat;
+}
+
+.signup {
+	background-color: #CE9540;
+}
+
+.login {
+	background-color: #734C11;
+	margin-left: -79px;
+	padding-left: 32px;
+}
+
+.form-wrapper {
+	/* background-color: #CE9540; */
+	/* position: relative; */
+	/* bottom: 0; */
+	/* height: calc(100vh - 19.076923076923077vh); */
+	/* max-height: 100%; */
+
+	/* display: flex; */
+	/* justify-content: center; */
 	margin: 0 auto;
 }
 
 *:focus {
 	outline: none;
-}
-
-label {
-	font-size: 20px;
 }
 
 input,
@@ -70,13 +83,16 @@ input,
 	border: none;
 }
 
+select,
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
 	background-color: #734C11;
 	color: rgb(0, 0, 0);
 }
 
+select,
 input,
 .reset {
 	padding: 14px;
@@ -84,6 +100,14 @@ input,
 	margin-bottom: 10px;
 	width: 420px;
 	font-size: 20px;
+}
+
+select {
+	border: none;
+}
+
+select:hover {
+	cursor: pointer;
 }
 
 input[type="submit"],
@@ -99,16 +123,28 @@ input[type="submit"]:hover,
 	background-color: rgb(0, 0, 0, 0.8);
 }
 
+/* input[id="condition"] { */
+/* 	width: 879px; */
+/* } */
+
 .form {
 	/* border: 2px solid peachpuff; */
-	/* width: 900px; */
+	width: 900px;
 	padding: 12px;
+}
+
+
+.row {
+	display: flex;
+	gap: 38px;
+	margin-bottom: 30px;
 }
 
 /* removes white background on atofill passwords */
 /* input:autofill { */
 /* 	background-color: #ce9540; */
 /* } */
+
 /**/
 /* input { */
 /* 	filter: none; */
@@ -118,7 +154,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-	-webkit-box-shadow: 0 0 0 30px #734C11 inset !important;
+	-webkit-box-shadow: 0 0 0 30px #ce9540 inset !important;
 }
 
 /*Change text in autofill textbox*/
