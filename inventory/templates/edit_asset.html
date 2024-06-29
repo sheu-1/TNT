@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}
+Asset management - Edit asset
+{% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
+<script src="{{ url_for('static', filename='reset_fields.js') }}" defer></script>
+<script src="{{ url_for('static', filename='dependent_select.js') }}" defer></script>
+{% endblock head %}
+{% block navlinks %}
+<a href="{{ url_for('show_assets') }}" class="links signup">All Assets</a>
+<a href="{{ url_for('index') }}" class="links login">Log out</a>
+{% endblock navlinks %}
+{% block body %}
+<h2 class="asset-heading">Edit asset</h2>
+<div class="form-wrapper">
+	<div class="layer">
+		<form autocomplete="off" action="{{ url_for('edit_asset', id=asset_id) }}" class="form" method="post">
+			{{ form.hidden_tag() }}
+			{{ form.csrf_token }}
+			<div class="row">
+				<div class="asset_description">
+					{{ form.asset_description.label }}
+					{{ form.asset_description(placeholder="",id="description") }}
+					{% if form.asset_description.errors %}
+					<div class="invalid-form">
+						{% for error in form.asset_description.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="financed_by">
+					{{ form.financed_by.label }}
+					{{ form.financed_by(placeholder="",id="financedby") }}
+					{% if form.financed_by.errors %}
+					<div class="invalid-form">
+						{% for error in form.financed_by.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="serial_number">
+					{{ form.serial_number.label }}
+					{{ form.serial_number(placeholder="",id="serial") }}
+					{% if form.serial_number.errors %}
+					<div class="invalid-form">
+						{% for error in form.serial_number.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="product_number">
+					{{ form.product_number.label }}
+					{{ form.product_number(placeholder="",id="productnumber") }}
+					{% if form.product_number.errors %}
+					<div class="invalid-form">
+						{% for error in form.product_number.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="make_model">
+					{{ form.make_model.label }}
+					{{ form.make_model(placeholder="",id="makemodel") }}
+					{% if form.make_model.errors %}
+					<div class="invalid-form">
+						{% for error in form.make_model.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="directorate">
+					{{ form.directorate.label }}
+					{{ form.directorate(placeholder="",id="directorate") }}
+					{% if form.directorate.errors %}
+					<div class="invalid-form">
+						{% for error in form.directorate.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="units">
+					{{ form.units.label }}
+					{{ form.units(placeholder="",id="units") }}
+					{% if form.units.errors %}
+					<div class="invalid-form">
+						{% for error in form.units.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="building">
+					{{ form.building.label }}
+					{{ form.building(placeholder="",id="building") }}
+					{% if form.building.errors %}
+					<div class="invalid-form">
+						{% for error in form.building.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="room">
+					{{ form.room.label }}
+					{{ form.room(placeholder="",id="room") }}
+					{% if form.room.errors %}
+					<div class="invalid-form">
+						{% for error in form.room.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="officer_in_charge">
+					{{ form.officer_allocated.label }}
+					{{ form.officer_allocated(placeholder="",id="officerincharge") }}
+					{% if form.officer_allocated.errors %}
+					<div class="invalid-form">
+						{% for error in form.officer_allocated.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="officer_contact_info">
+					{{ form.officer_contact_info.label }}
+					{{ form.officer_contact_info(placeholder="",id="officercontactinfo") }}
+					{% if form.officer_contact_info.errors %}
+					<div class="invalid-form">
+						{% for error in form.officer_contact_info.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="condition">
+					{{ form.state.label }}
+					{{ form.state(placeholder="",id="condition") }}
+					{% if form.state.errors %}
+					<div class="invalid-form">
+						{% for error in form.state.errors %}
+						<span>{{error}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+	</div>
+	<div class="row">
+		<input type="submit" value="Add item">
+		<button type="reset" id="reset-btn" class="reset">Reset</button>
+	</div>
+	</form>
+</div>
+</div>
+{% endblock body %}
