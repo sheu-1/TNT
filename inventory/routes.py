@@ -122,24 +122,21 @@ def get_units():
 @login_required
 def profile():
     form = UpdateAccountForm()
-    print(current_user.first_name)
+    print(current_user.full_name)
     if request.method == "GET":
-        form.first_name.data = current_user.first_name
-        form.second_name.data = current_user.second_name
+        form.full_name.data = current_user.full_name
         form.email.data = current_user.email
         print(request.method)
     if request.method == "POST" and form.validate_on_submit():
         print(request.method)
         if (
-            current_user.first_name == form.first_name.data
-            and current_user.second_name == form.second_name.data
+            current_user.full_name == form.full_name.data
             and current_user.email == form.email.data
         ):
             redirect(url_for("profile"))
         else:
-            print(current_user.first_name)
-            current_user.first_name = form.first_name.data
-            current_user.second_name = form.second_name.data
+            print(current_user.full_name)
+            current_user.full_name = form.full_name.data
             current_user.email = form.email.data
             if form.new_password.data:
                 hashed_password = bcrypt.generate_password_hash(form.new_password.data)
@@ -168,7 +165,7 @@ def login():
             return redirect(url_for("show_assets"))
         else:
             flash("Login unsuccessful. Please check email and password", "danger")
-    return render_template("login.html", title=login, form=form)
+    return render_template("login_user.html", title=login, form=form)
 
 
 @app.route("/register/", methods=["POST", "GET"])
@@ -182,15 +179,13 @@ def register():
     print(form)
     if request.method == "POST":
         if form.validate_on_submit():
-            first_name = form.first_name.data
-            second_name = form.second_name.data
+            full_name = form.full_name.data.title()
             email = form.email.data
             password = form.password.data
 
             hashed_password = bcrypt.generate_password_hash(password)
             user = User(
-                first_name=first_name,
-                second_name=second_name,
+                full_name=full_name,
                 email=email,
                 password=hashed_password,
             )
@@ -198,7 +193,8 @@ def register():
             db.session.add(user)
             db.session.commit()
             flash(
-                f" {form.first_name.data}has  been successfully registered", "success"
+                f" {form.full_name.data} you have been successfully registered. Log in to proceed.",
+                "success",
             )
             return redirect(url_for("login"))
         else:

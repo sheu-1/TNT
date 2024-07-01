@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Asset management system - Sign up
+Asset management system - Log in
 {% endblock title %}
 {% block head %}
 {{ super() }}
@@ -9,19 +9,14 @@ Asset management system - Sign up
 <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
-<a href="{{ url_for('login') }}" class="links login">Login</a>
+<a href="{{ url_for('register') }}" class="links login">Sign up</a>
 {% endblock navlinks %}
 {% block body %}
 <div class="container">
 	<div class="login-box">
-		<h2>Sign up</h2>
+		<h2>Log in</h2>
 		<form action="" method="post">
 			{{form.csrf_token}}
-			<div class="user-box">
-				<!-- <input type="text" name="" required="" /> -->
-				{{ form.full_name(required="")}}
-				<label>Full Names</label>
-			</div>
 			<div class="user-box">
 				<!-- <input type="email" name="" id="email" required=""> -->
 				{{ form.email(required="") }}
@@ -32,13 +27,6 @@ Asset management system - Sign up
 				{{ form.password(required="") }}
 				<label>Password</label>
 				<span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
-			</div>
-			<div class="user-box">
-				<!-- <input type="password" name="" id="confirm-password" required="" /> -->
-				{{ form.confirm_password(required="",id="confirm-password") }}
-				<label>Confirm Password</label>
-				<span class="confirm-password-toggle-icon password-toggle-icon"><i
-						class="fas fa-eye"></i></span>
 			</div>
 			<!-- <div class="submit"> -->
 			{{ form.submit(class="submit") }}
@@ -54,8 +42,8 @@ Asset management system - Sign up
 			<!-- 	<span></span> -->
 			<!-- 	Submit -->
 			<!-- </a> -->
-			<small class="have-account-link">Have an account?<a
-					href="{{ url_for('login') }}">Login</a></small>
+			<small class="have-account-link">Don't have an account?<a href="{{ url_for('register') }}">Sign
+					up</a></small>
 		</form>
 	</div>
 </div>

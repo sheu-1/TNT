@@ -16,8 +16,7 @@ from inventory.models import Asset, User
 
 
 class RegisterForm(FlaskForm):
-    first_name = StringField(validators=[DataRequired(), Length(min=2, max=12)])
-    second_name = StringField(validators=[DataRequired(), Length(min=2, max=12)])
+    full_name = StringField(validators=[DataRequired(), Length(min=6, max=12)])
     email = EmailField(validators=[Email(), DataRequired()])
     password = PasswordField(validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField(
@@ -101,11 +100,8 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(RegisterForm):
-    first_name = StringField(
-        "First Name", validators=[DataRequired(), Length(min=2, max=12)]
-    )
-    second_name = StringField(
-        "Second Name", validators=[DataRequired(), Length(min=2, max=12)]
+    full_name = StringField(
+        "Full Names", validators=[DataRequired(), Length(min=6, max=12)]
     )
     email = EmailField("Email", validators=[Email(), DataRequired()])
     new_password = PasswordField("New Password", validators=[Length(min=6)])

@@ -17,12 +17,8 @@ Asset management system - Your Profile
 		{{ form.hidden_tag() }}
 		{{ form.csrf_token }}
 		<div class="assets">
-		{{ form.first_name.label }}
-		{{ form.first_name() }}
-		</div>
-		<div class="assets">
-		{{ form.second_name.label }}
-		{{ form.second_name() }}
+		{{ form.full_name.label }}
+		{{ form.full_name() }}
 		</div>
 		<div class="assets">
 		{{ form.email.label }}

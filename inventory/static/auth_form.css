@@ -30,7 +30,10 @@ label {
 	color: wheat;
 }
 
-input {}
+small>a {
+	margin-left: 6px
+}
+
 
 .login-box {
 
@@ -66,6 +69,8 @@ input {}
 	/* color: wheat; */
 	font-weight: bold;
 	font-size: 18px;
+	color: #ded0a9;
+	font-weight: bold;
 }
 
 .user-box label {
@@ -77,6 +82,9 @@ input {}
 	color: #333;
 	pointer-events: none;
 	transition: 0.5s;
+
+	font-weight: bold;
+	color: aliceblue;
 }
 
 .user-box input:focus~label,
@@ -102,6 +110,9 @@ input {}
 
 	display: flex;
 	justify-content: center;
+	appearance: none;
+	border: none;
+	width: 100%;
 }
 
 input:-webkit-autofill,
@@ -113,7 +124,7 @@ input:-webkit-autofill:active {
 
 /*Change text in autofill textbox*/
 input:-webkit-autofill {
-	-webkit-text-fill-color: rgb(0, 0, 0) !important;
+	-webkit-text-fill-color: #ded0a9 !important;
 }
 
 /* Changes placeholder color */
@@ -129,7 +140,9 @@ input:-webkit-autofill {
 }
 
 .submit:hover {
-	background-color: #fff;
+	/* background-color: #ded0a9; */
+	background-color: #bfbaac;
+	cursor: pointer;
 	color: #333;
 	border: 1px solid #333;
 }
