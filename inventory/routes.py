@@ -2,8 +2,13 @@ from flask import flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
-                            RegisterForm, UpdateAccountForm)
+from inventory.form import (
+    AssetForm,
+    DeleteAccountForm,
+    LoginForm,
+    RegisterForm,
+    UpdateAccountForm,
+)
 from inventory.models import Asset, User
 
 
@@ -206,7 +211,7 @@ def register():
         print(form.email.data)
         print("Did not validate?")
 
-    return render_template("register.html", form=form)
+    return render_template("register_user.html", form=form)
 
 
 @app.route("/logout")
@@ -236,13 +241,14 @@ def delete_account():
 
 @app.errorhandler(404)
 def error_404(error):
-    return render_template('404.html')
+    return render_template("404.html")
+
 
 @app.errorhandler(403)
 def error_403(error):
-    return render_template('403.html')
+    return render_template("403.html")
 
 
 @app.errorhandler(500)
 def error_500(error):
-    return render_template('500.html')
+    return render_template("500.html")
