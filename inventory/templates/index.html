@@ -12,18 +12,23 @@ Asset management system - Home
 	{% endif %}
 {% endblock navlinks %}
 {% block body %}
+<div class="heading" style="background-color: rgb(115,76,17)">
+	<h2>INVENTORY MANAGEMENT SYSTEM</h2>
+</div> <br><br>
+
+<div class="parent">
+	<div class="child1">
+		<p>Inventory Stock Software
+Advanced Inventory & Stock Management System is a PHP-based web application that allows you to manage your product items, inventory, supplier, sales, and customer, purchase order, sales order, etc. Inventory Stock PHP script also calculates your business profit or loss.</p>
+	</div>
+	<div class="child2">
+		<img src="{{url_for('static', filename='assets/images/hero.jpeg')}}" alt="">
+	</div>
+	
+</div>
+
 <div class="main">
-	<div class="heading">
-		<h2>INVENTORY MANAGEMENT SYSTEM</h2>
-	</div>
-	<div class="image">
-		<img src="{{ url_for('static',filename='assets/images/hero.jpeg') }}" alt="hero-image" width="1000 " height="470">
-	</div>
-	<div class="info">
-		Inventory management is a crucial way for us as an organization to track our assets. This way we
-		are able to deliver excellent services and make informed decisions.
-	</div>
-	{% if current_user.is_authenticated %}
+			{% if current_user.is_authenticated %}
 	<div class="create-inventory-btn">
 		<a href="{{url_for('create_assets')}}">Click here to create an inventory</a>
 		<a href="{{url_for('show_assets')}}">View and manage all inventories</a>
