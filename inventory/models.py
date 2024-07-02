@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+from sqlalchemy import Nullable
 
 from inventory import app, db, login_manager
 
@@ -21,7 +22,7 @@ class User(db.Model, UserMixin):
         return self.id
 
     def __repr__(self):
-        return "<User %r>" % self.first_name
+        return "<User %r>" % self.full_name
 
 
 class Asset(db.Model):

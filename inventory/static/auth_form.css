@@ -24,6 +24,11 @@ h2 {
 	width: 100%;
 	max-width: 400px;
 	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	height: 80vh;
 }
 
 label {
@@ -121,7 +126,7 @@ small>a:hover {
 	appearance: none;
 	border: none;
 	width: 100%;
-	margin-bottom: 5px;
+	margin-bottom: 19px;
 }
 
 input:-webkit-autofill,
@@ -281,6 +286,7 @@ input:-webkit-autofill {
 	background-color: white;
 	background-repeat: no-repeat;
 	background-position: 12px 11px;
+	text-decoration: none;
 }
 
 .login-with-google-btn:hover {
