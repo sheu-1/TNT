@@ -24,6 +24,11 @@ h2 {
 	width: 100%;
 	max-width: 400px;
 	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	height: 80vh;
 }
 
 label {

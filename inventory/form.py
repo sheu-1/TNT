@@ -1,15 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    BooleanField,
-    EmailField,
-    IntegerField,
-    PasswordField,
-    SelectField,
-    StringField,
-    SubmitField,
-    ValidationError,
-    validators,
-)
+from wtforms import (BooleanField, EmailField, IntegerField, PasswordField,
+                     SelectField, StringField, SubmitField, ValidationError,
+                     validators)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -24,6 +16,10 @@ class RegisterForm(FlaskForm):
     )
     submit = SubmitField()
 
+    def validate_email(self,email):
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('Email already exists.')
 
 class AssetForm(FlaskForm):
     asset_description = SelectField(

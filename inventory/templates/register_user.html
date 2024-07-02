@@ -21,17 +21,38 @@ Asset management system - Sign up
 				<!-- <input type="text" name="" required="" /> -->
 				{{ form.full_name(required="")}}
 				<label>Full Names</label>
+				{% if form.full_name.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.full_name.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
 			</div>
 			<div class="user-box">
 				<!-- <input type="email" name="" id="email" required=""> -->
 				{{ form.email(required="") }}
 				<label for="email">Email</label>
+				{% if form.email.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.email.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
 			</div>
 			<div class="user-box">
 				<!-- <input type="password" name="" id="password" required="" /> -->
 				{{ form.password(required="") }}
 				<label>Password</label>
 				<span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+				{% if form.password.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
 			</div>
 			<div class="user-box">
 				<!-- <input type="password" name="" id="confirm-password" required="" /> -->
@@ -39,6 +60,13 @@ Asset management system - Sign up
 				<label>Confirm Password</label>
 				<span class="confirm-password-toggle-icon password-toggle-icon"><i
 						class="fas fa-eye"></i></span>
+				{% if form.confirm_password.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.confirm_password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
 			</div>
 			<!-- <div class="submit"> -->
 			{{ form.submit(class="submit") }}
