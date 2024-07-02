@@ -3,8 +3,11 @@
 	padding: 0;
 	box-sizing: border-box;
 	color-scheme: light;
-	@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+	/*@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');*/
+	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 }
+
 
 body {
 	display: flex;
@@ -266,10 +269,12 @@ body {
 
 .child1 p {
 	text-align: center;
-	margin-top: 80px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 20px;
+	margin-top: 50px;
+	font-family: "Roboto Mono", monospace;
+	font-size: 26px;
 	animation: fadeIn 5s;
+	color: #36040d;
+	
 }
 @keyframes fadeIn{
 	0%{opacity: 0;}
