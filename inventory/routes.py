@@ -2,13 +2,9 @@ from flask import flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import (
-    AssetForm,
-    DeleteAccountForm,
-    LoginForm,
-    RegisterForm,
-    UpdateAccountForm,
-)
+from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
+                            RegisterForm, UpdateAccountForm,
+                            UpdatePasswordForm)
 from inventory.models import Asset, User
 
 
@@ -117,18 +113,16 @@ def get_units():
     return jsonify(units)
 
 
-@app.route("/account/", methods=("GET", "POST"))
-@app.route("/profile/", methods=("GET", "POST"))
+@app.route("/account/", methods=["GET", "POST"])
+@app.route("/profile/", methods=["GET", "POST"])
 @login_required
 def profile():
     form = UpdateAccountForm()
-    print(current_user.full_name)
+    password_form = UpdatePasswordForm()
     if request.method == "GET":
         form.full_name.data = current_user.full_name
         form.email.data = current_user.email
-        print(request.method)
-    if request.method == "POST" and form.validate_on_submit():
-        print(request.method)
+    if form.validate_on_submit():
         if (
             current_user.full_name == form.full_name.data
             and current_user.email == form.email.data
@@ -136,18 +130,19 @@ def profile():
             redirect(url_for("profile"))
         else:
             print(current_user.full_name)
-            current_user.full_name = form.full_name.data
-            current_user.email = form.email.data
-            if form.new_password.data:
-                hashed_password = bcrypt.generate_password_hash(form.new_password.data)
-                current_user.password = hashed_password
-            else:
-                current_user.password = current_user.password
+            current_user.full_name = form.full_name.data.title()
+            current_user.email = form.email.data.lower()
             db.session.commit()
-            flash("Your account has been updated successfully!", "success")
-            return redirect(url_for("show_assets"))
-
-    return render_template("account.html", form=form)
+            print("Hurrah")
+            flash("Your Account Info has been updated successfully!", "success")
+            return redirect(url_for("profile"))
+    if password_form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(password_form.new_password.data)
+        current_user.password = hashed_password
+        db.session.commit()
+        flash("Your Password has been updated successfully!", "success")
+        return redirect(url_for("profile"))
+    return render_template("account.html", form=form, password_form=password_form)
 
 
 @app.route("/signin/", methods=("GET", "POST"))
@@ -162,9 +157,13 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            flash("Welcome back", "success")
             return redirect(url_for("show_assets"))
         else:
-            flash("Login unsuccessful. Please check email and password", "danger")
+            flash(
+                "Login unsuccessful. Please check if your Email and Password is correct and try again!",
+                "danger",
+            )
     return render_template("login_user.html", title=login, form=form)
 
 
@@ -180,7 +179,7 @@ def register():
     if request.method == "POST":
         if form.validate_on_submit():
             full_name = form.full_name.data.title()
-            email = form.email.data
+            email = form.email.data.lower()
             password = form.password.data
 
             hashed_password = bcrypt.generate_password_hash(password)
@@ -228,7 +227,7 @@ def delete_account():
         ):
             current_user.remove()
             db.session.commit()
-            flash("You no longer exist :)")
+            flash("You no longer exist :)", "success")
             return redirect(url_for("index"))
         else:
             flash("Incorrect password!", "danger")

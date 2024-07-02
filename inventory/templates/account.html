@@ -13,9 +13,9 @@ Asset management system - Your Profile
 {% block body %}
 <h2 class="profile-heading">Your Profile</h2>
 <div class="account-wrapper">
-	<form action="{{ url_for('profile') }}" class="form" method="post" >
-		{{ form.hidden_tag() }}
+	<form action="{{ url_for('profile') }}" class="form" method="POST" >
 		{{ form.csrf_token }}
+		{{ form.hidden_tag() }}
 		<div class="assets">
 		{{ form.full_name.label }}
 		{{ form.full_name() }}
@@ -25,17 +25,25 @@ Asset management system - Your Profile
 		{{ form.email() }}
 		</div>
 		<div class="assets">
-		{{ form.new_password.label }}
-		{{ form.new_password() }}
-		<div class="assets">
-		{{ form.confirm_new_password.label }}
-		{{ form.confirm_new_password() }}
-		</div>
-		</div>
-		<div class="assets">
 		{{ form.submit() }}
-			<a href="{{ url_for('delete_account') }}" class="delete-btn">Delete your account</a>
 		</div>
 	</form>
+	<form action="{{ url_for('profile') }}" class="form" method="POST">
+		{{ password_form.csrf_token }}
+		{{ password_form.hidden_tag() }}
+		<div class="assets">
+		{{ password_form.new_password.label }}
+		{{ password_form.new_password(autocomplete="new-password") }}
+		<div class="assets">
+		{{ password_form.confirm_new_password.label }}
+		{{ password_form.confirm_new_password(autocomplete="new-password") }}
+		</div>
+		<div class="assets">
+		{{ password_form.submit() }}
+		</div>
+	</form>
+		<div class="assets">
+			<a href="{{ url_for('delete_account') }}" class="delete-btn">Delete your Account</a>
+		</div>
 </div>
 {% endblock body %}

@@ -7,6 +7,9 @@ Asset management system - Delete account
 <link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='confirm_delete.css') }}">
 {% endblock head %}
+{% block navlinks %}
+<a href="{{ url_for('index') }}" class="links login">Home</a>
+{% endblock navlinks %}
 {% block body %}
 <div class="content">
 	<h2>Enter your password to proceed</h2>
@@ -14,9 +17,12 @@ Asset management system - Delete account
 		{{ form.csrf_token }}
 		<div class="password">
 			{{ form.password.label(class='confirm-delete-label') }}
-			{{ form.password() }}
+			{{ form.password(autocomplete="new-password") }}
 		</div>
-		{{ form.submit() }}
+		{{ form.submit(class="confirm-delete-btn") }}
+		<div class="exit">
+			<a href="{{ url_for('profile') }}">Exit</a>
+		</div>
 	</form>
 </div>
 {% endblock body %}

@@ -28,6 +28,7 @@ body {
 	margin: 12px;
 	display: flex;
 	flex-direction: column;
+	z-index: 100;
 }
 
 .error-messages {
@@ -71,6 +72,19 @@ body {
 	color: #a51d2d;
 }
 
+.error-messages-danger {
+	color: #d42a33;
+	font-weight: bold;
+}
+
+.error-messages-container-danger {
+	background: rgba(187, 26, 36, 0.35);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	border-radius: 16px;
+	backdrop-filter: blur(7.2px);
+	-webkit-backdrop-filter: blur(7.2px);
+	border: 1px solid rgba(187, 26, 36, 0.11);
+}
 
 
 .error-close-icon {

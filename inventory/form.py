@@ -1,7 +1,16 @@
+from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import (BooleanField, EmailField, IntegerField, PasswordField,
-                     SelectField, StringField, SubmitField, ValidationError,
-                     validators)
+from wtforms import (
+    BooleanField,
+    EmailField,
+    IntegerField,
+    PasswordField,
+    SelectField,
+    StringField,
+    SubmitField,
+    ValidationError,
+    validators,
+)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -16,10 +25,11 @@ class RegisterForm(FlaskForm):
     )
     submit = SubmitField()
 
-    def validate_email(self,email):
-            user = User.query.filter_by(email=email.data).first()
-            if user:
-                raise ValidationError('Email already exists.')
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError("Email already exists.")
+
 
 class AssetForm(FlaskForm):
     asset_description = SelectField(
@@ -95,16 +105,26 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
-class UpdateAccountForm(RegisterForm):
+class UpdateAccountForm(FlaskForm):
     full_name = StringField(
-        "Full Names", validators=[DataRequired(), Length(min=6, max=12)]
+        "Full Names:", validators=[DataRequired(), Length(min=6, max=12)]
     )
-    email = EmailField("Email", validators=[Email(), DataRequired()])
-    new_password = PasswordField("New Password", validators=[Length(min=6)])
+    email = EmailField("Email:", validators=[Email(), DataRequired()])
+    submit = SubmitField("Update your Account Info")
+
+    def validate_email(self, email):
+        if current_user.email != email.data:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError("Email already exists.")
+
+
+class UpdatePasswordForm(FlaskForm):
+    new_password = PasswordField("New Password:", validators=[Length(min=6)])
     confirm_new_password = PasswordField(
-        "Confirm New Password", validators=[Length(min=6), EqualTo("new_password")]
+        "Confirm New Password:", validators=[Length(min=6), EqualTo("new_password")]
     )
-    submit = SubmitField("Update your Account")
+    submit = SubmitField("Update your Password")
 
 
 class DeleteAccountForm(FlaskForm):

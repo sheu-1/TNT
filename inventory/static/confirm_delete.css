@@ -13,9 +13,60 @@
 
 h2 {
 	margin-bottom: 12px;
-	color: red
+	color: #a83236;
+}
+
+.confirm-delete-btn {
+	background-color: #701e1e !important;
+}
+
+.confirm-delete-btn:hover {
+	background-color: rgb(112, 30, 30, 0.7) !important;
+}
+
+.exit a {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px;
+	border-radius: 14px;
+	margin-bottom: 10px;
+	width: 420px;
+	font-size: 20px;
+	background: saddlebrown;
+	border: none;
+	color: white;
+}
+
+.exit a:hover {
+	cursor: pointer;
+	background-color: rgb(139, 69, 19, 0.8);
 }
 
 .confirm-delete-label {
 	font-size: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px #734c11 inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+	-webkit-text-fill-color: #ded0a9 !important;
+}
+
+/* Changes placeholder color */
+::placeholder {
+	color: rgb(0, 0, 0, 0.6);
+	opacity: 1;
+	/* Firefox */
+}
+
+::-ms-input-placeholder {
+	/* Edge 12 -18 */
+	color: rgb(0, 0, 0, 0.6);
 }
