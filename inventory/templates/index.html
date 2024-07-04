@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% block title %}
+	{% if not current_user.is_authenticated %}
 Asset management system - Home
+	{% else %}
+Asset management system - All assets
+	{% endif %}
 {% endblock %}
+{% if current_user.is_authenticated %}
+{% block head %}
+{{ super() }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='exportToExcel.js') }}" defer></script>
+<script src="{{ url_for('static', filename='filter.js') }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+{% endblock head %}
+{% endif %}
 {% block navlinks %}
 	{%if current_user.is_authenticated%}
 		<a href="{{url_for('profile')}}" class="links signup">Account</a>
@@ -12,6 +27,7 @@ Asset management system - Home
 	{% endif %}
 {% endblock navlinks %}
 {% block body %}
+{% if not current_user.is_authenticated %}
 <div class="heading" style="background-color: rgb(115,76,17)">
 	<h2>INVENTORY MANAGEMENT SYSTEM</h2>
 </div> <br><br>
@@ -28,13 +44,60 @@ Asset management system - Home
 	</div>
 	
 </div>
-
+{% else %}
 <div class="main">
-			{% if current_user.is_authenticated %}
-	<div class="create-inventory-btn">
-		<a href="{{url_for('create_assets')}}">Click here to create an inventory</a>
-		<a href="{{url_for('show_assets')}}">View and manage all inventories</a>
-	</div>
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <a href="{{ url_for('index') }}" class="all-assets-btn" ><h1>All Assets</h1></a>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+		<img src="{{ url_for('static', filename='assets/images/search.png') }}" alt="">
+            </div>
+	    <div class="table-links">
+		<a href="{{ url_for('create_assets') }}" class="add-asset-link">Add a new Asset</a>
+		<button id="import-excel-btn" class="import-excel">Import an Excel file</button>
+		<button id="toEXCEL" class="export-excel">Download as
+			Excel sheet</button>
+	    </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Asset Description <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Financed by <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Serial Number <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Product Number<span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Make Model <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Directorate <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Units <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Building <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Room <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Officer Allocated <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Officer Allocated Work ID / National ID<span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Asset Condition <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+					{% for asset in assets %}
+					<tr>
+						<td>{{ asset.asset_description }}</td>
+						<td>{{ asset.financed_by }}</td>
+						<td>{{ asset.serial_number }}</td>
+						<td>{{ asset.product_number }}</td>
+						<td>{{ asset.make_model }}</td>
+						<td>{{ asset.directorate }}</td>
+						<td>{{ asset.units }}</td>
+						<td>{{ asset.building }}</td>
+						<td>{{ asset.room }}</td>
+						<td>{{ asset.officer_allocated }}</td>
+						<td>{{ asset.officer_contact_info }}</td>
+						<td>{{ asset.state }}</td>
+					</tr>	
+						{% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
 	{% endif %}
-</div>
 {% endblock body %}

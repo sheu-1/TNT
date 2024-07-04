@@ -17,12 +17,6 @@ body {
 	text-decoration: none;
 }
 
-.logo {
-	background: url('assets/images/TNT\ logo.png');
-	background-color: whitesmoke;
-	background-blend-mode: multiply;
-}
-
 .sort-btn {
 	background-color: #734c11;
 	border: none;

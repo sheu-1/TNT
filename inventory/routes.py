@@ -18,7 +18,8 @@ from inventory.models import Asset, User
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    assets = Asset.query.all()
+    return render_template("index.html",assets=assets)
 
 
 # def get_total_asset_count():
@@ -26,11 +27,11 @@ def index():
 #     return str(len(assets))
 
 
-@app.route("/assets/")
-@login_required
-def show_assets():
-    assets = Asset.query.all()
-    return render_template("dashboard.html", assets=assets)
+# @app.route("/assets/")
+# @login_required
+# def show_assets():
+#     assets = Asset.query.all()
+#     return render_template("dashboard.html", assets=assets)
 
 
 unit_options = {
@@ -159,14 +160,14 @@ def profile():
 @app.route("/login/", methods=("GET", "POST"))
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("show_assets"))
+        return redirect(url_for("index"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash("Welcome back", "success")
-            return redirect(url_for("show_assets"))
+            return redirect(url_for("index"))
         else:
             flash(
                 "Login unsuccessful. Please check if your Email and Password is correct and try again!",

@@ -199,14 +199,14 @@ body {
 	align-items: center;
 }
 
-.wrap .img{
+.wrap .img {
 	width: 100%;
 	height: auto;
 }
 
 .main {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 
 }
@@ -242,14 +242,14 @@ body {
 	/* background-color: #cecece; */
 }
 
-.parent{
+.parent {
 	width: 100vw;
 	height: 100%;
 	display: flex;
 	padding: 10px 10px 10px 10px;
 }
 
-.child1{
+.child1 {
 	width: 100%;
 	height: 50%;
 	background-color: violet;
@@ -259,7 +259,7 @@ body {
 
 }
 
-.child2{
+.child2 {
 	width: 100%;
 	height: 50%;
 	margin-left: 5px;
@@ -270,18 +270,24 @@ body {
 .child1 p {
 	text-align: center;
 	margin-top: 50px;
-	font-family: "Roboto Mono", monospace;
-	font-size: 26px;
+	font-family: "Roboto Mono", sans-serif;
+	font-size: 31px;
 	animation: fadeIn 5s;
-	color: #36040d;
-	
-}
-@keyframes fadeIn{
-	0%{opacity: 0;}
-	100%{opacity: 1}
+	color: #5e212c;
+	line-height: 2.0;
 }
 
-.child2 img{
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+.child2 img {
 	width: 100%;
 	height: auto;
 	border-radius: 50px;
