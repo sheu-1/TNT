@@ -83,6 +83,14 @@ input,
 	border: none;
 }
 
+#reset-btn {
+	background: #840f0f;
+}
+
+#reset-btn:hover {
+	background: #840f0fa3;
+}
+
 select,
 input[type="text"],
 input[type="email"],
