@@ -1,9 +1,12 @@
-from flask import Flask
+import os
+
+from dotenv import load_dotenv
+from flask import Flask, Request
 from flask_bcrypt import Bcrypt, bcrypt
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from flask import Request
 
+load_dotenv(".env")
 app = Flask(__name__)
 app.app_context().push()
 app.config["SECRET_KEY"] = (
@@ -14,19 +17,19 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
-app.config['OAUTH2_PROVIDERS'] = {
+app.config["OAUTH2_PROVIDERS"] = {
     # Google OAuth 2.0 documentation:
     # https://developers.google.com/identity/protocols/oauth2/web-server#httprest
-    'google': {
-        'client_id': '1057144427942-i44qpksr1e73bi5ovf46343t03790rnl.apps.googleusercontent.com',
-        'client_secret':'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',
-        'authorize_url': 'https://accounts.google.com/o/oauth2/auth',
-        'token_url': 'https://accounts.google.com/o/oauth2/token',
-        'userinfo': {
-            'url': 'https://www.googleapis.com/oauth2/v3/userinfo',
-            'email': lambda json: json['email'],
+    "google": {
+        "client_id": os.getenv("client_id"),
+        "client_secret": os.getenv("client_secret"),
+        "authorize_url": "https://accounts.google.com/o/oauth2/auth",
+        "token_url": "https://accounts.google.com/o/oauth2/token",
+        "userinfo": {
+            "url": "https://www.googleapis.com/oauth2/v3/userinfo",
+            "email": lambda json: json["email"],
         },
-        'scopes': ['https://www.googleapis.com/auth/userinfo.email'],
+        "scopes": ["https://www.googleapis.com/auth/userinfo.email"],
     },
 }
 
