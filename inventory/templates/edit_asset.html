@@ -9,20 +9,20 @@ Asset management - Edit asset
 <script src="{{ url_for('static', filename='dependent_select.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
-<a href="{{ url_for('show_assets') }}" class="links signup">All Assets</a>
+<a href="{{ url_for('index') }}" class="links signup">All Assets</a>
 <a href="{{ url_for('index') }}" class="links login">Log out</a>
 {% endblock navlinks %}
 {% block body %}
 <h2 class="asset-heading">Edit asset</h2>
 <div class="form-wrapper">
 	<div class="layer">
-		<form autocomplete="off" action="{{ url_for('edit_asset', id=asset_id) }}" class="form" method="post">
+		<form autocomplete="off" action="" class="form" method="post">
 			{{ form.hidden_tag() }}
 			{{ form.csrf_token }}
 			<div class="row">
 				<div class="asset_description">
 					{{ form.asset_description.label }}
-					{{ form.asset_description(placeholder="",id="description") }}
+					{{ form.asset_description(placeholder="",id="description", value="{{ asset.asset_description }}") }}
 					{% if form.asset_description.errors %}
 					<div class="invalid-form">
 						{% for error in form.asset_description.errors %}
@@ -165,8 +165,8 @@ Asset management - Edit asset
 			</div>
 	</div>
 	<div class="row">
-		<input type="submit" value="Add item">
-		<button type="reset" id="reset-btn" class="reset">Reset</button>
+		<input type="submit" value="Done">
+		<a href="{{ url_for('edit_asset',asset_id=asset.idassets ) }}" style="text-align:center;text-decoration:none;" class="reset">Reset</a>
 	</div>
 	</form>
 </div>

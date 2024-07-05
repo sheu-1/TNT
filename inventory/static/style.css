@@ -174,6 +174,63 @@ body {
 	left: 35vw;
 }
 
+#deleteModal {
+	position: fixed;
+	top: 1.3%;
+	left: 46%;
+	padding-left: 27px;
+	padding-right: 28px;
+	padding-top: 8px;
+	padding-bottom: 12px;
+	border: 2px solid grey;
+}
+
+#deleteModal::backdrop {
+	background-color: rgba(24, 26, 16, 0.59);
+}
+
+.modal-text {
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 1.5;
+	color: firebrick;
+}
+
+#cancelBtn,
+#confirmBtn {
+	padding-top: 9px;
+	padding-bottom: 9px;
+	padding-left: 14px;
+	padding-right: 14px;
+	font-size: 18px;
+}
+
+#cancelBtn:hover,
+#confirmBtn:hover {
+	text-decoration: underline;
+}
+
+#cancelBtn {
+	color: #efeaed;
+	background-color: #5d9cdf;
+	border-radius: 6px;
+}
+
+#confirmBtn {
+	color: firebrick;
+	font-weight: bold;
+}
+
+.modal-btn {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.modal-text {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
 
 .heading>h2 {
 	padding: 12px;

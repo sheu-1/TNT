@@ -67,7 +67,7 @@ Asset management system - All assets
         <section class="table__body">
             <table>
                 <thead>
-                    <tr>
+                    <tr> 
                         <th> Asset Description <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Financed by <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Serial Number <span class="icon-arrow">&UpArrow;</span></th>
@@ -100,8 +100,9 @@ Asset management system - All assets
 						<td>{{ asset.state }}</td>
 						<td>
 							<div class="edit-links">
-							    <a class="edit" title="Edit" data-toggle="tooltip" id="{{asset.idassets}}"><i class="fa fa-pencil"></i></a>
-							    <a class="delete" title="Delete" data-toggle="tooltip" id="{{asset.idassets}}"><i class="fa fa-trash"></i></a>
+								<a class="edit" title="Edit" href="{{ url_for('edit_asset',asset_id=asset.idassets ) }}" data-toggle="tooltip" id="{{asset.idassets}}"><i class="fa fa-pencil"></i></a>
+								<button class="delete" title="Delete" data-toggle="tooltip" id="del-btn"><i class="fa fa-trash"></i></button>
+								 <!-- href="{{ url_for('delete_asset',asset_id=asset.idassets) }}" -->
 							</div>
                         </td>
 					</tr>	
@@ -110,5 +111,17 @@ Asset management system - All assets
             </table>
         </section>
     </main>
+<dialog id="deleteModal">
+    <form action="{{url_for('delete_account')}}" method="post">
+      <div class="modal-text">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p class="modal-text">Proceed to delete?</p>
+      </div>
+      <div class="modal-btn">
+        <button id="cancelBtn">Cancel</button>
+        <input type="submit" id="confirmBtn" value="Yes"></input>
+      </div>
+    </form>
+</dialog>
 	{% endif %}
 {% endblock body %}

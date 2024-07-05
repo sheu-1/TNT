@@ -5,21 +5,89 @@ import string
 from urllib.parse import urlencode
 
 import requests
-from flask import (abort, current_app, flash, jsonify, redirect,
-                   render_template, request, session, url_for)
+from flask import (
+    abort,
+    current_app,
+    flash,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
-                            RegisterForm, UpdateAccountForm,
-                            UpdatePasswordForm)
+from inventory.form import (
+    AssetForm,
+    DeleteAccountForm,
+    LoginForm,
+    RegisterForm,
+    UpdateAccountForm,
+    UpdatePasswordForm,
+)
 from inventory.models import Asset, User
 
 
 @app.route("/")
 def index():
     assets = Asset.query.all()
-    return render_template("index.html",assets=assets)
+    return render_template("index.html", assets=assets)
+
+
+@app.route("/asset/edit/<int:asset_id>", methods=("GET", "POST"))
+def edit_asset(asset_id):
+    form = AssetForm()
+    asset = Asset.query.get_or_404(asset_id)
+    if request.method == "GET":
+        form.asset_description.data = asset.asset_description
+        form.financed_by.data = asset.financed_by
+        form.serial_number.data = asset.serial_number
+        form.product_number.data = asset.product_number
+        form.make_model.data = asset.make_model
+        form.directorate.data = asset.directorate
+        form.units.data = asset.units
+        form.building.data = asset.building
+        form.room.data = asset.room
+        form.officer_allocated.data = asset.officer_allocated
+        form.officer_contact_info.data = asset.officer_contact_info
+        form.state.data = asset.state
+    if request.method == "POST" and form.validate_on_submit():
+        directorate = form.directorate.data
+        form.units.choices = [
+            (unit, unit) for unit in unit_options.get(directorate, [])
+        ]
+        default_directorate = form.directorate.data or "Accounting Services"
+        form.units.choices = [
+            (unit, unit) for unit in unit_options[default_directorate]
+        ]
+        asset.asset_description = form.asset_description.data
+        asset.financed_by = form.financed_by.data
+        if asset.serial_number != form.serial_number.data:
+            asset.serial_number = form.serial_number.data
+        asset.product_number = form.product_number.data
+        asset.make_model = form.make_model.data
+        asset.directorate = form.directorate.data
+        asset.units = form.units.data
+        asset.building = form.building.data
+        asset.room = form.room.data
+        asset.officer_allocated = form.officer_allocated.data
+        asset.officer_contact_info = form.officer_contact_info.data
+        asset.state = form.state.data
+
+        db.session.commit()
+        flash(f"Asset {asset.asset_description} successfully updated!", "success")
+    return render_template("edit_asset.html", form=form, asset=asset)
+
+
+@app.route("/asset/delete/<int:asset_id>", methods=("GET", "POST"))
+def delete_asset(asset_id):
+    asset = Asset.query.get_or_404(asset_id)
+    db.session.delete(asset)
+    db.session.commit()
+    flash("Asset Successfully deleted", "success")
+    return redirect(url_for("index"))
 
 
 # def get_total_asset_count():
@@ -242,94 +310,110 @@ def delete_account():
             flash("Incorrect password!", "danger")
     return render_template("confirm_delete.html", form=form)
 
-@app.route('/authorize/<provider>')
+
+@app.route("/authorize/<provider>")
 def oauth2_authorize(provider):
     if not current_user.is_anonymous:
-        return redirect(url_for('index'))
+        return redirect(url_for("index"))
 
-    provider_data = current_app.config['OAUTH2_PROVIDERS'].get(provider)
+    provider_data = current_app.config["OAUTH2_PROVIDERS"].get(provider)
     if provider_data is None:
         abort(404)
 
     # generate a random string for the state parameter
-    session['oauth2_state'] = secrets.token_urlsafe(16)
+    session["oauth2_state"] = secrets.token_urlsafe(16)
 
     # create a query string with all the OAuth2 parameters
-    qs = urlencode({
-        'client_id': provider_data['client_id'],
-        'redirect_uri': url_for('oauth2_callback', provider=provider,
-                                _external=True),
-        'response_type': 'code',
-        'scope': ' '.join(provider_data['scopes']),
-        'state': session['oauth2_state'],
-    })
+    qs = urlencode(
+        {
+            "client_id": provider_data["client_id"],
+            "redirect_uri": url_for(
+                "oauth2_callback", provider=provider, _external=True
+            ),
+            "response_type": "code",
+            "scope": " ".join(provider_data["scopes"]),
+            "state": session["oauth2_state"],
+        }
+    )
 
     # redirect the user to the OAuth2 provider authorization URL
-    return redirect(provider_data['authorize_url'] + '?' + qs)
+    return redirect(provider_data["authorize_url"] + "?" + qs)
 
-@app.route('/callback/<provider>')
+
+@app.route("/callback/<provider>")
 def oauth2_callback(provider):
     if not current_user.is_anonymous:
-        return redirect(url_for('index'))
+        return redirect(url_for("index"))
 
-    provider_data = current_app.config['OAUTH2_PROVIDERS'].get(provider)
+    provider_data = current_app.config["OAUTH2_PROVIDERS"].get(provider)
     if provider_data is None:
         abort(404)
 
     # if there was an authentication error, flash the error messages and exit
-    if 'error' in request.args:
+    if "error" in request.args:
         for k, v in request.args.items():
-            if k.startswith('error'):
-                flash(f'{k}: {v}')
-        return redirect(url_for('index'))
+            if k.startswith("error"):
+                flash(f"{k}: {v}")
+        return redirect(url_for("index"))
 
     # make sure that the state parameter matches the one we created in the
     # authorization request
-    if request.args['state'] != session.get('oauth2_state'):
+    if request.args["state"] != session.get("oauth2_state"):
         abort(401)
 
     # make sure that the authorization code is present
-    if 'code' not in request.args:
+    if "code" not in request.args:
         abort(401)
 
     # exchange the authorization code for an access token
-    response = requests.post(provider_data['token_url'], data={
-        'client_id': provider_data['client_id'],
-        'client_secret': provider_data['client_secret'],
-        'code': request.args['code'],
-        'grant_type': 'authorization_code',
-        'redirect_uri': url_for('oauth2_callback', provider=provider,
-                                _external=True),
-    }, headers={'Accept': 'application/json'})
+    response = requests.post(
+        provider_data["token_url"],
+        data={
+            "client_id": provider_data["client_id"],
+            "client_secret": provider_data["client_secret"],
+            "code": request.args["code"],
+            "grant_type": "authorization_code",
+            "redirect_uri": url_for(
+                "oauth2_callback", provider=provider, _external=True
+            ),
+        },
+        headers={"Accept": "application/json"},
+    )
     if response.status_code != 200:
         abort(401)
-    oauth2_token = response.json().get('access_token')
+    oauth2_token = response.json().get("access_token")
     if not oauth2_token:
         abort(401)
 
     # use the access token to get the user's email address
-    response = requests.get(provider_data['userinfo']['url'], headers={
-        'Authorization': 'Bearer ' + oauth2_token,
-        'Accept': 'application/json',
-    })
+    response = requests.get(
+        provider_data["userinfo"]["url"],
+        headers={
+            "Authorization": "Bearer " + oauth2_token,
+            "Accept": "application/json",
+        },
+    )
     if response.status_code != 200:
         abort(401)
-    email = provider_data['userinfo']['email'](response.json())
+    email = provider_data["userinfo"]["email"](response.json())
 
     # find or create the user in the database
     user = db.session.scalar(db.select(User).where(User.email == email))
     if user is None:
-        #Generate a random password
+        # Generate a random password
         characters = string.ascii_letters + string.digits
-        password = ''.join(random.choices(characters,k=20))
+        password = "".join(random.choices(characters, k=20))
         hashed_password = bcrypt.generate_password_hash(password)
-        user = User(email=email, full_name=email.split('@')[0],password=hashed_password)
+        user = User(
+            email=email, full_name=email.split("@")[0], password=hashed_password
+        )
         db.session.add(user)
         db.session.commit()
 
     # log the user in
     login_user(user)
-    return redirect(url_for('index'))
+    return redirect(url_for("index"))
+
 
 @app.errorhandler(404)
 def error_404(error):
