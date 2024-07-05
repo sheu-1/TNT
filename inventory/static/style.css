@@ -271,12 +271,12 @@ body {
 
 .child1 p {
 	text-align: center;
-	margin-top: 50px;
+	/* margin-top: 50px; */
 	font-family: "Roboto Mono", sans-serif;
 	font-size: 31px;
 	animation: fadeIn 5s;
 	color: #5e212c;
-	line-height: 2.0;
+	/* line-height: 2.0; */
 }
 
 @keyframes fadeIn {
