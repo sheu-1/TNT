@@ -12,6 +12,19 @@ body {
 	background-color: #ce9540;
 }
 
+.edit-links {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+}
+
+.edit-links>a:hover {
+	cursor: pointer;
+}
+
+.edit-links .delete {
+	color: #701e1e;
+}
 
 .all-assets-btn {
 	text-decoration: none;

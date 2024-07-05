@@ -80,6 +80,7 @@ Asset management system - All assets
                         <th> Officer Allocated <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Officer Allocated Work ID / National ID<span class="icon-arrow">&UpArrow;</span></th>
                         <th> Asset Condition <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,6 +98,12 @@ Asset management system - All assets
 						<td>{{ asset.officer_allocated }}</td>
 						<td>{{ asset.officer_contact_info }}</td>
 						<td>{{ asset.state }}</td>
+						<td>
+							<div class="edit-links">
+							    <a class="edit" title="Edit" data-toggle="tooltip" id="{{asset.idassets}}"><i class="fa fa-pencil"></i></a>
+							    <a class="delete" title="Delete" data-toggle="tooltip" id="{{asset.idassets}}"><i class="fa fa-trash"></i></a>
+							</div>
+                        </td>
 					</tr>	
 						{% endfor %}
                 </tbody>
