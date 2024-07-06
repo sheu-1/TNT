@@ -81,7 +81,9 @@ Asset management system - All assets
                         <th> Officer Allocated <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Officer Allocated Work ID / National ID<span class="icon-arrow">&UpArrow;</span></th>
                         <th> Asset Condition <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Actions</th>
+						{% if assets %}		
+							<th>Actions</th>
+						{% endif %}
                     </tr>
                 </thead>
                 <tbody>
