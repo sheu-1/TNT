@@ -12,6 +12,7 @@ Asset management system - All assets
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='exportToExcel.js') }}" defer></script>
 <script src="{{ url_for('static', filename='filter.js') }}" defer></script>
+<script src="{{ url_for('static', filename='modal.js') }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
@@ -106,22 +107,28 @@ Asset management system - All assets
 							</div>
                         </td>
 					</tr>	
+					<dialog id="deleteModal">
+					    <form action="{{url_for('delete_asset' ,asset_id=asset.idassets)}}" method="post">
+					      <div class="modal-text">
+								<div class="delete-msg">
+									<i class="fa-solid fa-triangle-exclamation"></i>
+									<p class="modal-text">Proceed to delete?</p>
+								</div>
+								<div class="modal-msg">
+									<span>Asset: {{ asset.asset_description }}</span>
+									<span>Serial Number: {{ asset.serial_number }}</span>
+								</div>
+					      </div>
+					      <div class="modal-btn">
+						<button id="cancelBtn">Cancel</button>
+						<input type="submit" id="confirmBtn" value="Yes"></input>
+					      </div>
+					    </form>
+					</dialog>
 						{% endfor %}
                 </tbody>
             </table>
         </section>
     </main>
-<dialog id="deleteModal">
-    <form action="{{url_for('delete_account')}}" method="post">
-      <div class="modal-text">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <p class="modal-text">Proceed to delete?</p>
-      </div>
-      <div class="modal-btn">
-        <button id="cancelBtn">Cancel</button>
-        <input type="submit" id="confirmBtn" value="Yes"></input>
-      </div>
-    </form>
-</dialog>
 	{% endif %}
 {% endblock body %}
