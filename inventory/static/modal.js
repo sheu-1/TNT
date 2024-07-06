@@ -1,14 +1,20 @@
-const deleteBtn = document.querySelector("#del-btn");
-const modalForm = document.querySelector("#deleteModal");
-const confirmBtn = modalForm.querySelector("#confirmBtn");
-const cancelBtn = modalForm.querySelector("#cancelBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteButtons = document.querySelectorAll(".delete-btn");
 
-cancelBtn.addEventListener("click", (e) => {
-  //prevent cancelBtn submit action
-  e.preventDefault();
-  modalForm.close();
-});
+  deleteButtons.forEach((button) => {
+    const assetId = button.getAttribute("data-id");
+    const modalForm = document.querySelector(
+      `.delete-modal[data-id='${assetId}']`,
+    );
+    const cancelBtn = modalForm.querySelector(".cancel-btn");
 
-deleteBtn.addEventListener("click", () => {
-  modalForm.showModal();
+    button.addEventListener("click", () => {
+      modalForm.showModal();
+    });
+
+    cancelBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      modalForm.close();
+    });
+  });
 });

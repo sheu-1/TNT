@@ -104,12 +104,11 @@ Asset management system - All assets
 						<td>
 							<div class="edit-links">
 								<a class="edit" title="Edit" href="{{ url_for('edit_asset',asset_id=asset.idassets ) }}" data-toggle="tooltip" id="{{asset.idassets}}"><i class="fa fa-pencil"></i></a>
-								<button class="delete" title="Delete" data-toggle="tooltip" id="del-btn"><i class="fa fa-trash"></i></button>
-								 <!-- href="{{ url_for('delete_asset',asset_id=asset.idassets) }}" -->
+								<button class="delete delete-btn" title="Delete" data-toggle="tooltip" data-id="{{ asset.idassets }}"><i class="fa fa-trash"></i></button>
 							</div>
                         </td>
 					</tr>	
-					<dialog id="deleteModal">
+					<dialog id="deleteModal" class="delete-modal" data-id="{{ asset.idassets }}" >
 					    <form action="{{url_for('delete_asset' ,asset_id=asset.idassets)}}" method="post">
 					      <div class="modal-text">
 								<div class="delete-msg">
@@ -122,7 +121,7 @@ Asset management system - All assets
 								</div>
 					      </div>
 					      <div class="modal-btn">
-						<button id="cancelBtn">Cancel</button>
+						<button id="cancelBtn" class="cancel-btn" data-id="{{ asset.idassets }}">Cancel</button>
 						<input type="submit" id="confirmBtn" value="Yes"></input>
 					      </div>
 					    </form>
