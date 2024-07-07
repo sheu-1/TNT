@@ -54,10 +54,15 @@ def index():
     return render_template("index.html", assets=assets)
 
 
-@app.route("/asset/edit/<int:asset_id>", methods=("GET", "POST"))
+@app.route("/assets/edit/<int:asset_id>", methods=("GET", "POST"))
 def edit_asset(asset_id):
     form = UpdateAssetForm()
     asset = Asset.query.get_or_404(asset_id)
+    # print(asset.recorded_by)
+    # print(current_user.full_name)
+    # Prevent a user from editing another user's recorded assets
+    if asset.recorded_by != current_user.full_name:
+        abort(403)
     current_serial = asset.serial_number
     if request.method == "GET":
         form.asset_description.data = asset.asset_description
@@ -120,7 +125,7 @@ def edit_asset(asset_id):
     return render_template("edit_asset.html", form=form, asset=asset)
 
 
-@app.route("/asset/delete/<int:asset_id>", methods=("GET", "POST"))
+@app.route("/assets/delete/<int:asset_id>", methods=("GET", "POST"))
 def delete_asset(asset_id):
     asset = Asset.query.get_or_404(asset_id)
     db.session.delete(asset)
@@ -153,6 +158,7 @@ def create_assets():
                 officer_allocated=form.officer_allocated.data.title(),
                 officer_contact_info=form.officer_contact_info.data,
                 state=form.state.data.capitalize(),
+                recorded_by = current_user.full_name
             )
             db.session.add(asset)
             db.session.commit()

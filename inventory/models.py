@@ -39,6 +39,7 @@ class Asset(db.Model):
     officer_allocated = db.Column(db.Text, default="N/A")
     officer_contact_info = db.Column(db.Text, default="N/A")
     state = db.Column(db.Text, nullable=False)
+    recorded_by = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
         return self.serial_number
