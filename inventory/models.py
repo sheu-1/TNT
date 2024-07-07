@@ -41,4 +41,4 @@ class Asset(db.Model):
     recorded_by = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
-        return self.serial_number
+        return f"Asset('{self.asset_description}','{self.financed_by}','{self.serial_number}','{self.product_number}','{self.make_model}','{self.directorate}','{self.units}','{self.building}','{self.room}','{self.officer_allocated}','{self.officer_contact_info}','{self.state}')"
