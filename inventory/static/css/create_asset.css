@@ -27,7 +27,6 @@ body {
 }
 
 .links {
-	/* border: 2px solid slateblue; */
 	padding: 12px;
 	display: flex;
 	align-items: center;
@@ -60,14 +59,6 @@ body {
 }
 
 .form-wrapper {
-	/* background-color: #CE9540; */
-	/* position: relative; */
-	/* bottom: 0; */
-	/* height: calc(100vh - 19.076923076923077vh); */
-	/* max-height: 100%; */
-
-	/* display: flex; */
-	/* justify-content: center; */
 	margin: 0 auto;
 }
 
@@ -138,12 +129,7 @@ input[type="submit"]:hover {
 	background-color: #aa444487 !important;
 }
 
-/* input[id="condition"] { */
-/* 	width: 879px; */
-/* } */
-
 .form {
-	/* border: 2px solid peachpuff; */
 	width: 900px;
 	padding: 12px;
 }
@@ -154,16 +140,6 @@ input[type="submit"]:hover {
 	gap: 38px;
 	margin-bottom: 30px;
 }
-
-/* removes white background on atofill passwords */
-/* input:autofill { */
-/* 	background-color: #ce9540; */
-/* } */
-
-/**/
-/* input { */
-/* 	filter: none; */
-/* } */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

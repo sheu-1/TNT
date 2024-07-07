@@ -58,12 +58,10 @@ def index():
 def edit_asset(asset_id):
     form = UpdateAssetForm()
     asset = Asset.query.get_or_404(asset_id)
-    # print(asset.recorded_by)
-    # print(current_user.full_name)
+
     # Prevent a user from editing another user's recorded assets
     if asset.recorded_by != current_user.full_name:
         abort(403)
-    current_serial = asset.serial_number
     if request.method == "GET":
         form.asset_description.data = asset.asset_description
         form.financed_by.data = asset.financed_by
@@ -178,7 +176,7 @@ def create_assets():
         ]
         print(form.asset_description.data)
         print("Did not validate?")
-    return render_template("assets.html", form=form)
+    return render_template("create_asset.html", form=form)
 
 
 @app.route("/get_units", methods=["POST"])

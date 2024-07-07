@@ -10,12 +10,12 @@ Asset management system - All assets
 {% block head %}
 {{ super() }}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='exportToExcel.js') }}" defer></script>
-<script src="{{ url_for('static', filename='filter.js') }}" defer></script>
-<script src="{{ url_for('static', filename='modal.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/exportToExcel.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/filter.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/modal.js') }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/assets_table.css') }}">
 {% endblock head %}
 {% endif %}
 {% block navlinks %}
@@ -40,8 +40,8 @@ Asset management system - All assets
 			Our state-of-the-art platform ensures efficient, secure, and transparent handling of inventory, 
 			providing a seamless experience for all users.</p>
 		<div class="register-login-btns">
-			<a href="{{ url_for('register') }}" class="button-64" role="button"><span class="text">Get Started</span></a>
-			<a href="{{ url_for('login') }}" class="button-64" role="button"><span class="text">Log In</span></a>
+			<a href="{{ url_for('register') }}" class="hero-section-btn" role="button"><span class="text">Get Started</span></a>
+			<a href="{{ url_for('login') }}" class="hero-section-btn" role="button"><span class="text">Log In</span></a>
 		</div>
 	</div>
 	<div class="child2">

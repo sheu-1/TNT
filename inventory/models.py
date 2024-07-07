@@ -1,7 +1,6 @@
 from flask_login import UserMixin
-from sqlalchemy import Nullable
 
-from inventory import app, db, login_manager
+from inventory import db, login_manager
 
 
 @login_manager.user_loader

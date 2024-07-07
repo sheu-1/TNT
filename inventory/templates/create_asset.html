@@ -4,9 +4,9 @@ Asset management - Add an asset
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='assets.css') }}">
-<script src="{{ url_for('static', filename='reset_fields.js') }}" defer></script>
-<script src="{{ url_for('static', filename='dependent_select.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_asset.css') }}">
+<script src="{{ url_for('static', filename='js/reset_fields.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/dependent_select.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" class="links signup">All Assets</a>

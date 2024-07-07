@@ -177,25 +177,6 @@ class UpdateAssetForm(FlaskForm):
     officer_contact_info = IntegerField("Officer Allocated Work ID / National ID")
     state = StringField("Condition", validators=[DataRequired()])
 
-    # def validate_serial_number(self, serial_number):
-    #     serial = Asset.query.filter_by(serial_number=serial_number.data).first()
-    #     print(f"serial is {serial}")
-    #     print(f"serial_number is {serial_number.data}")
-    #     if serial != serial_number.data:
-    #         if serial:
-    #             raise ValidationError(
-    #                 "The serial number you entered is already in use. Please verify your entry or check the existing records to avoid duplicates."
-    #             )
-    # def validate_serial_number(self,serial_number):
-    #     if serial_number.data == Asset.query.filter_by(serial_number=serial_number.data).first():
-    #         pass
-    #     else:
-    #         serial = Asset.query.filter_by(serial_number=serial_number.data).first()
-    #         if serial:
-    #             raise ValidationError(
-    #                 "The serial number you entered is already in use. Please verify your entry or check the existing records to avoid duplicates."
-    #             )
-
 class DeleteAccountForm(FlaskForm):
     password = PasswordField("Password:", validators=[DataRequired(), Length(min=6)])
     submit = SubmitField("Proceed to delete")

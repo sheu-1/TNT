@@ -4,9 +4,9 @@ Asset management system - Sign up
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='auth_form.css') }}">
-<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth_form.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('login') }}" class="links login">Login</a>

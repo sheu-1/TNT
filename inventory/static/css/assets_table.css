@@ -2,7 +2,6 @@
 
 section {
 	background-color: #734c11;
-	/* border-radius: 10px; */
 }
 
 body {
@@ -48,10 +47,6 @@ body {
 	border: none;
 	appearance: none;
 }
-
-/* .tnt-logo { */
-/* 	background-color: whitesmoke; */
-/* } */
 
 .table-links {
 	margin-top: 20px;
@@ -123,10 +118,6 @@ h1 {
 	}
 }
 
-/*@page {
-    size: landscape;
-    margin: 0; 
-}*/
 ::-webkit-scrollbar {
 	width: 10px;
 }
@@ -156,16 +147,11 @@ th {
 main.table {
 	width: 94%;
 	margin: 34px 0px;
-	/* height: 90vh; */
-	/* background-color: #fff5; */
 	background-color: #734c11;
 	height: calc(90vh - 101px);
 	backdrop-filter: blur(7px);
-	/* box-shadow: 0 .4rem .8rem #0005; */
 	border-radius: .8rem;
 
-	/* overflow: hidden; */
-	/* overflow-x: auto; */
 	overflow: auto;
 }
 
@@ -180,34 +166,27 @@ td {
 .table__header {
 	width: 100%;
 	height: 65px;
-	/* background-color: #fff4; */
 	padding: .8rem 2rem;
-
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
 .table__header .input-group {
-	/* width: 35%; */
 	width: 20%;
 	height: 100%;
-	/* background-color: #fff5; */
 	background-color: #4a270455;
 	padding: 0 .8rem;
 	border-radius: 2rem;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	transition: .2s;
 }
 
 .table__header .input-group:hover {
 	width: 25%;
 	background-color: #fff8;
-	/* box-shadow: 0 .1rem .4rem #0002; */
 }
 
 .table__header .input-group img {
@@ -222,20 +201,6 @@ td {
 	border: none;
 	outline: none;
 }
-
-/* .table__body { */
-/* 	/* width: 95%; */
-*/
-/* 	max-height: calc(89% - 1.6rem); */
-/* 	background-color: #fffb; */
-/**/
-/* 	margin: .8rem auto; */
-/* 	border-radius: .6rem; */
-/**/
-/* 	overflow: auto; */
-/* 	overflow: overlay; */
-/* } */
-/**/
 
 .table__body::-webkit-scrollbar {
 	width: 0.5rem;
@@ -413,18 +378,14 @@ tbody td.active {
 .export__file .export__file-options {
 	position: absolute;
 	right: 0;
-
 	width: 12rem;
 	border-radius: .5rem;
 	overflow: hidden;
 	text-align: center;
-
 	opacity: 0;
 	transform: scale(.8);
 	transform-origin: top right;
-
 	box-shadow: 0 .2rem .5rem #0004;
-
 	transition: .2s;
 }
 
@@ -439,11 +400,9 @@ tbody td.active {
 	width: 100%;
 	padding: .6rem 0;
 	background-color: #f2f2f2;
-
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-
 	transition: .2s ease-in-out;
 }
 

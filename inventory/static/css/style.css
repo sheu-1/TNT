@@ -3,7 +3,6 @@
 	padding: 0;
 	box-sizing: border-box;
 	color-scheme: light;
-	/*@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');*/
 	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 }
@@ -36,7 +35,6 @@ body {
 }
 
 .error-messages {
-	/* border: 2px solid yellow; */
 	font: bolder;
 	font-size: 18px;
 	line-height: 1.2;
@@ -92,7 +90,6 @@ body {
 
 
 .error-close-icon {
-	/* border: 2px solid green; */
 	padding-top: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
@@ -144,7 +141,6 @@ body {
 }
 
 .links {
-	/* border: 2px solid slateblue; */
 	padding: 12px;
 	display: flex;
 	align-items: center;
@@ -345,7 +341,6 @@ body {
 	display: flex;
 	align-items: end;
 	justify-content: center;
-	/* background-color: #cecece; */
 }
 
 .parent {
@@ -377,12 +372,10 @@ body {
 
 .child1 p {
 	text-align: center;
-	/* margin-top: 50px; */
 	font-family: "Roboto Mono", sans-serif;
 	font-size: 31px;
 	animation: fadeIn 5s;
 	color: #5e212c;
-	/* line-height: 2.0; */
 }
 
 @keyframes fadeIn {
@@ -401,7 +394,7 @@ body {
 	border-radius: 50px;
 }
 
-.button-64 {
+.hero-section-btn {
 	text-align: center;
 	align-items: center;
 	background-image: linear-gradient(144deg, #804624, #5C3A16 50%, #825D17);
@@ -426,12 +419,12 @@ body {
 	cursor: pointer;
 }
 
-.button-64:active,
-.button-64:hover {
+.hero-section-btn:active,
+.hero-section-btn:hover {
 	outline: 0;
 }
 
-.button-64 span {
+.hero-section-btn span {
 	background-color: rgb(115, 76, 17);
 	padding: 16px 24px;
 	border-radius: 6px;
@@ -440,12 +433,12 @@ body {
 	transition: 300ms;
 }
 
-.button-64:hover span {
+.hero-section-btn:hover span {
 	background: none;
 }
 
 @media (min-width: 768px) {
-	.button-64 {
+	.hero-section-btn {
 		font-size: 24px;
 		min-width: 196px;
 	}

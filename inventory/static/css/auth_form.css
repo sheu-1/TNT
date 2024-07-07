@@ -9,7 +9,6 @@
 
 body {
 	background: #ce9540 !important;
-	/* height: 100vh; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -72,14 +71,10 @@ small>a:hover {
 .user-box input {
 	width: 100%;
 	padding: 10px 0;
-	/* font-size: 16px; */
-	/* color: #333; */
-	/* margin-bottom: 30px; */
 	border: none;
 	border-bottom: 2px solid #333;
 	outline: none;
 	background: transparent;
-	/* color: wheat; */
 	font-weight: bold;
 	font-size: 18px;
 	color: #ded0a9;
@@ -154,7 +149,6 @@ input:-webkit-autofill {
 }
 
 .submit:hover {
-	/* background-color: #ded0a9; */
 	background-color: #bfbaac;
 	cursor: pointer;
 	color: #333;

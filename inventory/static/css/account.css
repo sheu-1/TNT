@@ -44,7 +44,6 @@ body {
 
 .account-wrapper {
 	background-color: #CE9540;
-	/* height: calc(100vh - 23.5vh); */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -104,19 +103,9 @@ input[type="submit"]:hover,
 }
 
 .form {
-	/* border: 2px solid peachpuff; */
-	/* width: 900px; */
 	padding: 12px;
 }
 
-/* removes white background on atofill passwords */
-/* input:autofill { */
-/* 	background-color: #ce9540; */
-/* } */
-/**/
-/* input { */
-/* 	filter: none; */
-/* } */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
