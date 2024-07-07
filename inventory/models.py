@@ -41,4 +41,4 @@ class Asset(db.Model):
     state = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
-        return "<Serial Number %r>" % self.serial_number
+        return self.serial_number

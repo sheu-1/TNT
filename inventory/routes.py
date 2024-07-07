@@ -1,106 +1,18 @@
-import os
 import random
 import secrets
 import string
 from urllib.parse import urlencode
 
 import requests
-from flask import (
-    abort,
-    current_app,
-    flash,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-)
+from flask import (abort, current_app, flash, jsonify, redirect,
+                   render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import (
-    AssetForm,
-    DeleteAccountForm,
-    LoginForm,
-    RegisterForm,
-    UpdateAccountForm,
-    UpdatePasswordForm,
-)
+from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
+                            RegisterForm, UpdateAccountForm, UpdateAssetForm,
+                            UpdatePasswordForm)
 from inventory.models import Asset, User
-
-
-@app.route("/")
-def index():
-    assets = Asset.query.all()
-    return render_template("index.html", assets=assets)
-
-
-@app.route("/asset/edit/<int:asset_id>", methods=("GET", "POST"))
-def edit_asset(asset_id):
-    form = AssetForm()
-    asset = Asset.query.get_or_404(asset_id)
-    if request.method == "GET":
-        form.asset_description.data = asset.asset_description
-        form.financed_by.data = asset.financed_by
-        form.serial_number.data = asset.serial_number
-        form.product_number.data = asset.product_number
-        form.make_model.data = asset.make_model
-        form.directorate.data = asset.directorate
-        form.units.data = asset.units
-        form.building.data = asset.building
-        form.room.data = asset.room
-        form.officer_allocated.data = asset.officer_allocated
-        form.officer_contact_info.data = asset.officer_contact_info
-        form.state.data = asset.state
-    if request.method == "POST" and form.validate_on_submit():
-        directorate = form.directorate.data
-        form.units.choices = [
-            (unit, unit) for unit in unit_options.get(directorate, [])
-        ]
-        default_directorate = form.directorate.data or "Accounting Services"
-        form.units.choices = [
-            (unit, unit) for unit in unit_options[default_directorate]
-        ]
-        asset.asset_description = form.asset_description.data
-        asset.financed_by = form.financed_by.data
-        if asset.serial_number != form.serial_number.data:
-            asset.serial_number = form.serial_number.data
-        asset.product_number = form.product_number.data
-        asset.make_model = form.make_model.data
-        asset.directorate = form.directorate.data
-        asset.units = form.units.data
-        asset.building = form.building.data
-        asset.room = form.room.data
-        asset.officer_allocated = form.officer_allocated.data
-        asset.officer_contact_info = form.officer_contact_info.data
-        asset.state = form.state.data
-
-        db.session.commit()
-        flash(f"Asset {asset.asset_description} successfully updated!", "success")
-    return render_template("edit_asset.html", form=form, asset=asset)
-
-
-@app.route("/asset/delete/<int:asset_id>", methods=("GET", "POST"))
-def delete_asset(asset_id):
-    asset = Asset.query.get_or_404(asset_id)
-    db.session.delete(asset)
-    db.session.commit()
-    flash("Asset Successfully deleted", "success")
-    return redirect(url_for("index"))
-
-
-# def get_total_asset_count():
-#     assets = Asset.query.all()
-#     return str(len(assets))
-
-
-# @app.route("/assets/")
-# @login_required
-# def show_assets():
-#     assets = Asset.query.all()
-#     return render_template("dashboard.html", assets=assets)
-
 
 unit_options = {
     "Accounting Services": [
@@ -135,6 +47,86 @@ unit_options = {
     ],
 }
 
+
+@app.route("/")
+def index():
+    assets = Asset.query.all()
+    return render_template("index.html", assets=assets)
+
+
+@app.route("/asset/edit/<int:asset_id>", methods=("GET", "POST"))
+def edit_asset(asset_id):
+    form = UpdateAssetForm()
+    asset = Asset.query.get_or_404(asset_id)
+    current_serial = asset.serial_number
+    if request.method == "GET":
+        form.asset_description.data = asset.asset_description
+        form.financed_by.data = asset.financed_by
+        form.serial_number.data = asset.serial_number
+        form.product_number.data = asset.product_number
+        form.make_model.data = asset.make_model
+        form.directorate.data = asset.directorate
+
+               # Set units choices based on the current directorate
+        form.units.choices = [(unit, unit) for unit in unit_options.get(asset.directorate, [])]
+        form.units.data = asset.units  # Set the current unit
+
+        form.building.data = asset.building
+        form.room.data = asset.room
+        form.officer_allocated.data = asset.officer_allocated
+        form.officer_contact_info.data = asset.officer_contact_info
+        form.state.data = asset.state
+    if request.method == "POST":
+        directorate = form.directorate.data
+        form.units.choices = [
+            (unit,unit) for unit in unit_options.get(directorate, [])
+        ]
+        if  form.validate_on_submit():
+            if (asset.asset_description == form.asset_description.data and
+            asset.financed_by == form.financed_by.data and
+            asset.serial_number == form.serial_number.data and
+            asset.product_number == form.product_number.data and
+            asset.make_model == form.make_model.data and
+            asset.directorate == form.directorate.data and
+            asset.units == form.units.data and
+            asset.building == form.building.data and
+            asset.room == form.room.data and
+            asset.officer_allocated == form.officer_allocated.data and
+            asset.officer_contact_info == form.officer_contact_info.data and
+            asset.state == form.state.data):
+                return redirect(url_for('edit_asset',asset_id=asset.idassets))
+
+            else:
+                directorate = form.directorate.data
+                form.units.choices = [
+                    (unit, unit) for unit in unit_options.get(directorate, [])
+                ]
+                asset.asset_description = form.asset_description.data
+                asset.financed_by = form.financed_by.data
+                asset.serial_number = form.serial_number.data
+                asset.product_number = form.product_number.data
+                asset.make_model = form.make_model.data
+                asset.directorate = form.directorate.data
+                asset.units = form.units.data
+                asset.building = form.building.data
+                asset.room = form.room.data
+                asset.officer_allocated = form.officer_allocated.data
+                asset.officer_contact_info = form.officer_contact_info.data
+                asset.state = form.state.data
+
+                db.session.commit()
+                flash(f"Asset {asset.asset_description} successfully updated!", "success")
+                return redirect(url_for('edit_asset', asset_id=asset.idassets))
+    return render_template("edit_asset.html", form=form, asset=asset)
+
+
+@app.route("/asset/delete/<int:asset_id>", methods=("GET", "POST"))
+def delete_asset(asset_id):
+    asset = Asset.query.get_or_404(asset_id)
+    db.session.delete(asset)
+    db.session.commit()
+    flash("Asset Successfully deleted", "success")
+    return redirect(url_for("index"))
 
 @app.route("/assets/create", methods=("GET", "POST"))
 @login_required
