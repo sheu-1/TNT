@@ -157,7 +157,6 @@ def delete_asset(asset_id):
 @login_required
 def create_assets():
     form = AssetForm()
-    print(form)
     if request.method == "POST":
         # set unit choices before submit
         directorate = form.directorate.data
@@ -228,7 +227,6 @@ def profile():
             current_user.full_name = form.full_name.data.title()
             current_user.email = form.email.data.lower()
             db.session.commit()
-            print("Hurrah")
             flash("Your Account Info has been updated successfully!", "success")
             return redirect(url_for("profile"))
     if password_form.validate_on_submit():
@@ -297,9 +295,6 @@ def register():
                     print(
                         f"Error in {getattr(form, field).label.text}: {error}", "error"
                     )
-    else:
-        print(form.email.data)
-        print("Did not validate?")
 
     return render_template("register_user.html", form=form)
 

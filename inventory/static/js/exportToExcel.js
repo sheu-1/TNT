@@ -1,16 +1,3 @@
-// const exportExcelBtn = document.querySelector("#export-excel-btn");
-// exportExcelBtn.addEventListener("click", exportToExcel);
-// function exportToExcel(tableId) {
-//   tableId = "table";
-//   let tableData = document.getElementById(tableId).outerHTML;
-//   tableData = tableData.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
-//   tableData = tableData.replace(/<input[^>]*>|<\/input>/gi, ""); //remove input params
-//
-//   let a = document.createElement("a");
-//   a.href = `data:application/vnd.ms-excel, ${encodeURIComponent(tableData)}`;
-//   a.download = "downloaded_file_" + getRandomNumbers() + ".xls";
-//   a.click();
-// }
 function getRandomNumbers() {
   let dateObj = new Date();
   let dateTime = `${dateObj.getHours()}${dateObj.getMinutes()}${dateObj.getSeconds()}`;
@@ -126,57 +113,3 @@ excel_btn.onclick = () => {
   });
   saveAs(blob, "inventory.xlsx");
 };
-
-// const excel_btn = document.querySelector("#toEXCEL");
-//
-// const toExcel = function (table) {
-//   // Code For SIMPLE TABLE
-//   // const t_rows = table.querySelectorAll('tr');
-//   // return [...t_rows].map(row => {
-//   //     const cells = row.querySelectorAll('th, td');
-//   //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
-//   // }).join('\n');
-//
-//   const t_heads = table.querySelectorAll("th"),
-//     tbody_rows = table.querySelectorAll("tbody tr");
-//
-//   const headings = [...t_heads]
-//     .map((head) => {
-//       let actual_head = head.textContent.trim().split(" ");
-//       return actual_head.splice(0, actual_head.length - 1).join(" ");
-//     })
-//     .join("\t");
-//   const table_data = [...tbody_rows]
-//     .map((row) => {
-//       const cells = row.querySelectorAll("td"),
-//         data_without_img = [...cells]
-//           .map((cell) => cell.textContent.trim())
-//           .join("\t");
-//
-//       return data_without_img;
-//     })
-//     .join("\n");
-//
-//   return headings + "\n" + table_data;
-// };
-//
-// excel_btn.onclick = () => {
-//   const excel = toExcel(customers_table);
-//   downloadFile(excel, "excel");
-// };
-//
-// const downloadFile = function (data, fileType, fileName = "") {
-//   const a = document.createElement("a");
-//   a.download = fileName;
-//   const mime_types = {
-//     json: "application/json",
-//     csv: "text/csv",
-//     excel: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-//   };
-//   a.href = `
-//         data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
-//     `;
-//   document.body.appendChild(a);
-//   a.click();
-//   a.remove();
-// };

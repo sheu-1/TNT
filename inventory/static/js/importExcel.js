@@ -17,7 +17,6 @@ document
     console.log(formData);
 
     fetch("/upload_excel", {
-      // Corrected the URL
       method: "POST",
       body: formData,
     })
