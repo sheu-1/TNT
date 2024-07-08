@@ -5,6 +5,14 @@ body {
 	background-color: #CE9540;
 }
 
+.fa-arrow-up-right-from-square {
+	color: rgb(0, 0, 0);
+}
+
+.fa-arrow-up-right-from-square:hover {
+	cursor: pointer;
+}
+
 .nav {
 	background-color: whitesmoke;
 }

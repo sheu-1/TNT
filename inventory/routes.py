@@ -4,14 +4,29 @@ import string
 from urllib.parse import urlencode
 
 import requests
-from flask import (abort, current_app, flash, jsonify, redirect,
-                   render_template, request, session, url_for)
+from flask import (
+    abort,
+    current_app,
+    flash,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 from flask_login import current_user, login_required, login_user, logout_user
 
 from inventory import app, bcrypt, db
-from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
-                            RegisterForm, UpdateAccountForm, UpdateAssetForm,
-                            UpdatePasswordForm)
+from inventory.form import (
+    AssetForm,
+    DeleteAccountForm,
+    LoginForm,
+    RegisterForm,
+    UpdateAccountForm,
+    UpdateAssetForm,
+    UpdatePasswordForm,
+)
 from inventory.models import Asset, User
 
 unit_options = {
@@ -70,8 +85,10 @@ def edit_asset(asset_id):
         form.make_model.data = asset.make_model
         form.directorate.data = asset.directorate
 
-               # Set units choices based on the current directorate
-        form.units.choices = [(unit, unit) for unit in unit_options.get(asset.directorate, [])]
+        # Set units choices based on the current directorate
+        form.units.choices = [
+            (unit, unit) for unit in unit_options.get(asset.directorate, [])
+        ]
         form.units.data = asset.units  # Set the current unit
 
         form.building.data = asset.building
@@ -82,22 +99,24 @@ def edit_asset(asset_id):
     if request.method == "POST":
         directorate = form.directorate.data
         form.units.choices = [
-            (unit,unit) for unit in unit_options.get(directorate, [])
+            (unit, unit) for unit in unit_options.get(directorate, [])
         ]
-        if  form.validate_on_submit():
-            if (asset.asset_description == form.asset_description.data and
-            asset.financed_by == form.financed_by.data and
-            asset.serial_number == form.serial_number.data and
-            asset.product_number == form.product_number.data and
-            asset.make_model == form.make_model.data and
-            asset.directorate == form.directorate.data and
-            asset.units == form.units.data and
-            asset.building == form.building.data and
-            asset.room == form.room.data and
-            asset.officer_allocated == form.officer_allocated.data and
-            asset.officer_contact_info == form.officer_contact_info.data and
-            asset.state == form.state.data):
-                return redirect(url_for('edit_asset',asset_id=asset.idassets))
+        if form.validate_on_submit():
+            if (
+                asset.asset_description == form.asset_description.data
+                and asset.financed_by == form.financed_by.data
+                and asset.serial_number == form.serial_number.data
+                and asset.product_number == form.product_number.data
+                and asset.make_model == form.make_model.data
+                and asset.directorate == form.directorate.data
+                and asset.units == form.units.data
+                and asset.building == form.building.data
+                and asset.room == form.room.data
+                and asset.officer_allocated == form.officer_allocated.data
+                and asset.officer_contact_info == form.officer_contact_info.data
+                and asset.state == form.state.data
+            ):
+                return redirect(url_for("edit_asset", asset_id=asset.idassets))
 
             else:
                 directorate = form.directorate.data
@@ -118,8 +137,10 @@ def edit_asset(asset_id):
                 asset.state = form.state.data
 
                 db.session.commit()
-                flash(f"Asset {asset.asset_description} successfully updated!", "success")
-                return redirect(url_for('edit_asset', asset_id=asset.idassets))
+                flash(
+                    f"Asset {asset.asset_description} successfully updated!", "success"
+                )
+                return redirect(url_for("edit_asset", asset_id=asset.idassets))
     return render_template("edit_asset.html", form=form, asset=asset)
 
 
@@ -130,6 +151,7 @@ def delete_asset(asset_id):
     db.session.commit()
     flash("Asset Successfully deleted", "success")
     return redirect(url_for("index"))
+
 
 @app.route("/assets/create", methods=("GET", "POST"))
 @login_required
@@ -156,7 +178,7 @@ def create_assets():
                 officer_allocated=form.officer_allocated.data.title(),
                 officer_contact_info=form.officer_contact_info.data,
                 state=form.state.data.capitalize(),
-                recorded_by = current_user.full_name
+                recorded_by=current_user.full_name,
             )
             db.session.add(asset)
             db.session.commit()

@@ -80,7 +80,7 @@ Asset management - Add an asset
 				    {% endif %}
 				</div>
 				<div class="directorate">
-				{{ form.directorate.label }}
+				{{ form.directorate.label }} <a href="https://www.treasury.go.ke/organogram/" target="_blank" ><i class="fa-solid fa-arrow-up-right-from-square" title="Treasury Organogram"></i></a> 
 				{{ form.directorate(placeholder="",id="directorate") }}
 				{% if form.directorate.errors %}
 				    <div class="invalid-form">
@@ -93,7 +93,7 @@ Asset management - Add an asset
 			</div>
 			<div class="row">
 				<div class="units">
-				{{ form.units.label }}	
+				{{ form.units.label }} <a href="https://www.treasury.go.ke/organogram/" target="_blank" ><i class="fa-solid fa-arrow-up-right-from-square" title="Treasury Organogram"></i></a>	
 				{{ form.units(placeholder="",id="units") }}
 				{% if form.units.errors %}
 				    <div class="invalid-form">

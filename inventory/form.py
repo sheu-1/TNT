@@ -1,7 +1,15 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import (BooleanField, EmailField, IntegerField, PasswordField,
-                     SelectField, StringField, SubmitField, ValidationError)
+from wtforms import (
+    BooleanField,
+    EmailField,
+    IntegerField,
+    PasswordField,
+    SelectField,
+    StringField,
+    SubmitField,
+    ValidationError,
+)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -76,9 +84,9 @@ class AssetForm(FlaskForm):
 
     room = StringField("Room", validators=[DataRequired()])
     officer_allocated = StringField(
-        "Officer Allocated Names", validators=[Length(min=2, max=20)]
+        "Officer Allocated Names or n/a", validators=[Length(min=2, max=20)]
     )
-    officer_contact_info = IntegerField("Officer Allocated Work ID / National ID")
+    officer_contact_info = IntegerField("Officer Allocated Work ID / National ID or 0")
     state = StringField("Condition", validators=[DataRequired()])
 
     def validate_serial_number(self, serial_number):
@@ -176,6 +184,7 @@ class UpdateAssetForm(FlaskForm):
     )
     officer_contact_info = IntegerField("Officer Allocated Work ID / National ID")
     state = StringField("Condition", validators=[DataRequired()])
+
 
 class DeleteAccountForm(FlaskForm):
     password = PasswordField("Password:", validators=[DataRequired(), Length(min=6)])
