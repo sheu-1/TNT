@@ -434,7 +434,7 @@ def oauth2_callback(provider):
 
 @app.errorhandler(404)
 def error_404(error):
-    return render_template("404.html")
+    return render_template("403.html")
 
 
 @app.errorhandler(403)
