@@ -17,7 +17,7 @@ from flask import (
 )
 from flask_login import current_user, login_required, login_user, logout_user
 
-from inventory import app, bcrypt, db
+from inventory import app, bcrypt, db, mail
 from inventory.form import (
     AssetForm,
     DeleteAccountForm,
@@ -26,8 +26,12 @@ from inventory.form import (
     UpdateAccountForm,
     UpdateAssetForm,
     UpdatePasswordForm,
+    RequestResetForm,
+    PasswordResetForm
+    
 )
 from inventory.models import Asset, User
+from flask_mail import Message
 
 unit_options = {
     "Accounting Services": [
@@ -441,3 +445,44 @@ def error_403(error):
 @app.errorhandler(500)
 def error_500(error):
     return render_template("500.html")
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', sender='sheundaalex@gmail.com', 
+                  recipients= [user.email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+
+If you did not make this request then simply ignore this email and no changes will be done.
+'''
+    mail.send(msg)
+
+@app.route("/request_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+    return render_template('reset_request.html', title='Reset Password', form=form)
+
+@app.route("/request_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('reset_request'))
+    form = PasswordResetForm()
+    if form.validate_on_submit():           
+            hashed_password = bcrypt.generate_password_hash(form.password.data)
+            user.password= hashed_password
+            db.session.commit()
+            flash(
+                f" {form.full_name.data} your password has been successfully updated. Log in to proceed.",
+                "success",
+            )
+            return redirect(url_for("login"))
+    return render_template('reset_token.html', title = 'Reset Password', form=form)

@@ -189,3 +189,19 @@ class UpdateAssetForm(FlaskForm):
 class DeleteAccountForm(FlaskForm):
     password = PasswordField("Password:", validators=[DataRequired(), Length(min=6)])
     submit = SubmitField("Proceed to delete")
+
+class RequestResetForm(FlaskForm):
+    email = EmailField("Email:", validators=[Email(), DataRequired()])
+    submit = SubmitField("Request Password Reset")
+    
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError("There is no account created with that Email. Please Sign UP.")
+
+class PasswordResetForm(FlaskForm):
+    password = PasswordField(validators=[DataRequired(), Length(min=6)])
+    confirm_password = PasswordField(
+        validators=[DataRequired(), EqualTo("password"), Length(min=6)]
+    )
+    submit = SubmitField('Reset Password')

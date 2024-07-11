@@ -2,6 +2,10 @@
 {% block title %}
 Asset management system - Page Not Found
 {% endblock title %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" style="justify-content:center;" class="links signup">Home</a>
 {% endblock navlinks %}
