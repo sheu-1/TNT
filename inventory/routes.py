@@ -222,7 +222,7 @@ def profile():
         db.session.commit()
         flash("Your Password has been updated successfully!", "success")
         return redirect(url_for("profile"))
-    return render_template("account.html", form=form, password_form=password_form)
+    return render_template("user_profile.html", form=form, password_form=password_form)
 
 
 @app.route("/signin/", methods=("GET", "POST"))
@@ -457,7 +457,7 @@ def reset_token(token):
         return redirect(url_for("index"))
     user = User.verify_reset_token(token)
     if user is None:
-        flash('That is an invalid or expired token', 'warning')
+        flash('That token is invalid or expired. Please enter your email again.', 'danger')
         return redirect(url_for('reset_request'))
     form = PasswordResetForm()
     if form.validate_on_submit():           
