@@ -312,3 +312,22 @@ input:-webkit-autofill {
 body {
 	text-align: center;
 }
+
+.proceed-delete-account-btn,
+.delete-btn {
+	background-color: #771f1f;
+}
+
+.profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 19px;
+	height: 80vh;
+}
+
+.account-password {
+	display: flex;
+	gap: 19px;
+}

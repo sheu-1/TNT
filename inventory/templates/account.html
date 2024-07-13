@@ -4,46 +4,81 @@ Asset management system - Your Profile
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static',filename='css/account.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth_form.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" class="links signup">Home</a>
 <a href="{{ url_for('logout') }}" class="links login">Logout</a>
 {% endblock navlinks %}
 {% block body %}
-<h2 class="profile-heading">Your Profile</h2>
-<div class="account-wrapper">
-	<form action="{{ url_for('profile') }}" class="form" method="POST" >
-		{{ form.csrf_token }}
-		{{ form.hidden_tag() }}
+<div class="profile">
+	<div class="account-password">
+	<div class="login-box">
+		<h2>Change Account Info</h2>
+		<form action="" method="post">
+			{{form.csrf_token}}
+			<div class="user-box">
+				{{ form.full_name(required="")}}
+				<label>Full Names</label>
+				{% if form.full_name.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.full_name.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+			</div>
+			<div class="user-box">
+				{{ form.email(required="") }}
+				<label for="email">Email</label>
+				{% if form.email.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.email.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+			</div>
+			{{ form.submit(class="submit") }}
+		</form>
+	</div>
+	<div class="login-box">
+		<h2>Change Account Password</h2>
+		<form action="" method="post">
+			{{password_form.csrf_token}}
+			<div class="user-box">
+				{{ password_form.new_password(id="password",required="",autocomplete="new-password") }}
+				<label>Password</label>
+				<span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+				{% if password_form.new_password.errors %}
+				    <div class="invalid-form">
+				      {% for error in password_form.new_password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+			</div>
+			<div class="user-box">
+				{{ password_form.confirm_new_password(required="",id="confirm-password",autocomplete="new-password") }}
+				<label>Confirm Password</label>
+				<span class="confirm-password-toggle-icon password-toggle-icon"><i
+						class="fas fa-eye"></i></span>
+				{% if password_form.confirm_new_password.errors %}
+				    <div class="invalid-form">
+				      {% for error in password_form.confirm_new_password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+			</div>
+			{{ password_form.submit(class="submit") }}
+		</form>
+	</div>
+	</div>
 		<div class="assets">
-		{{ form.full_name.label }}
-		{{ form.full_name() }}
-		</div>
-		<div class="assets">
-		{{ form.email.label }}
-		{{ form.email() }}
-		</div>
-		<div class="assets">
-		{{ form.submit() }}
-		</div>
-	</form>
-	<form action="{{ url_for('profile') }}" class="form" method="POST">
-		{{ password_form.csrf_token }}
-		{{ password_form.hidden_tag() }}
-		<div class="assets">
-		{{ password_form.new_password.label }}
-		{{ password_form.new_password(autocomplete="new-password") }}
-		<div class="assets">
-		{{ password_form.confirm_new_password.label }}
-		{{ password_form.confirm_new_password(autocomplete="new-password") }}
-		</div>
-		<div class="assets">
-		{{ password_form.submit() }}
-		</div>
-	</form>
-		<div class="assets">
-			<a href="{{ url_for('delete_account') }}" class="delete-btn">Delete your Account</a>
+			<a href="{{ url_for('delete_account') }}" class="delete-btn submit">Delete your Account</a>
 		</div>
 </div>
 {% endblock body %}

@@ -1,28 +1,37 @@
 {% extends "base.html" %}
 {% block title %}
-Asset management system - Delete account
+Asset management system - Sign up
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/create_asset.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/confirm_delete.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth_form.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" class="links login">Home</a>
 {% endblock navlinks %}
 {% block body %}
-<div class="content">
-	<h2>Enter your password to proceed</h2>
-	<form action="" method="POST" >
-		{{ form.csrf_token }}
-		<div class="password">
-			{{ form.password.label(class='confirm-delete-label') }}
-			{{ form.password(autocomplete="new-password") }}
-		</div>
-		{{ form.submit(class="confirm-delete-btn") }}
-		<div class="exit">
-			<a href="{{ url_for('profile') }}">Exit</a>
-		</div>
-	</form>
+<div class="container">
+	<div class="login-box">
+		<h2>Delete Your Account</h2>
+		<form action="" method="post">
+			{{form.csrf_token}}
+			<div class="user-box">
+				{{ form.password(required="",autocomplete="new-password") }}
+				<label>Password</label>
+				<span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+				{% if form.password.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
+			</div>
+			{{ form.submit(class="submit proceed-delete-account-btn") }}
+			<a href="{{ url_for('profile') }}" class="submit" >Exit</a>
+		</form>
+	</div>
 </div>
 {% endblock body %}
