@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv(".env")
 app = Flask(__name__)
@@ -17,11 +17,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'sheundaalex@gmail.com'
-app.config['MAIL_PASSWORD'] = '13735524Aa.'
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "ict404tnt@gmail.com"
+app.config["MAIL_PASSWORD"] = "idox obhe xkmr xcrh"
 mail = Mail(app)
 
 app.config["OAUTH2_PROVIDERS"] = {

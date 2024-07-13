@@ -4,12 +4,17 @@ Asset management system - Page Not Found
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/error.css') }}">
 {% endblock head %}
 {% block navlinks %}
 <a href="{{ url_for('index') }}" style="justify-content:center;" class="links signup">Home</a>
 {% endblock navlinks %}
 {% block body %}
-<h1>404</h1>
-<h3>Page Not Found</h3>
+<div class="error-container">
+ <div class="error">
+    <h1>404</h1>
+    <h3>The page you requested for could not be found. Page not Found</h3>
+ </div>
+</div>
+
 {% endblock body %}

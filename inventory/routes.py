@@ -262,7 +262,7 @@ def register():
             email = form.email.data.lower()
             password = form.password.data
 
-            hashed_password = bcrypt.generate_password_hash(password)
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
             user = User(
                 full_name=full_name,
                 email=email,
@@ -417,7 +417,7 @@ def oauth2_callback(provider):
 
 @app.errorhandler(404)
 def error_404(error):
-    return render_template("403.html")
+    return render_template("404.html")
 
 
 @app.errorhandler(403)
@@ -431,7 +431,7 @@ def error_500(error):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password Reset Request', sender='sheundaalex@gmail.com', 
+    msg = Message('Password Reset Request', sender='ict404tnt@gmail.com', 
                   recipients= [user.email])
     msg.body = f'''To reset your password, visit the following link:
 {url_for('reset_token', token=token, _external=True)}
@@ -448,7 +448,8 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-    return render_template('reset_request.html', title='Reset Password', form=form)
+        flash('An email has been sent to you with reset instructions','success')
+    return render_template('reset_request.html', form=form)
 
 @app.route("/request_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
@@ -464,8 +465,8 @@ def reset_token(token):
             user.password= hashed_password
             db.session.commit()
             flash(
-                f" {form.full_name.data} your password has been successfully updated. Log in to proceed.",
+                f"Your password has been successfully updated. Log in to proceed.",
                 "success",
             )
             return redirect(url_for("login"))
-    return render_template('reset_token.html', title = 'Reset Password', form=form)
+    return render_template('reset_token.html',  form=form)
