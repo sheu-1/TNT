@@ -4,34 +4,17 @@ import string
 from urllib.parse import urlencode
 
 import requests
-from flask import (
-    abort,
-    current_app,
-    flash,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-)
+from flask import (abort, current_app, flash, jsonify, redirect,
+                   render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
+from flask_mail import Message
 
 from inventory import app, bcrypt, db, mail
-from inventory.form import (
-    AssetForm,
-    DeleteAccountForm,
-    LoginForm,
-    RegisterForm,
-    UpdateAccountForm,
-    UpdateAssetForm,
-    UpdatePasswordForm,
-    RequestResetForm,
-    PasswordResetForm
-    
-)
+from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
+                            PasswordResetForm, RegisterForm, RequestResetForm,
+                            UpdateAccountForm, UpdateAssetForm,
+                            UpdatePasswordForm)
 from inventory.models import Asset, User
-from flask_mail import Message
 
 unit_options = {
     "Accounting Services": [
@@ -79,7 +62,7 @@ def edit_asset(asset_id):
     asset = Asset.query.get_or_404(asset_id)
 
     # Prevent a user from editing another user's recorded assets
-    if asset.recorded_by != current_user.full_name:
+    if not current_user.full_name != 'Admin Tnt' and current_user.email != 'admin@tnt.app' and asset.recorded_by != current_user.full_name:
         abort(403)
     if request.method == "GET":
         form.asset_description.data = asset.asset_description
