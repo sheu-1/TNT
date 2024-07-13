@@ -4,7 +4,7 @@ Asset management system - Password Reset
 {% endblock title %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth_form.css') }}">
 <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock head %}
 {% block navlinks %}
@@ -18,12 +18,28 @@ Asset management system - Password Reset
 			{{form.csrf_token}}
 			<div class="user-box">
 				{{ form.password(required="") }}
-				<label for="password">Password</label>
+				<label>Password</label>
+				<span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+				{% if form.password.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
 			</div>
 			<div class="user-box">
-				{{ form.confirm_password(required="") }}
-				<label>Confirm_password</label>
-				<span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+				{{ form.confirm_password(required="",id="confirm-password") }}
+				<label>Confirm Password</label>
+				<span class="confirm-password-toggle-icon password-toggle-icon"><i
+						class="fas fa-eye"></i></span>
+				{% if form.confirm_password.errors %}
+				    <div class="invalid-form">
+				      {% for error in form.confirm_password.errors %}
+					<span>{{error}}</span>
+				      {% endfor %}
+				    </div>
+				    {% endif %}
 			</div>
 			{{ form.submit(class="submit") }}						
 		</form>
