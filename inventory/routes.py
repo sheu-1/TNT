@@ -62,7 +62,7 @@ def edit_asset(asset_id):
     asset = Asset.query.get_or_404(asset_id)
 
     # Prevent a user from editing another user's recorded assets
-    if not current_user.full_name != 'Admin Tnt' and current_user.email != 'admin@tnt.app' and asset.recorded_by != current_user.full_name:
+    if  current_user.full_name != 'Admin Tnt' and current_user.email != 'admin@tnt.app' and asset.recorded_by != current_user.full_name:
         abort(403)
     if request.method == "GET":
         form.asset_description.data = asset.asset_description
