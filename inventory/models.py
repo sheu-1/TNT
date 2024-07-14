@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     full_name = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
+    is_oauth_user = db.Column(db.Boolean, default=False)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(app.config["SECRET_KEY"], expires_sec)
