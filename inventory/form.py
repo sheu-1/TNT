@@ -1,15 +1,7 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import (
-    BooleanField,
-    EmailField,
-    IntegerField,
-    PasswordField,
-    SelectField,
-    StringField,
-    SubmitField,
-    ValidationError,
-)
+from wtforms import (BooleanField, EmailField, IntegerField, PasswordField,
+                     SelectField, StringField, SubmitField, ValidationError)
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from inventory.models import Asset, User
@@ -105,9 +97,6 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    full_name = StringField(
-        "Full Names:", validators=[DataRequired(), Length(min=6, max=12)]
-    )
     email = EmailField("Email:", validators=[Email(), DataRequired()])
     submit = SubmitField("Update your Account Info")
 
@@ -116,14 +105,6 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("Email already exists.")
-
-
-class UpdateOauthAccountForm(FlaskForm):
-    full_name = StringField(
-        "Full Names:", validators=[DataRequired(), Length(min=6, max=12)]
-    )
-    submit = SubmitField("Update your Account Info")
-
 
 class UpdatePasswordForm(FlaskForm):
     new_password = PasswordField("New Password:", validators=[Length(min=6)])

@@ -13,7 +13,7 @@ from inventory import app, bcrypt, db, mail
 from inventory.form import (AssetForm, DeleteAccountForm, LoginForm,
                             PasswordResetForm, RegisterForm, RequestResetForm,
                             UpdateAccountForm, UpdateAssetForm,
-                            UpdateOauthAccountForm, UpdatePasswordForm)
+                            UpdatePasswordForm)
 from inventory.models import Asset, User
 
 unit_options = {
@@ -198,46 +198,29 @@ def get_units():
 @app.route("/profile/", methods=["GET", "POST"])
 @login_required
 def profile():
-    oauth_form = UpdateOauthAccountForm()
+    if current_user.is_oauth_user == True:
+        abort(403)
     form = UpdateAccountForm()
     password_form = UpdatePasswordForm()
-    if current_user.is_oauth_user == True:
-        if request.method == "GET":
-            oauth_form.full_name.data = current_user.full_name
-        if oauth_form.validate_on_submit():
-            if (
-                current_user.full_name == oauth_form.full_name.data
-            ):
-                redirect(url_for("profile"))
-            else:
-                current_user.full_name = oauth_form.full_name.data.title()
-                db.session.commit()
-                flash("Your Account Info has been updated successfully!", "success")
-                return redirect(url_for("profile"))
-    else:
-        if request.method == "GET":
-            form.full_name.data = current_user.full_name
-            form.email.data = current_user.email
-        if form.validate_on_submit():
-            if (
-                current_user.full_name == form.full_name.data
-                and current_user.email == form.email.data
-            ):
-                redirect(url_for("profile"))
-            else:
-                print(current_user.full_name)
-                current_user.full_name = form.full_name.data.title()
-                current_user.email = form.email.data.lower()
-                db.session.commit()
-                flash("Your Account Info has been updated successfully!", "success")
-                return redirect(url_for("profile"))
-        if password_form.validate_on_submit():
-            hashed_password = bcrypt.generate_password_hash(password_form.new_password.data)
-            current_user.password = hashed_password
+    if request.method == "GET":
+        form.email.data = current_user.email
+    if form.validate_on_submit():
+        if (
+             current_user.email == form.email.data
+        ):
+            redirect(url_for("profile"))
+        else:
+            current_user.email = form.email.data.lower()
             db.session.commit()
-            flash("Your Password has been updated successfully!", "success")
+            flash("Your Account Info has been updated successfully!", "success")
             return redirect(url_for("profile"))
-    return render_template("user_profile.html", form=form, password_form=password_form,oauth_form=oauth_form)
+    if password_form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(password_form.new_password.data)
+        current_user.password = hashed_password
+        db.session.commit()
+        flash("Your Password has been updated successfully!", "success")
+        return redirect(url_for("profile"))
+    return render_template("user_profile.html", form=form, password_form=password_form)
 
 
 @app.route("/signin/", methods=("GET", "POST"))
@@ -270,7 +253,6 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for("index"))
     form = RegisterForm()
-    print(form)
     if request.method == "POST":
         if form.validate_on_submit():
             full_name = form.full_name.data.title()

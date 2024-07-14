@@ -20,8 +20,12 @@ Asset management system - All assets
 {% endif %}
 {% block navlinks %}
 	{%if current_user.is_authenticated%}
-		<a href="{{url_for('profile')}}" class="links signup">Account</a>
-		<a href="{{url_for('logout')}}" class="links login">Logout</a>
+			{% if not current_user.is_oauth_user %}
+				<a href="{{url_for('profile')}}" class="links signup">Account</a>
+				<a href="{{url_for('logout')}}" class="links login">Logout</a>
+			{% else %}
+				<a href="{{url_for('logout')}}" class="links login">Logout</a>
+			{% endif %}
 	{% else %}
 		<a href="{{url_for('register')}}" class="links signup">Sign up</a>
 		<a href="{{url_for('login')}}" class="links login">Login</a>
